@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transporte Premium Conciertos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+    header {
+      background: #020617;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    button {
+      background: #22c55e;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #16a34a;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Transporte Premium a Conciertos 🎶
+</header>
+
+<section>
+  <div class="card">
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos un servicio exclusivo de transporte para conciertos. Nos enfocamos en brindarte comodidad, seguridad y una experiencia única antes y después del evento.</p>
+  </div>
+
+  <div class="card">
+    <h2>¿Qué ofrecemos?</h2>
+    <ul>
+      <li>Traslado ida y vuelta a conciertos</li>
+      <li>Capacidad para hasta 4 personas</li>
+      <li>Agua fría o dulces incluidos</li>
+      <li>Ambiente cómodo y seguro</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Precio</h2>
+    <p>$30.000 CLP por persona (ida y vuelta)</p>
+  </div>
+
+  <div class="card">
+    <h2>Reserva tu viaje</h2>
+    <p>Contáctanos por WhatsApp para asegurar tu cupo.</p>
+    <button onclick="window.location.href='https://wa.me/569XXXXXXXX'">
+      Reservar por WhatsApp
+    </button>
+  </div>
+</section>
+
+<footer>
+  © 2026 Transporte Premium - Todos los derechos reservados
+</footer>
+
+</body>
+</html>
