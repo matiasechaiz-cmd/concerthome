@@ -12,14 +12,14 @@
   <style>
     :root{
       --bg:#07090d;
-      --bg-2:#0d1117;
+      --bg2:#0d1117;
       --card:#11161d;
-      --card-2:#161c24;
+      --card2:#161c24;
       --text:#f5f7fa;
       --muted:#b5bfcc;
       --line:rgba(255,255,255,0.08);
       --accent:#4fd17b;
-      --accent-2:#25D366;
+      --accent2:#25D366;
       --shadow:0 20px 60px rgba(0,0,0,.35);
       --radius:22px;
       --max:1180px;
@@ -28,9 +28,6 @@
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      <div style="position:absolute; top:20px; left:30px; z-index:10;">
-    <img src="logo.png" style="width:120px;">
-</div>
       margin:0;
       font-family:'Poppins',sans-serif;
       background:
@@ -51,7 +48,7 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(10px);
-      background:rgba(7,9,13,0.7);
+      background:rgba(7,9,13,0.78);
       border-bottom:1px solid var(--line);
     }
 
@@ -72,8 +69,8 @@
     }
 
     .brand img{
-      width:54px;
-      height:54px;
+      width:58px;
+      height:58px;
       object-fit:contain;
       border-radius:14px;
       box-shadow: var(--shadow);
@@ -87,12 +84,12 @@
     }
 
     .brand-text strong{
-      font-size:1.1rem;
+      font-size:1.08rem;
     }
 
     .brand-text span{
       color:var(--muted);
-      font-size:.78rem;
+      font-size:.8rem;
       font-weight:500;
     }
 
@@ -109,7 +106,9 @@
       transition:.2s ease;
     }
 
-    .menu a:hover{color:var(--text)}
+    .menu a:hover{
+      color:var(--text);
+    }
 
     .hero{
       position:relative;
@@ -124,7 +123,7 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(3,5,8,.58), rgba(3,5,8,.82)),
+        linear-gradient(rgba(3,5,8,.58), rgba(3,5,8,.84)),
         url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
       transform:scale(1.03);
     }
@@ -133,7 +132,7 @@
       position:relative;
       z-index:1;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns:1.15fr .85fr;
       gap:32px;
       padding:72px 0 56px;
     }
@@ -186,7 +185,7 @@
     }
 
     .btn-primary{
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
       color:#08110a;
       box-shadow:0 16px 30px rgba(37,211,102,.18);
     }
@@ -282,8 +281,14 @@
       gap:18px;
     }
 
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
     .card{
-      background:linear-gradient(180deg, var(--card), var(--card-2));
+      background:linear-gradient(180deg, var(--card), var(--card2));
       border:1px solid var(--line);
       border-radius:var(--radius);
       padding:24px;
@@ -427,7 +432,8 @@
       .pricing,
       .about,
       .concerts,
-      .grid-3{
+      .grid-3,
+      .grid-2{
         grid-template-columns:1fr;
       }
 
@@ -477,9 +483,9 @@
         <div class="eyebrow">Traslados privados en Santiago</div>
         <h1>Tu experiencia<br>empieza desde<br>el trayecto.</h1>
         <p>
-          En ConcertHome te llevamos y te traemos de conciertos en un servicio cómodo,
-          puntual y seguro. Ideal para quienes quieren disfrutar la noche sin preocuparse
-          por estacionamientos, traslados o vuelta a casa.
+          En ConcertHome te llevamos y te traemos de conciertos con un servicio cómodo,
+          puntual y seguro. Ideal para disfrutar la noche sin preocuparte por estacionamientos,
+          apps de último minuto o el regreso a casa.
         </p>
 
         <div class="hero-actions">
@@ -531,7 +537,7 @@
           <h3>Traslado privado</h3>
           <p>
             Te pasamos a buscar y coordinamos el regreso contigo para que no dependas
-            de apps, tacos ni estacionamientos.
+            de otras apps ni traslados apurados.
           </p>
         </div>
 
@@ -606,9 +612,8 @@
         <div>
           <h2>Próximos conciertos en Santiago</h2>
           <p>
-            Esta sección usa fechas reales de carteleras oficiales para que tu página se
-            vea activa y conectada con los eventos de la ciudad. Los siguientes shows aparecen
-            actualmente publicados en Movistar Arena y Ticketmaster Chile. :contentReference[oaicite:1]{index=1}
+            Puedes cambiar fácilmente esta parte editando solo el nombre del concierto,
+            el lugar y la fecha.
           </p>
         </div>
       </div>
@@ -622,7 +627,7 @@
             <span>📅 11 abril 2026</span>
             <span>🕘 21:00 hrs</span>
           </div>
-          <p>Uno de los eventos más grandes del freestyle en español, anunciado por Movistar Arena. :contentReference[oaicite:2]{index=2}</p>
+          <p>Uno de los eventos más grandes del freestyle en español.</p>
           <div class="cta-row">
             <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Red%20Bull%20Batalla%20en%20Santiago.">Cotizar traslado</a>
           </div>
@@ -636,7 +641,7 @@
             <span>📅 15 y 16 abril 2026</span>
             <span>🕘 21:00 hrs</span>
           </div>
-          <p>Show publicado en la cartelera oficial de Movistar Arena y PuntoTicket. :contentReference[oaicite:3]{index=3}</p>
+          <p>Show internacional con alta convocatoria en Santiago.</p>
           <div class="cta-row">
             <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Laura%20Pausini%20en%20Santiago.">Cotizar traslado</a>
           </div>
@@ -650,7 +655,7 @@
             <span>📅 18 abril 2026</span>
             <span>🕘 21:00 hrs</span>
           </div>
-          <p>Evento anunciado en la cartelera oficial de Movistar Arena y PuntoTicket. :contentReference[oaicite:4]{index=4}</p>
+          <p>Una fecha ideal para promocionar tus traslados en grupos pequeños.</p>
           <div class="cta-row">
             <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Sebasti%C3%A1n%20Yatra%20en%20Santiago.">Cotizar traslado</a>
           </div>
@@ -663,7 +668,7 @@
             <span>📍 Estadio Nacional</span>
             <span>📅 8 mayo 2026</span>
           </div>
-          <p>Concierto listado por Ticketmaster Chile para Santiago, en Estadio Nacional. :contentReference[oaicite:5]{index=5}</p>
+          <p>Show de gran convocatoria para público que suele coordinar ida y regreso con anticipación.</p>
           <div class="cta-row">
             <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Ko%D0%AFn%20en%20Santiago.">Cotizar traslado</a>
           </div>
@@ -715,5 +720,5 @@
     </div>
   </footer>
 
-</body>  
+</body>
 </html>
