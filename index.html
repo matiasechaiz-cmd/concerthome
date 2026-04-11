@@ -1,112 +1,716 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>ConcertHome</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConcertHome | Transporte VIP a Conciertos</title>
 
-<!-- Tipografía moderna -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #0b0b0b;
-    color: white;
-}
+  <style>
+    :root{
+      --bg:#07090d;
+      --bg-2:#0d1117;
+      --card:#11161d;
+      --card-2:#161c24;
+      --text:#f5f7fa;
+      --muted:#b5bfcc;
+      --line:rgba(255,255,255,0.08);
+      --accent:#4fd17b;
+      --accent-2:#25D366;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --max:1180px;
+    }
 
-/* HERO */
-header {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-    url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2') center/cover;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(79,209,123,.08), transparent 25%),
+        linear-gradient(180deg, #06080c 0%, #0b1017 100%);
+      color:var(--text);
+    }
 
-header h1 {
-    font-size: 3.5em;
-    font-weight: 600;
-    margin: 0;
-}
+    a{text-decoration:none;color:inherit}
 
-header p {
-    font-size: 1.2em;
-    color: #ccc;
-}
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
 
-/* SECCIONES */
-section {
-    padding: 60px 20px;
-}
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      background:rgba(7,9,13,0.7);
+      border-bottom:1px solid var(--line);
+    }
 
-h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
 
-/* CARD */
-.card {
-    background: #141414;
-    padding: 25px;
-    margin: auto;
-    max-width: 400px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
 
-/* BOTÓN */
-button {
-    background: #25D366;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    .brand img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+      border-radius:14px;
+      box-shadow: var(--shadow);
+      background:#0a0d12;
+    }
 
-button:hover {
-    transform: scale(1.05);
-    background: #1ebe5d;
-}
-</style>
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+
+    .brand-text strong{
+      font-size:1.1rem;
+    }
+
+    .brand-text span{
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:500;
+    }
+
+    .menu{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .menu a{
+      color:var(--muted);
+      font-size:.95rem;
+      font-weight:500;
+      transition:.2s ease;
+    }
+
+    .menu a:hover{color:var(--text)}
+
+    .hero{
+      position:relative;
+      min-height:88vh;
+      display:grid;
+      align-items:center;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(3,5,8,.58), rgba(3,5,8,.82)),
+        url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      transform:scale(1.03);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:32px;
+      padding:72px 0 56px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.04);
+      border-radius:999px;
+      color:#d8e0ea;
+      font-size:.9rem;
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(2.4rem, 5vw, 4.8rem);
+      line-height:0.98;
+      letter-spacing:-1.6px;
+    }
+
+    .hero p{
+      margin:0 0 28px;
+      max-width:680px;
+      color:#dbe3ed;
+      font-size:1.05rem;
+      line-height:1.75;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:15px 22px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-weight:700;
+      transition:.22s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      color:#08110a;
+      box-shadow:0 16px 30px rgba(37,211,102,.18);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 36px rgba(37,211,102,.24);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.05);
+      border-color:rgba(255,255,255,0.12);
+      color:var(--text);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.08);
+    }
+
+    .hero-card{
+      align-self:end;
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:28px;
+      padding:26px;
+      backdrop-filter: blur(10px);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card h3{
+      margin:0 0 6px;
+      font-size:1.25rem;
+    }
+
+    .hero-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:.96rem;
+      line-height:1.7;
+    }
+
+    .hero-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .hero-list div{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:#edf2f7;
+      font-size:.96rem;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      margin-top:8px;
+      background:linear-gradient(135deg, var(--accent), #9af0b6);
+      box-shadow:0 0 0 8px rgba(79,209,123,.1);
+      flex:0 0 auto;
+    }
+
+    .section{
+      padding:84px 0;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:clamp(1.8rem, 3vw, 3rem);
+      letter-spacing:-1px;
+    }
+
+    .section-head p{
+      margin:10px 0 0;
+      max-width:720px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, var(--card), var(--card-2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.12rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:.96rem;
+    }
+
+    .service-icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      margin-bottom:16px;
+      background:rgba(79,209,123,.10);
+      color:#8ff0af;
+      font-size:1.4rem;
+      border:1px solid rgba(79,209,123,.16);
+    }
+
+    .pricing{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:stretch;
+    }
+
+    .price-card{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .price-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:160px;
+      height:160px;
+      background:radial-gradient(circle, rgba(79,209,123,.22), transparent 70%);
+    }
+
+    .price{
+      font-size:clamp(2rem,4vw,3.3rem);
+      font-weight:800;
+      letter-spacing:-1px;
+      margin:10px 0 8px;
+    }
+
+    .small-muted{
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.8;
+    }
+
+    .features{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .features div{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#edf2f7;
+      font-size:.97rem;
+    }
+
+    .concerts{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .concert-card{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .concert-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--line);
+      font-size:.84rem;
+      color:#dce4ee;
+      font-weight:600;
+      width:max-content;
+    }
+
+    .concert-card h3{
+      margin:2px 0 0;
+      font-size:1.25rem;
+    }
+
+    .concert-card .cta-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .footer{
+      padding:26px 0 40px;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-size:.92rem;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner,
+      .pricing,
+      .about,
+      .concerts,
+      .grid-3{
+        grid-template-columns:1fr;
+      }
+
+      .menu{
+        display:none;
+      }
+
+      .hero{
+        min-height:auto;
+      }
+
+      .hero-inner{
+        padding:52px 0;
+      }
+
+      .brand img{
+        width:46px;
+        height:46px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    <div>
-        <h1>ConcertHome</h1>
-        <p>Transporte exclusivo para conciertos</p>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand">
+        <img src="logo.png" alt="Logo ConcertHome">
+        <div class="brand-text">
+          <strong>ConcertHome</strong>
+          <span>Transporte VIP a conciertos</span>
+        </div>
+      </a>
+
+      <div class="menu">
+        <a href="#servicio">Servicio</a>
+        <a href="#tarifas">Tarifas</a>
+        <a href="#conciertos">Conciertos</a>
+        <a href="#contacto">Reserva</a>
+      </div>
     </div>
-</header>
+  </nav>
 
-<section style="text-align:center;">
-    <h2>¿Quiénes somos?</h2>
-    <p>Te llevamos y traemos de conciertos con un servicio cómodo, seguro y personalizado.</p>
-</section>
+  <header class="hero" id="inicio">
+    <div class="container hero-inner">
+      <div>
+        <div class="eyebrow">Traslados privados en Santiago</div>
+        <h1>Tu experiencia<br>empieza desde<br>el trayecto.</h1>
+        <p>
+          En ConcertHome te llevamos y te traemos de conciertos en un servicio cómodo,
+          puntual y seguro. Ideal para quienes quieren disfrutar la noche sin preocuparse
+          por estacionamientos, traslados o vuelta a casa.
+        </p>
 
-<section style="text-align:center;">
-    <h2>Servicio</h2>
-    <div class="card">
-        <p>✔ Ida y vuelta incluida</p>
-        <p>✔ Hasta 4 personas</p>
-        <p>✔ Agua fría y dulces</p>
-        <h3>$30.000 por persona</h3>
+        <div class="hero-actions">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/56954190451?text=Hola%2C%20cu%C3%A9ntanos%20a%20qu%C3%A9%20experiencia%20quieres%20que%20te%20llevemos%20y%20te%20ayudamos%20con%20tu%20reserva."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Reservar por WhatsApp
+          </a>
+
+          <a class="btn btn-secondary" href="#conciertos">Ver conciertos</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Un traslado pensado para disfrutar</h3>
+        <p>
+          Servicio exclusivo para hasta 4 personas, con ambiente cómodo y detalles
+          que hacen la diferencia.
+        </p>
+
+        <div class="hero-list">
+          <div><span class="dot"></span><span>Ida y vuelta al evento</span></div>
+          <div><span class="dot"></span><span>Agua fría y dulces incluidos</span></div>
+          <div><span class="dot"></span><span>Atención personalizada por WhatsApp</span></div>
+          <div><span class="dot"></span><span>Ideal para Movistar Arena, Estadio Nacional y más</span></div>
+        </div>
+      </div>
     </div>
-</section>
+  </header>
 
-<section style="text-align:center;">
-    <h2>Reserva tu experiencia</h2>
-    <p>Contáctanos directamente por WhatsApp</p>
-    <button onclick="window.location.href='https://wa.me/56954190451?text=Hola%20cuentanos%20a%20que%20experiencia%20quieres%20que%20te%20llevemos'">
-        Reservar ahora
-    </button>
-</section>
+  <section class="section" id="servicio">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>¿Por qué elegir ConcertHome?</h2>
+          <p>
+            Diseñamos un servicio simple y premium para quienes quieren ir a un concierto
+            sin estrés y volver con tranquilidad.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="service-icon">🚙</div>
+          <h3>Traslado privado</h3>
+          <p>
+            Te pasamos a buscar y coordinamos el regreso contigo para que no dependas
+            de apps, tacos ni estacionamientos.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="service-icon">✨</div>
+          <h3>Comodidad real</h3>
+          <p>
+            Vehículo cómodo para hasta 4 pasajeros, con agua fría o dulces para que la
+            experiencia se sienta distinta desde el inicio.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="service-icon">🎵</div>
+          <h3>Enfoque en conciertos</h3>
+          <p>
+            Servicio pensado específicamente para shows y eventos musicales en Santiago,
+            con atención cercana y flexible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tarifas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Tarifas</h2>
+          <p>
+            Precio claro y fácil de entender para que tus clientes sepan desde el inicio
+            cuánto cuesta vivir la experiencia.
+          </p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="card price-card">
+          <div class="tag">Tarifa base</div>
+          <div class="price">$30.000</div>
+          <div class="small-muted">por persona, ida y vuelta</div>
+
+          <div class="features">
+            <div>✔ Traslado al concierto</div>
+            <div>✔ Retorno coordinado</div>
+            <div>✔ Capacidad de hasta 4 personas</div>
+            <div>✔ Agua fría o dulces incluidos</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ideal para</h3>
+          <p class="small-muted">
+            Parejas, amigos o grupos pequeños que quieren una experiencia cómoda y más
+            exclusiva que un traslado común.
+          </p>
+
+          <div class="features">
+            <div>✔ Movistar Arena</div>
+            <div>✔ Estadio Nacional</div>
+            <div>✔ Teatro Caupolicán</div>
+            <div>✔ Otros recintos de Santiago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conciertos">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Próximos conciertos en Santiago</h2>
+          <p>
+            Esta sección usa fechas reales de carteleras oficiales para que tu página se
+            vea activa y conectada con los eventos de la ciudad. Los siguientes shows aparecen
+            actualmente publicados en Movistar Arena y Ticketmaster Chile. :contentReference[oaicite:1]{index=1}
+          </p>
+        </div>
+      </div>
+
+      <div class="concerts">
+        <div class="card concert-card">
+          <span class="tag">Freestyle / Evento musical</span>
+          <h3>Red Bull Batalla – Final Internacional</h3>
+          <div class="concert-meta">
+            <span>📍 Movistar Arena</span>
+            <span>📅 11 abril 2026</span>
+            <span>🕘 21:00 hrs</span>
+          </div>
+          <p>Uno de los eventos más grandes del freestyle en español, anunciado por Movistar Arena. :contentReference[oaicite:2]{index=2}</p>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Red%20Bull%20Batalla%20en%20Santiago.">Cotizar traslado</a>
+          </div>
+        </div>
+
+        <div class="card concert-card">
+          <span class="tag">Pop</span>
+          <h3>Laura Pausini</h3>
+          <div class="concert-meta">
+            <span>📍 Movistar Arena</span>
+            <span>📅 15 y 16 abril 2026</span>
+            <span>🕘 21:00 hrs</span>
+          </div>
+          <p>Show publicado en la cartelera oficial de Movistar Arena y PuntoTicket. :contentReference[oaicite:3]{index=3}</p>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Laura%20Pausini%20en%20Santiago.">Cotizar traslado</a>
+          </div>
+        </div>
+
+        <div class="card concert-card">
+          <span class="tag">Pop latino</span>
+          <h3>Sebastián Yatra</h3>
+          <div class="concert-meta">
+            <span>📍 Movistar Arena</span>
+            <span>📅 18 abril 2026</span>
+            <span>🕘 21:00 hrs</span>
+          </div>
+          <p>Evento anunciado en la cartelera oficial de Movistar Arena y PuntoTicket. :contentReference[oaicite:4]{index=4}</p>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Sebasti%C3%A1n%20Yatra%20en%20Santiago.">Cotizar traslado</a>
+          </div>
+        </div>
+
+        <div class="card concert-card">
+          <span class="tag">Rock / Metal</span>
+          <h3>KoЯn</h3>
+          <div class="concert-meta">
+            <span>📍 Estadio Nacional</span>
+            <span>📅 8 mayo 2026</span>
+          </div>
+          <p>Concierto listado por Ticketmaster Chile para Santiago, en Estadio Nacional. :contentReference[oaicite:5]{index=5}</p>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://wa.me/56954190451?text=Hola%2C%20quiero%20cotizar%20traslado%20para%20Ko%D0%AFn%20en%20Santiago.">Cotizar traslado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="about">
+        <div class="card">
+          <h3>Reserva tu viaje</h3>
+          <p class="small-muted">
+            Escríbenos directo por WhatsApp y cuéntanos a qué concierto o experiencia quieres
+            que te llevemos. Te respondemos con disponibilidad y coordinación del trayecto.
+          </p>
+          <div style="margin-top:18px;">
+            <a
+              class="btn btn-primary"
+              href="https://wa.me/56954190451?text=Hola%2C%20cu%C3%A9ntanos%20a%20qu%C3%A9%20experiencia%20quieres%20que%20te%20llevemos%3F"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Hablar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Quiénes somos</h3>
+          <p class="small-muted">
+            ConcertHome nace para ofrecer un traslado distinto: cómodo, seguro y pensado para
+            clientes que valoran una experiencia más cuidada antes y después de un concierto.
+          </p>
+          <div class="features">
+            <div>✔ Atención personalizada</div>
+            <div>✔ Imagen profesional para tu marca</div>
+            <div>✔ Página lista para compartir por Instagram o WhatsApp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 ConcertHome · Transporte VIP a conciertos en Santiago
+    </div>
+  </footer>
 
 </body>
 </html>
