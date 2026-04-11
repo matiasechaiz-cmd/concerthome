@@ -1,72 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transporte VIP Conciertos</title>
-  <style>
-    body { margin:0; font-family:'Segoe UI',sans-serif; background:#0f172a; color:#e5e7eb; }
-    nav { position:sticky; top:0; background:#020617; display:flex; justify-content:center; gap:20px; padding:12px; z-index:10; }
-    nav a { color:#e5e7eb; text-decoration:none; font-weight:600; }
-    header { text-align:center; padding:80px 20px; background:url('https://images.unsplash.com/photo-1518972559570-0c4a57c6f4a5') center/cover; }
-    header h1 { font-size:42px; margin:0; }
-    header p { font-size:18px; }
-    section { max-width:1000px; margin:auto; padding:40px 20px; }
-    .card { background:#1e293b; padding:25px; border-radius:15px; margin-bottom:20px; }
-    .price { font-size:28px; color:#22c55e; }
-    .btn { display:inline-block; margin-top:15px; background:#22c55e; padding:15px 25px; border-radius:10px; text-decoration:none; color:black; font-weight:bold; }
-    footer { text-align:center; padding:20px; background:#020617; }
-  </style>
+<meta charset="UTF-8">
+<title>ConcertHome</title>
+
+<!-- Tipografía moderna -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0b0b0b;
+    color: white;
+}
+
+/* HERO */
+header {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2') center/cover;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3.5em;
+    font-weight: 600;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    color: #ccc;
+}
+
+/* SECCIONES */
+section {
+    padding: 60px 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* CARD */
+.card {
+    background: #141414;
+    padding: 25px;
+    margin: auto;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* BOTÓN */
+button {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #1ebe5d;
+}
+</style>
 </head>
+
 <body>
 
-<nav>
-  <a href="#inicio">Inicio</a>
-  <a href="#servicio">Servicio</a>
-  <a href="#precio">Precio</a>
-  <a href="#contacto">Reserva</a>
-</nav>
-
-<header id="inicio">
-  <h1>Transporte VIP a Conciertos 🎶</h1>
-  <p>Viaja cómodo, seguro y sin preocupaciones</p>
+<header>
+    <div>
+        <h1>ConcertHome</h1>
+        <p>Transporte exclusivo para conciertos</p>
+    </div>
 </header>
 
-<section id="servicio">
-  <div class="card">
+<section style="text-align:center;">
     <h2>¿Quiénes somos?</h2>
-    <p>Servicio exclusivo en Santiago para llevarte y traerte de conciertos con total comodidad.</p>
-  </div>
-
-  <div class="card">
-    <h2>¿Qué ofrecemos?</h2>
-    <ul>
-      <li>Traslado ida y vuelta</li>
-      <li>Hasta 4 personas</li>
-      <li>Agua o snacks incluidos</li>
-      <li>Servicio puntual y seguro</li>
-    </ul>
-  </div>
+    <p>Te llevamos y traemos de conciertos con un servicio cómodo, seguro y personalizado.</p>
 </section>
 
-<section id="precio">
-  <div class="card">
-    <h2>Precio</h2>
-    <p class="price">$30.000 CLP por persona</p>
-  </div>
+<section style="text-align:center;">
+    <h2>Servicio</h2>
+    <div class="card">
+        <p>✔ Ida y vuelta incluida</p>
+        <p>✔ Hasta 4 personas</p>
+        <p>✔ Agua fría y dulces</p>
+        <h3>$30.000 por persona</h3>
+    </div>
 </section>
 
-<section id="contacto">
-  <div class="card">
-    <h2>Reserva tu viaje</h2>
-    <p>Haz clic y reserva directo por WhatsApp</p>
-    <a class="btn" href="https://wa.me/56954190451?text=Hola%2C%20cu%C3%A9ntanos%20a%20qu%C3%A9%20experiencia%20quieres%20que%20te%20llevemos%3F">Reservar ahora</a>
-  </div>
+<section style="text-align:center;">
+    <h2>Reserva tu experiencia</h2>
+    <p>Contáctanos directamente por WhatsApp</p>
+    <button onclick="window.location.href='https://wa.me/56954190451?text=Hola%20cuentanos%20a%20que%20experiencia%20quieres%20que%20te%20llevemos'">
+        Reservar ahora
+    </button>
 </section>
-
-<footer>
-  © 2026 Transporte VIP Conciertos
-</footer>
 
 </body>
 </html>
