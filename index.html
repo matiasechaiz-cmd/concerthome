@@ -38,20 +38,18 @@
 
     html{scroll-behavior:smooth}
 
-    body{
-      margin:0;
-      font-family:"Inter",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top center, rgba(212,174,98,.14), transparent 18%),
-        radial-gradient(circle at 15% 15%, rgba(124,92,255,.14), transparent 24%),
-        radial-gradient(circle at 85% 20%, rgba(38,211,102,.10), transparent 22%),
-        linear-gradient(180deg, #090b10 0%, #0b0f16 48%, #090b10 100%);
-      min-height:100vh;
-    }
+   body{
+  margin:0;
+  font-family:"Inter",sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(rgba(5,8,14,.45), rgba(5,8,14,.68)),
+    url("fondo-concierto.jpg") center center / cover no-repeat fixed;
+  min-height:100vh;
+}
 
     /* ambiente tipo concierto sin depender de imágenes externas */
-    body::before{
+    
       content:"";
       position:fixed;
       inset:0;
@@ -71,7 +69,7 @@
       z-index:-2;
     }
 
-    body::after{
+  
       content:"";
       position:fixed;
       left:0;
