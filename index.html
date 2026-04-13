@@ -1,149 +1,732 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Transporte a conciertos en Santiago | ConcertHome</title>
-<meta name="description" content="Transporte seguro a conciertos en Santiago. Traslado ida y vuelta al Movistar Arena y eventos.">
+  <title>Transporte a conciertos en Santiago | ConcertHome</title>
+  <meta
+    name="description"
+    content="Servicio de transporte seguro a conciertos en Santiago. Reserva tu traslado ida y vuelta desde tu comuna al Movistar Arena, Estadio Nacional y más."
+  />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
-  background: #0b0b0f;
-}
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg-2: #10131a;
+      --panel: rgba(14, 17, 24, 0.86);
+      --panel-2: rgba(20, 24, 34, 0.88);
+      --text: #f5f7fb;
+      --muted: #c8cfdb;
+      --line: rgba(255, 255, 255, 0.09);
+      --green: #29d266;
+      --green-dark: #1ea952;
+      --gold: #c9a45c;
+      --shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
 
-/* FONDO CONCIERTO */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
-    url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  z-index: -1;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* CONTENEDOR */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 20px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* TITULO */
-h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
-}
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(5, 8, 14, 0.72), rgba(5, 8, 14, 0.9)),
+        radial-gradient(circle at top, rgba(124, 92, 255, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(41, 210, 102, 0.14), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #090b10 100%);
+      min-height: 100vh;
+    }
 
-p {
-  color: #ccc;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 220, 120, 0.10), transparent 20%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.015) 0,
+          rgba(255,255,255,0.015) 1px,
+          transparent 1px,
+          transparent 140px
+        );
+      z-index: -1;
+    }
 
-/* TARJETA */
-.card {
-  background: rgba(20,20,30,0.85);
-  padding: 25px;
-  border-radius: 12px;
-  margin-top: 30px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* INPUTS */
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #1e1e2a;
-  color: white;
-}
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-/* BOTON */
-button {
-  margin-top: 15px;
-  padding: 14px;
-  width: 100%;
-  background: #26d366;
-  border: none;
-  border-radius: 8px;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 10, 16, 0.74);
+      border-bottom: 1px solid var(--line);
+    }
 
-/* PRECIO */
-.precio {
-  margin-top: 15px;
-  font-size: 18px;
-  color: #26d366;
-  font-weight: bold;
-}
-</style>
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      padding: 6px;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #eef1f7;
+      font-weight: 500;
+    }
+
+    .menu a {
+      opacity: 0.92;
+    }
+
+    .menu a:hover {
+      opacity: 1;
+      color: #fff;
+    }
+
+    .hero {
+      padding: 42px 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side,
+    .form-card,
+    .info-card,
+    .list-card,
+    .seo-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 34px;
+      min-height: 100%;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 164, 92, 0.38);
+      background: rgba(201, 164, 92, 0.08);
+      color: #f6dfb3;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.35rem, 4.2vw, 4.9rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-main p.lead {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn,
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn {
+      background: var(--green);
+      color: #08110b;
+    }
+
+    .btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--line);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .hero-side {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .info-card {
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(18, 22, 31, 0.54);
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.02rem;
+    }
+
+    .section {
+      padding: 12px 0 22px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.92fr;
+      gap: 28px;
+    }
+
+    .form-card {
+      padding: 28px;
+    }
+
+    .card-title {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .card-subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.02rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7, 10, 17, 0.88);
+      color: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font: inherit;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #98a1b2;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(41, 210, 102, 0.6);
+      box-shadow: 0 0 0 4px rgba(41, 210, 102, 0.09);
+    }
+
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    .price-box {
+      margin: 10px 0 8px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(41, 210, 102, 0.08);
+      border: 1px solid rgba(41, 210, 102, 0.18);
+      color: #7ff0a8;
+      font-size: 1.24rem;
+      font-weight: 800;
+    }
+
+    .price-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 58px;
+      border: none;
+      border-radius: 16px;
+      background: var(--green);
+      color: #08110b;
+      font-size: 1.06rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: var(--green-dark);
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .list-card,
+    .seo-card {
+      padding: 24px;
+    }
+
+    .list-card h3,
+    .seo-card h2 {
+      margin: 0 0 14px;
+      font-size: 1.6rem;
+      letter-spacing: -0.04em;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .check-list li::before {
+      content: "●";
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .commune-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: #edf1f8;
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .seo-card {
+      margin-top: 14px;
+    }
+
+    .seo-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    footer {
+      padding: 34px 0 48px;
+      color: #98a1b2;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu {
+        gap: 16px;
+        font-size: 0.95rem;
+      }
+
+      .brand-title {
+        font-size: 1.45rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .nav {
+        min-height: 74px;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .brand-sub,
+      .menu {
+        display: none;
+      }
+
+      .hero-main,
+      .hero-side,
+      .form-card,
+      .list-card,
+      .seo-card {
+        padding: 20px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        line-height: 1.02;
+      }
+
+      .card-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <img src="logo.png" alt="Logo ConcertHome" />
+        <div class="brand-text">
+          <span class="brand-title">ConcertHome</span>
+          <span class="brand-sub">Traslado premium a conciertos en Santiago</span>
+        </div>
+      </div>
 
-<div class="container">
+      <nav class="menu">
+        <a href="#servicios">Servicios</a>
+        <a href="#comunas">Comunas</a>
+        <a href="#reserva">Reservar</a>
+      </nav>
+    </div>
+  </header>
 
-<h1>Transporte a conciertos en Santiago</h1>
-<p>Servicio VIP ida y vuelta desde tu comuna al Movistar Arena y eventos.</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <span class="pill">Transporte VIP a conciertos en Santiago</span>
+          <h1>Tu experiencia empieza desde el trayecto</h1>
+          <p class="lead">
+            Servicio exclusivo de traslado ida y vuelta a conciertos en Santiago de Chile.
+          </p>
+          <p class="lead">
+            Viaja seguro, cómodo y puntual en vehículo SUV para hasta 4 personas.
+          </p>
+          <p class="lead">
+            Reserva online tu traslado con atención personalizada y confirmación directa.
+          </p>
 
-<div class="card">
+          <div class="cta-row">
+            <a class="btn" href="#reserva">Reservar traslado</a>
+            <a class="btn-outline" href="https://wa.me/56900000000" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+          </div>
+        </div>
 
-<label>Nombre</label>
-<input type="text" placeholder="Tu nombre">
+        <aside class="hero-side">
+          <div class="info-card">
+            <h3>Servicio pensado para conciertos y eventos</h3>
+            <p>
+              Ideal para traslados a Movistar Arena, Estadio Nacional y otros recintos de Santiago.
+            </p>
+          </div>
 
-<label>Teléfono</label>
-<input type="text" placeholder="Tu teléfono">
+          <div class="info-card">
+            <h3>Capacidad y comodidad</h3>
+            <p>
+              Vehículo SUV seguro, oscuro y cómodo, con capacidad para hasta 4 pasajeros.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-<label>Evento</label>
-<input type="text" placeholder="Ej: Movistar Arena">
+    <section class="section" id="reserva">
+      <div class="container section-grid">
+        <div class="form-card">
+          <h2 class="card-title">Reserva tu traslado</h2>
+          <p class="card-subtitle">
+            Completa este formulario con tus datos. Puedes usarlo para cotizar y recibir confirmación de tu reserva.
+          </p>
 
-<label>Comuna</label>
-<select id="comuna" onchange="calcularPrecio()">
-  <option value="">Selecciona comuna</option>
-  <option value="30000">Puente Alto</option>
-  <option value="25000">La Florida</option>
-  <option value="20000">Ñuñoa</option>
-  <option value="35000">Maipú</option>
-</select>
+          <form class="grid-2" action="#" method="post" onsubmit="return false;">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" type="text" placeholder="Tu nombre" />
+            </div>
 
-<div class="precio" id="precio">Precio estimado: $0</div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" type="tel" placeholder="Tu teléfono" />
+            </div>
 
-<button>Reservar traslado</button>
+            <div class="field">
+              <label for="evento">Concierto o evento</label>
+              <input id="evento" type="text" placeholder="Ej: Movistar Arena" />
+            </div>
 
-</div>
+            <div class="field">
+              <label for="comuna">Comuna</label>
+              <select id="comuna" onchange="calcularPrecio()">
+                <option value="">Selecciona una comuna</option>
+                <option value="40000">Puente Alto</option>
+                <option value="35000">La Florida</option>
+                <option value="32000">Maipú</option>
+                <option value="30000">Ñuñoa</option>
+                <option value="32000">Santiago Centro</option>
+                <option value="38000">Las Condes</option>
+                <option value="42000">San Bernardo</option>
+                <option value="36000">La Cisterna</option>
+                <option value="39000">Providencia</option>
+                <option value="37000">Macul</option>
+              </select>
+            </div>
 
-<!-- TEXTO SEO -->
-<div class="card">
-<h2>Traslado a conciertos en Santiago</h2>
-<p>
-Ofrecemos transporte privado a conciertos en Santiago, incluyendo Movistar Arena y Estadio Nacional.
-Servicio cómodo, seguro y puntual desde tu comuna.
-</p>
-</div>
+            <div class="field full">
+              <div class="price-box" id="precio">Precio estimado: $0</div>
+              <div class="price-note">
+                Precio referencial por traslado. El valor final puede variar según horario, destino exacto y cantidad de pasajeros.
+              </div>
+            </div>
 
-</div>
+            <div class="field full">
+              <label for="direccion">Dirección exacta</label>
+              <input id="direccion" type="text" placeholder="Dirección de recogida o destino" />
+            </div>
 
-<script>
-function calcularPrecio() {
-  let comuna = document.getElementById("comuna");
-  let precio = comuna.value;
+            <div class="field">
+              <label for="personas">Número de personas</label>
+              <select id="personas">
+                <option>1 persona</option>
+                <option>2 personas</option>
+                <option>3 personas</option>
+                <option>4 personas</option>
+              </select>
+            </div>
 
-  if(precio === "") {
-    document.getElementById("precio").innerText = "Precio estimado: $0";
-  } else {
-    document.getElementById("precio").innerText = "Precio estimado: $" + precio;
-  }
-}
-</script>
+            <div class="field">
+              <label for="servicio">Tipo de servicio</label>
+              <select id="servicio">
+                <option>Ida y vuelta</option>
+                <option>Solo ida</option>
+                <option>Solo regreso</option>
+              </select>
+            </div>
 
+            <div class="field full">
+              <label for="mensaje">Observaciones</label>
+              <textarea id="mensaje" placeholder="Ej: horario del concierto, punto de encuentro, necesidades especiales, etc."></textarea>
+            </div>
+
+            <div class="field full">
+              <button class="submit-btn" type="submit">Reservar traslado</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="side-stack">
+          <div class="list-card" id="servicios">
+            <h3>Servicios</h3>
+            <ul class="check-list">
+              <li>Traslado a conciertos en Santiago.</li>
+              <li>Servicio ida y vuelta para recitales y eventos.</li>
+              <li>Traslado al Movistar Arena, Estadio Nacional y otros recintos.</li>
+              <li>Vehículo SUV privado para hasta 4 pasajeros.</li>
+              <li>Atención personalizada y coordinación directa.</li>
+            </ul>
+          </div>
+
+          <div class="list-card" id="comunas">
+            <h3>Comunas donde trabajamos</h3>
+            <div class="commune-tags">
+              <span class="tag">Puente Alto</span>
+              <span class="tag">La Florida</span>
+              <span class="tag">Maipú</span>
+              <span class="tag">Ñuñoa</span>
+              <span class="tag">Santiago Centro</span>
+              <span class="tag">Las Condes</span>
+              <span class="tag">San Bernardo</span>
+              <span class="tag">La Cisterna</span>
+              <span class="tag">Providencia</span>
+              <span class="tag">Macul</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="seo-card">
+          <h2>Transporte a conciertos en Santiago</h2>
+          <p>
+            En ConcertHome ofrecemos transporte privado a conciertos en Santiago, incluyendo traslado al Movistar Arena, Estadio Nacional y otros eventos importantes.
+          </p>
+          <p>
+            Nuestro servicio de traslado a conciertos incluye ida y vuelta desde tu comuna, con vehículo SUV cómodo, seguro y puntual para hasta 4 personas.
+          </p>
+          <p>
+            Reserva fácilmente indicando tu comuna y obtén un precio estimado inmediato para tu traslado.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 ConcertHome. Transporte a conciertos en Santiago.
+    </div>
+  </footer>
+
+  <script>
+    function calcularPrecio() {
+      const comuna = document.getElementById("comuna");
+      const precio = document.getElementById("precio");
+      const valor = comuna.value;
+
+      if (!valor) {
+        precio.textContent = "Precio estimado: $0";
+        return;
+      }
+
+      const numero = Number(valor);
+      precio.textContent = "Precio estimado: $" + numero.toLocaleString("es-CL");
+    }
+  </script>
 </body>
 </html>
      
