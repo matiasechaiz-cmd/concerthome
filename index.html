@@ -29,7 +29,7 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
+    <body>
       <h1>Transporte a conciertos en Santiago de Chile</h1>
 
 <p>
@@ -40,6 +40,42 @@ Viaja seguro, cómodo y puntual en vehículo SUV para hasta 4 personas.
 <p>
 Atendemos eventos en todo Santiago de Chile, ofreciendo un servicio privado y confiable para que disfrutes sin preocupaciones.
 </p>
+    <h2>Reserva tu traslado</h2>
+
+<button onclick="document.getElementById('formulario').style.display='block'">
+Reservar traslado
+</button>
+
+<div id="formulario" style="display:none; margin-top:20px;">
+
+<form action="https://formsubmit.co/matias.echaiz@gmail.com" method="POST">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="https://concerthome.cl">
+<input type="text" name="Nombre" placeholder="Tu nombre" required><br><br>
+
+<input type="tel" name="Telefono" placeholder="Tu teléfono" required><br><br>
+
+<input type="text" name="Evento" placeholder="Concierto o evento" required><br><br>
+
+<select name="Comuna" required>
+<option value="">Selecciona tu comuna</option>
+<option>Providencia</option>
+<option>Las Condes</option>
+<option>Ñuñoa</option>
+<option>La Florida</option>
+<option>Maipú</option>
+<option>Puente Alto</option>
+</select><br><br>
+
+<input type="text" name="Direccion" placeholder="Dirección exacta" required><br><br>
+
+<input type="number" name="Personas" placeholder="Número de personas" required><br><br>
+
+<button type="submit">Enviar reserva</button>
+
+</form>
+
+</div>
       margin:0;
       font-family:'Poppins',sans-serif;
       background:
