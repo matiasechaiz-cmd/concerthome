@@ -609,6 +609,7 @@
             <div>
               <label for="comuna">Comuna</label>
               <select id="comuna" name="Comuna" required>
+                <p id="precio" style="margin-top:10px; font-weight:bold; color:#26d366;"></p>
                 <option value="">Selecciona tu comuna</option>
                 <option>Providencia</option>
                 <option>Las Condes</option>
@@ -661,7 +662,30 @@
       ConcertHome · Transporte VIP a conciertos en Santiago de Chile.
     </div>
   </footer>
+<script>
+document.getElementById("comuna").addEventListener("change", function() {
+  let comuna = this.value;
+  let precioTexto = "";
 
+  if (comuna === "Providencia" || comuna === "Ñuñoa") {
+    precioTexto = "Precio estimado: $25.000";
+  } 
+  else if (comuna === "Las Condes" || comuna === "Vitacura") {
+    precioTexto = "Precio estimado: $30.000";
+  } 
+  else if (comuna === "La Florida" || comuna === "Maipú") {
+    precioTexto = "Precio estimado: $35.000";
+  } 
+  else if (comuna === "Puente Alto" || comuna === "Quilicura") {
+    precioTexto = "Precio estimado: $40.000";
+  } 
+  else {
+    precioTexto = "Precio a confirmar según ubicación";
+  }
+
+  document.getElementById("precio").innerText = precioTexto;
+});
+</script>
 </body>
 </html>
      
