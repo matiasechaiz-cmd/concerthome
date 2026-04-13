@@ -609,7 +609,8 @@
             <div>
               <label for="comuna">Comuna</label>
               <select id="comuna" name="Comuna" required>
-                <p id="precio" style="margin-top:10px; font-weight:bold; color:#26d366;"></p>
+                
+                 style="margin-top:10px; font-weight:bold; color:#26d366;"></p>
                 <option value="">Selecciona tu comuna</option>
                 <option>Providencia</option>
                 <option>Las Condes</option>
@@ -621,6 +622,8 @@
                 <option>Santiago Centro</option>
                 <option>Otra</option>
               </select>
+              <p id="precio" style="margin-top:10px; font-weight:bold; color:#26d366;"></p
+
             </div>
 
             <div class="full">
@@ -663,12 +666,10 @@
     </div>
   </footer>
 <script>
-window.addEventListener("load", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
   const comunaSelect = document.getElementById("comuna");
   const precioTexto = document.getElementById("precio");
-
-  if (!comunaSelect || !precioTexto) return;
 
   comunaSelect.addEventListener("change", function () {
     const comuna = this.value;
