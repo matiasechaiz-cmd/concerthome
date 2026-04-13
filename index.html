@@ -663,27 +663,37 @@
     </div>
   </footer>
 <script>
-document.getElementById("comuna").addEventListener("change", function() {
-  let comuna = this.value;
-  let precioTexto = "";
+window.addEventListener("load", function() {
 
-  if (comuna === "Providencia" || comuna === "Ñuñoa") {
-    precioTexto = "Precio estimado: $25.000";
-  } 
-  else if (comuna === "Las Condes" || comuna === "Vitacura") {
-    precioTexto = "Precio estimado: $30.000";
-  } 
-  else if (comuna === "La Florida" || comuna === "Maipú") {
-    precioTexto = "Precio estimado: $35.000";
-  } 
-  else if (comuna === "Puente Alto" || comuna === "Quilicura") {
-    precioTexto = "Precio estimado: $40.000";
-  } 
-  else {
-    precioTexto = "Precio a confirmar según ubicación";
-  }
+  const comunaSelect = document.getElementById("comuna");
+  const precioTexto = document.getElementById("precio");
 
-  document.getElementById("precio").innerText = precioTexto;
+  if (!comunaSelect || !precioTexto) return;
+
+  comunaSelect.addEventListener("change", function () {
+    const comuna = this.value;
+
+    if (comuna === "Providencia" || comuna === "Ñuñoa") {
+      precioTexto.innerText = "Precio estimado: $25.000";
+    } 
+    else if (comuna === "Las Condes" || comuna === "Vitacura") {
+      precioTexto.innerText = "Precio estimado: $30.000";
+    } 
+    else if (comuna === "La Florida" || comuna === "Maipú") {
+      precioTexto.innerText = "Precio estimado: $35.000";
+    } 
+    else if (comuna === "Puente Alto") {
+      precioTexto.innerText = "Precio estimado: $40.000";
+    } 
+    else if (comuna === "Santiago Centro") {
+      precioTexto.innerText = "Precio estimado: $28.000";
+    } 
+    else {
+      precioTexto.innerText = "Precio a confirmar";
+    }
+
+  });
+
 });
 </script>
 </body>
