@@ -1,127 +1,72 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const elementos = {
-    form: document.getElementById("reservaForm"),
-    tipoServicio: document.getElementById("tipoServicio"),
-    comunaOrigen: document.getElementById("comunaOrigen"),
-    direccionOrigen: document.getElementById("direccionOrigen"),
-    destino: document.getElementById("destino"),
-    salidaRegreso: document.getElementById("salidaRegreso"),
-    comunaRegreso: document.getElementById("comunaRegreso"),
-    direccionRegreso: document.getElementById("direccionRegreso"),
-    bloqueRegreso: document.getElementById("bloqueRegreso"),
-    valorIda: document.getElementById("valorIda"),
-    valorRegreso: document.getElementById("valorRegreso"),
-    valorTotal: document.getElementById("valorTotal"),
-    whatsappBtn: document.getElementById("whatsappBtn")
+const WHATSAPP_NUMBER = "56954190451"; // tu número
+
+const elementos = {
+  form: document.getElementById("reservaForm"),
+  tipoServicio: document.getElementById("tipoServicio"),
+  comunaOrigen: document.getElementById("comunaOrigen"),
+  direccionOrigen: document.getElementById("direccionOrigen"),
+  destino: document.getElementById("destino"),
+  salidaRegreso: document.getElementById("salidaRegreso"),
+  comunaRegreso: document.getElementById("comunaRegreso"),
+  direccionRegreso: document.getElementById("direccionRegreso"),
+  bloqueRegreso: document.getElementById("bloqueRegreso"),
+  valorIda: document.getElementById("valorIda"),
+  valorRegreso: document.getElementById("valorRegreso"),
+  valorTotal: document.getElementById("valorTotal"),
+  whatsappBtn: document.getElementById("whatsappBtn")
+};
+
+function obtenerDatosFormulario(elementos) {
+  return {
+    tipoServicio: elementos.tipoServicio.value,
+    comunaOrigen: elementos.comunaOrigen.value,
+    destino: elementos.destino.value
   };
+}
 
-  const WHATSAPP_NUMBER = "56954190451";
+function calcularResumen(datos) {
+  const valorIda = obtenerValorIda(datos.tipoServicio, datos.comunaOrigen, datos.destino);
+  const valorRegreso = obtenerValorRegreso(datos.tipoServicio, datos.destino, datos.comunaOrigen);
+  const total = valorIda + valorRegreso;
 
-  llenarSelect(elementos.comunaOrigen, COMUNAS, "Seleccione comuna");
-  llenarSelect(elementos.comunaRegreso, COMUNAS, "Seleccione comuna");
-  llenarSelect(elementos.destino, RECINTOS, "Seleccione recinto");
-  llenarSelect(elementos.salidaRegreso, RECINTOS, "Seleccione recinto");
+  return { valorIda, valorRegreso, total };
+}
 
-  function recalcular() {
-    mostrarBloqueRegreso(elementos.tipoServicio.value, elementos.bloqueRegreso);
+function formatoPesos(valor) {
+  return "$" + Number(valor).toLocaleString("es-CL");
+}
 
-    if (elementos.destino.value && !elementos.salidaRegreso.value) {
-      elementos.salidaRegreso.value = elementos.destino.value;
-    }
+function obtenerTextoServicio(valor) {
+  if (valor === "ida") return "Solo ida";
+  if (valor === "regreso") return "Solo regreso";
+  if (valor === "ida_vuelta") return "Ida y regreso";
+  return "No definido";
+}
 
-    if (
-      (elementos.tipoServicio.value === "ida_vuelta" || elementos.tipoServicio.value === "regreso") &&
-      elementos.comunaOrigen.value &&
-      !elementos.comunaRegreso.value
-    ) {
-      elementos.comunaRegreso.value = elementos.comunaOrigen.value;
-    }
+function recalcular() {
+  const datos = obtenerDatosFormulario(elementos);
+  const resumen = calcularResumen(datos);
 
-    const datos = obtenerDatosFormulario(elementos);
-    const resumen = calcularResumen(datos);
-    actualizarResumenUI(resumen, elementos);
-  }
+  elementos.valorIda.textContent = formatoPesos(resumen.valorIda);
+  elementos.valorRegreso.textContent = formatoPesos(resumen.valorRegreso);
+  elementos.valorTotal.textContent = formatoPesos(resumen.total);
+}
 
-  function obtenerTextoServicio(valor) {
-    if (valor === "ida") return "Solo ida";
-    if (valor === "regreso") return "Solo regreso";
-    if (valor === "ida_vuelta") return "Ida y regreso";
-    return "No definido";
-  }
-
-  function obtenerLabelDesdeSelect(select) {
-    return select.options[select.selectedIndex]?.text || "";
-  }
-
- function construirMensajeWhatsApp() {
+function construirMensajeWhatsApp() {
   const mensaje = "Hola! 👋 ¿A qué experiencia quieres que te llevemos? 🚗✨";
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
 }
 
-  if (resumen.total > 0) {
-    mensaje += `Total estimado: ${formatoPesos(resumen.total)}`;
-  }
+elementos.tipoServicio.addEventListener("change", recalcular);
+elementos.comunaOrigen.addEventListener("change", recalcular);
+elementos.destino.addEventListener("change", recalcular);
 
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
-}
-    const datos = obtenerDatosFormulario(elementos);
-    const resumen = calcularResumen(datos);
-
-    const tipoServicio = obtenerTextoServicio(datos.tipoServicio);
-    const comunaOrigen = obtenerLabelDesdeSelect(elementos.comunaOrigen) || "No indicada";
-    const destino = obtenerLabelDesdeSelect(elementos.destino) || "No indicado";
-    const salidaRegreso = obtenerLabelDesdeSelect(elementos.salidaRegreso) || destino || "No indicado";
-    const comunaRegreso = obtenerLabelDesdeSelect(elementos.comunaRegreso) || comunaOrigen || "No indicada";
-    const direccionOrigen = elementos.direccionOrigen.value.trim() || "No indicada";
-    const direccionRegreso = elementos.direccionRegreso.value.trim() || "No indicada";
-
-  let mensaje = `Hola! 👋 ¿A qué experiencia quieres que te llevemos? 🚗✨%0A%0A`;
-    mensaje += `Tipo de servicio: ${tipoServicio}%0A`;
-    mensaje += `Comuna de origen: ${comunaOrigen}%0A`;
-    mensaje += `Dirección de origen: ${direccionOrigen}%0A`;
-    mensaje += `Recinto de destino: ${destino}%0A`;
-
-    if (datos.tipoServicio === "regreso" || datos.tipoServicio === "ida_vuelta") {
-      mensaje += `Salida regreso: ${salidaRegreso}%0A`;
-      mensaje += `Comuna regreso: ${comunaRegreso}%0A`;
-      mensaje += `Dirección regreso: ${direccionRegreso}%0A`;
-    }
-
-    mensaje += `%0AValor ida: ${encodeURIComponent(formatoPesos(resumen.valorIda))}%0A`;
-    mensaje += `Valor regreso: ${encodeURIComponent(formatoPesos(resumen.valorRegreso))}%0A`;
-    mensaje += `Total: ${encodeURIComponent(formatoPesos(resumen.total))}`;
-
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
-  }
-
-  elementos.tipoServicio.addEventListener("change", recalcular);
-  elementos.comunaOrigen.addEventListener("change", recalcular);
-  elementos.destino.addEventListener("change", recalcular);
-  elementos.salidaRegreso.addEventListener("change", recalcular);
-  elementos.comunaRegreso.addEventListener("change", recalcular);
-
-  elementos.form.addEventListener("submit", (event) => {
+if (elementos.whatsappBtn) {
+  elementos.whatsappBtn.addEventListener("click", (event) => {
     event.preventDefault();
-
-    const datos = obtenerDatosFormulario(elementos);
-    const resumen = calcularResumen(datos);
-
-    alert(
-      `Reserva registrada:\n\n` +
-      `Tipo de servicio: ${obtenerTextoServicio(datos.tipoServicio)}\n` +
-      `Valor ida: ${formatoPesos(resumen.valorIda)}\n` +
-      `Valor regreso: ${formatoPesos(resumen.valorRegreso)}\n` +
-      `Total: ${formatoPesos(resumen.total)}`
-    );
+    const url = construirMensajeWhatsApp();
+    window.open(url, "_blank");
   });
+}
 
-  if (elementos.whatsappBtn) {
-    elementos.whatsappBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      const url = construirMensajeWhatsApp();
-      window.open(url, "_blank");
-    });
-  }
-
-  recalcular();
-});
+recalcular();
