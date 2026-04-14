@@ -78,91 +78,82 @@
           Completa el formulario y revisa el valor de ida, regreso y total final.
         </p>
       </div>
+<form id="reservaForm" class="booking-form">
+  <div class="form-group">
+    <label for="tipoServicio">Tipo de servicio</label>
+    <select id="tipoServicio" name="tipoServicio" required>
+      <option value="">Seleccione</option>
+      <option value="ida">Solo ida</option>
+      <option value="regreso">Solo regreso</option>
+      <option value="ida_vuelta">Ida y regreso</option>
+    </select>
+  </div>
 
-      <form id="reservaForm" class="booking-form">
-        <div class="form-group">
-          <label for="tipoServicio">Tipo de servicio</label>
-          <select id="tipoServicio" name="tipoServicio" required>
-            <option value="">Seleccione</option>
-            <option value="ida">Solo ida</option>
-            <option value="regreso">Solo regreso</option>
-            <option value="ida_vuelta">Ida y regreso</option>
-          </select>
-        </div>
+  <div id="salidaBlock" class="form-block">
+    <h3 id="tituloSalida">Lugar de salida</h3>
 
-        <div class="form-block">
-          <h3>Salida de origen</h3>
+    <div class="form-group">
+      <label id="labelComunaOrigen" for="comunaOrigen">Comuna de salida</label>
+      <select id="comunaOrigen" name="comunaOrigen">
+        <option value="">Seleccione comuna</option>
+      </select>
+    </div>
 
-          <div class="form-group">
-            <label for="comunaOrigen">Comuna de origen</label>
-            <select id="comunaOrigen" name="comunaOrigen" required>
-              <option value="">Seleccione comuna</option>
-            </select>
-          </div>
+    <div class="form-group">
+      <label id="labelDireccionOrigen" for="direccionOrigen">Dirección exacta de salida</label>
+      <input
+        type="text"
+        id="direccionOrigen"
+        name="direccionOrigen"
+        placeholder="Ej: Gran Avenida 1234"
+      />
+    </div>
+  </div>
 
-          <div class="form-group">
-            <label for="direccionOrigen">Dirección exacta de origen</label>
-            <input
-              type="text"
-              id="direccionOrigen"
-              name="direccionOrigen"
-              placeholder="Ej: Gran Avenida 1234"
-              required
-            />
-          </div>
-        </div>
+  <div id="destinoBlock" class="form-block">
+    <h3 id="tituloDestino">Estadio o recinto</h3>
 
-        <div class="form-block">
-          <h3>Hacia</h3>
+    <div class="form-group">
+      <label id="labelDestino" for="destino">Estadio o recinto</label>
+      <select id="destino" name="destino">
+        <option value="">Seleccione recinto</option>
+      </select>
+    </div>
+  </div>
 
-          <div class="form-group">
-            <label for="destino">Recinto de destino</label>
-            <select id="destino" name="destino" required>
-              <option value="">Seleccione recinto</option>
-            </select>
-          </div>
-        </div>
+  <div id="bloqueRegreso" class="form-block hidden">
+    <h3 id="tituloRegreso">Lugar de regreso</h3>
 
-        <div id="bloqueRegreso" class="form-block hidden">
-          <h3>Regreso</h3>
+    <div class="form-group">
+      <label id="labelComunaRegreso" for="comunaRegreso">Comuna de regreso</label>
+      <select id="comunaRegreso" name="comunaRegreso">
+        <option value="">Seleccione comuna</option>
+      </select>
+    </div>
 
-          <div class="form-group">
-            <label for="salidaRegreso">Lugar de salida del regreso</label>
-            <select id="salidaRegreso" name="salidaRegreso">
-              <option value="">Seleccione recinto</option>
-            </select>
-          </div>
+    <div class="form-group">
+      <label id="labelDireccionRegreso" for="direccionRegreso">Dirección exacta de regreso</label>
+      <input
+        type="text"
+        id="direccionRegreso"
+        name="direccionRegreso"
+        placeholder="Ej: Vicuña Mackenna 456"
+      />
+    </div>
+  </div>
 
-          <div class="form-group">
-            <label for="comunaRegreso">Comuna de destino del regreso</label>
-            <select id="comunaRegreso" name="comunaRegreso">
-              <option value="">Seleccione comuna</option>
-            </select>
-          </div>
+  <div class="summary-box">
+    <h3>Resumen de valores</h3>
+    <p>Valor ida: <strong id="valorIda">$0</strong></p>
+    <p>Valor regreso: <strong id="valorRegreso">$0</strong></p>
+    <p>Total final: <strong id="valorTotal">$0</strong></p>
+    <small>
+      El valor puede variar según comuna de salida, recinto, comuna de regreso y tipo de servicio.
+    </small>
+  </div>
 
-          <div class="form-group">
-            <label for="direccionRegreso">Dirección exacta de destino</label>
-            <input
-              type="text"
-              id="direccionRegreso"
-              name="direccionRegreso"
-              placeholder="Ej: Vicuña Mackenna 456"
-            />
-          </div>
-        </div>
-
-        <div class="summary-box">
-          <h3>Resumen de valores</h3>
-          <p>Valor ida: <strong id="valorIda">$0</strong></p>
-          <p>Valor regreso: <strong id="valorRegreso">$0</strong></p>
-          <p>Total final: <strong id="valorTotal">$0</strong></p>
-          <small>
-            El valor puede variar según comuna de origen, recinto, horario y tipo de regreso.
-          </small>
-        </div>
-
-        <button type="submit" class="primary-btn">Reservar</button>
-      </form>
+  <button type="submit" class="primary-btn">Reservar</button>
+</form>
     </section>
 
     <section class="section-card events-section">
