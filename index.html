@@ -3,882 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Transporte a conciertos en Santiago | ConcertHome</title>
-  <meta
-    name="description"
-    content="Transporte a conciertos en Santiago. Reserva tu traslado ida y vuelta desde tu comuna al Movistar Arena, Estadio Nacional y otros eventos."
-  />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <style>
-    :root{
-      --bg:#08090d;
-      --bg-2:#0f1218;
-      --panel:rgba(14,18,27,.88);
-      --panel-2:rgba(19,24,35,.92);
-      --text:#f4f7fb;
-      --muted:#bfc7d7;
-      --line:rgba(255,255,255,.08);
-      --green:#26d366;
-      --green-dark:#1ea952;
-      --gold:#d4ae62;
-      --shadow:0 14px 34px rgba(0,0,0,.35);
-      --radius:22px;
-      --max:1180px;
-    }
-
-    *{box-sizing:border-box}
-
-    html{scroll-behavior:smooth}
-
-   body{
-  margin:0;
-  font-family:"Inter",sans-serif;
-  color:var(--text);
-  background:
-    linear-gradient(rgba(5,8,14,.45), rgba(5,8,14,.68)),
-    url("fondo-concierto.jpg") center center / cover no-repeat fixed;
-  min-height:100vh;
-}
-
-    /* ambiente tipo concierto sin depender de imágenes externas */
-    
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 20% -10%, rgba(255,255,255,.05), transparent 20%),
-        radial-gradient(circle at 50% -10%, rgba(255,214,128,.08), transparent 22%),
-        radial-gradient(circle at 80% -10%, rgba(124,92,255,.08), transparent 20%),
-        linear-gradient(to bottom, rgba(0,0,0,.12), rgba(0,0,0,.42)),
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,.012) 0,
-          rgba(255,255,255,.012) 1px,
-          transparent 1px,
-          transparent 140px
-        );
-      z-index:-2;
-    }
-
-  
-      content:"";
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      height:32vh;
-      pointer-events:none;
-      background:
-        radial-gradient(ellipse at center bottom, rgba(0,0,0,.65), rgba(0,0,0,0) 70%);
-      z-index:-1;
-    }
-
-    a{color:inherit;text-decoration:none}
-
-    .container{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(10px);
-      background:rgba(8,11,17,.72);
-      border-bottom:1px solid var(--line);
-    }
-
-    .nav{
-      min-height:82px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand img{
-      width:58px;
-      height:58px;
-      object-fit:contain;
-      border-radius:14px;
-      border:1px solid var(--line);
-      padding:6px;
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-      flex-shrink:0;
-    }
-
-    .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.08;
-    }
-
-    .brand-title{
-      font-size:1.9rem;
-      font-weight:800;
-      letter-spacing:-.05em;
-    }
-
-    .brand-sub{
-      font-size:.92rem;
-      color:var(--muted);
-    }
-
-    .menu{
-      display:flex;
-      align-items:center;
-      gap:26px;
-      font-weight:600;
-      color:#eef2f8;
-    }
-
-    .menu a:hover{color:#fff}
-
-    .hero{
-      padding:42px 0 22px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:28px;
-    }
-
-    .card,
-    .hero-main,
-    .hero-side,
-    .form-card,
-    .side-card,
-    .shows-card,
-    .seo-card{
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main{
-      padding:34px;
-    }
-
-    .hero-side{
-      padding:22px;
-      display:grid;
-      gap:16px;
-      align-content:start;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 18px;
-      border-radius:999px;
-      border:1px solid rgba(212,174,98,.35);
-      background:rgba(212,174,98,.08);
-      color:#f5deb0;
-      font-weight:700;
-      margin-bottom:20px;
-    }
-
-    h1{
-      margin:0 0 18px;
-      font-size:clamp(2.4rem, 4.7vw, 5rem);
-      line-height:.95;
-      letter-spacing:-.06em;
-    }
-
-    .lead{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-size:1.12rem;
-      line-height:1.75;
-      max-width:760px;
-    }
-
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:28px;
-    }
-
-    .btn,
-    .btn-outline{
-      min-height:56px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 24px;
-      border-radius:16px;
-      font-weight:800;
-      transition:.2s ease;
-    }
-
-    .btn{
-      background:var(--green);
-      color:#08110b;
-    }
-
-    .btn:hover{background:var(--green-dark)}
-
-    .btn-outline{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:#fff;
-    }
-
-    .btn-outline:hover{background:rgba(255,255,255,.08)}
-
-    .mini-card{
-      padding:22px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.025);
-    }
-
-    .mini-card h3{
-      margin:0 0 10px;
-      font-size:1.5rem;
-      letter-spacing:-.04em;
-    }
-
-    .mini-card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .section{
-      padding:12px 0 24px;
-    }
-
-    .section-grid{
-      display:grid;
-      grid-template-columns:1fr .92fr;
-      gap:28px;
-    }
-
-    .form-card{
-      padding:28px;
-    }
-
-    .card-title{
-      margin:0 0 10px;
-      font-size:2rem;
-      letter-spacing:-.04em;
-    }
-
-    .card-subtitle{
-      margin:0 0 24px;
-      color:var(--muted);
-      line-height:1.75;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px 18px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .field.full{grid-column:1 / -1}
-
-    label{
-      font-weight:700;
-      color:#fff;
-    }
-
-    input,
-    select,
-    textarea{
-      width:100%;
-      padding:16px 18px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(7,10,17,.90);
-      color:#fff;
-      font:inherit;
-      outline:none;
-    }
-
-    input::placeholder,
-    textarea::placeholder{
-      color:#97a0b1;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus{
-      border-color:rgba(38,211,102,.6);
-      box-shadow:0 0 0 4px rgba(38,211,102,.09);
-    }
-
-    textarea{
-      min-height:108px;
-      resize:vertical;
-    }
-
-    .price-box{
-      margin:10px 0 8px;
-      padding:14px 16px;
-      border-radius:16px;
-      background:rgba(38,211,102,.08);
-      border:1px solid rgba(38,211,102,.18);
-      color:#7ff0a8;
-      font-size:1.22rem;
-      font-weight:800;
-    }
-
-    .price-note{
-      color:var(--muted);
-      font-size:.94rem;
-      line-height:1.6;
-      margin-bottom:12px;
-    }
-
-    .submit-btn{
-      width:100%;
-      min-height:58px;
-      border:none;
-      border-radius:16px;
-      background:var(--green);
-      color:#08110b;
-      font-size:1.06rem;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .submit-btn:hover{background:var(--green-dark)}
-
-    .side-stack{
-      display:grid;
-      gap:18px;
-    }
-
-    .side-card,
-    .shows-card,
-    .seo-card{
-      padding:24px;
-    }
-
-    .side-card h3,
-    .shows-card h2,
-    .seo-card h2{
-      margin:0 0 14px;
-      font-size:1.6rem;
-      letter-spacing:-.04em;
-    }
-
-    .list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:12px;
-    }
-
-    .list li{
-      color:var(--muted);
-      line-height:1.65;
-      display:flex;
-      gap:12px;
-    }
-
-    .list li::before{
-      content:"●";
-      color:var(--green);
-      flex-shrink:0;
-    }
-
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .tag{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:#edf2f8;
-      font-weight:600;
-      font-size:.95rem;
-    }
-
-    .shows-card{
-      margin-top:18px;
-    }
-
-    .shows-intro{
-      color:var(--muted);
-      line-height:1.7;
-      margin:0 0 18px;
-    }
-
-    .months{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
-    }
-
-    .month{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:rgba(255,255,255,.025);
-      padding:18px;
-    }
-
-    .month h3{
-      margin:0 0 14px;
-      font-size:1.25rem;
-      letter-spacing:-.04em;
-    }
-
-    .show-list{
-      display:grid;
-      gap:10px;
-    }
-
-    .show-item{
-      padding:12px 12px 11px;
-      border-radius:14px;
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.06);
-    }
-
-    .show-date{
-      display:block;
-      color:#9ce7b6;
-      font-size:.88rem;
-      font-weight:700;
-      margin-bottom:5px;
-    }
-
-    .show-name{
-      display:block;
-      font-weight:700;
-      color:#fff;
-      line-height:1.35;
-    }
-
-    .show-venue{
-      display:block;
-      color:var(--muted);
-      font-size:.92rem;
-      margin-top:4px;
-      line-height:1.45;
-    }
-
-    .seo-card p{
-      margin:0 0 12px;
-      color:var(--muted);
-      line-height:1.75;
-    }
-
-    footer{
-      padding:34px 0 48px;
-      color:#97a0b1;
-      font-size:.95rem;
-    }
-
-    @media (max-width: 980px){
-      .hero-grid,
-      .section-grid,
-      .months{
-        grid-template-columns:1fr;
-      }
-
-      .brand-title{font-size:1.5rem}
-      .menu{gap:16px;font-size:.95rem}
-    }
-
-    @media (max-width: 640px){
-      .container{width:min(var(--max), calc(100% - 20px))}
-      .brand img{width:48px;height:48px}
-      .brand-sub,
-      .menu{display:none}
-      .hero-main,
-      .hero-side,
-      .form-card,
-      .side-card,
-      .shows-card,
-      .seo-card{padding:20px}
-      .grid-2{grid-template-columns:1fr}
-      .card-title{font-size:1.72rem}
-      h1{line-height:1.02}
-    }
-  </style>
+  <title>Transporte Seguro a Conciertos</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <img src="logo.png" alt="Logo ConcertHome">
-        <div class="brand-text">
-          <span class="brand-title">ConcertHome</span>
-          <span class="brand-sub">Traslado premium a conciertos en Santiago</span>
-        </div>
-      </div>
-
-      <nav class="menu">
-        <a href="#servicios">Servicios</a>
-        <a href="#comunas">Comunas</a>
-        <a href="#cartelera">Cartelera</a>
-        <a href="#reserva">Reservar</a>
-      </nav>
+  <header class="header">
+    <div class="overlay"></div>
+    <div class="header-content">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <h1>Transporte Seguro a Conciertos y Eventos</h1>
+      <p>Reserva tu traslado de ida, regreso o ida y vuelta con precio claro según comuna y recinto.</p>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-main">
-          <span class="pill">Transporte VIP a conciertos en Santiago</span>
-          <h1>Tu experiencia empieza desde el trayecto</h1>
+  <main class="container">
+    <section class="card">
+      <h2>Reserva tu traslado</h2>
 
-          <p class="lead">
-            Servicio exclusivo de traslado ida y vuelta a conciertos y eventos en Santiago de Chile.
-          </p>
-          <p class="lead">
-            Viaja seguro, cómodo y puntual en vehículo SUV privado para hasta 4 personas.
-          </p>
-          <p class="lead">
-            Reserva online tu traslado con atención personalizada y confirmación directa.
-          </p>
+      <form id="reservaForm">
+        <div class="form-group">
+          <label for="tipoServicio">Tipo de servicio</label>
+          <select id="tipoServicio" name="tipoServicio" required>
+            <option value="">Seleccione</option>
+            <option value="ida">Solo ida</option>
+            <option value="regreso">Solo regreso</option>
+            <option value="ida_vuelta">Ida y regreso</option>
+          </select>
+        </div>
 
-          <div class="cta-row">
-            <a class="btn" href="#reserva">Reservar traslado</a>
-            <a class="btn-outline" href="https://wa.me/56954190451" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+        <div class="form-section">
+          <h3>Salida de origen</h3>
+
+          <div class="form-group">
+            <label for="comunaOrigen">Comuna de origen</label>
+            <select id="comunaOrigen" name="comunaOrigen" required>
+              <option value="">Seleccione comuna</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="direccionOrigen">Dirección exacta de origen</label>
+            <input
+              type="text"
+              id="direccionOrigen"
+              name="direccionOrigen"
+              placeholder="Ej: Gran Avenida 1234"
+              required
+            />
           </div>
         </div>
 
-        <aside class="hero-side">
-          <div class="mini-card">
-            <h3>Servicio pensado para conciertos y eventos</h3>
-            <p>
-              Ideal para traslados a Movistar Arena, Estadio Nacional, Teatro Caupolicán, Teatro Coliseo y otros recintos de Santiago.
-            </p>
-          </div>
+        <div class="form-section">
+          <h3>Hacia</h3>
 
-          <div class="mini-card">
-            <h3>Capacidad y comodidad</h3>
-            <p>
-              Vehículo SUV seguro, oscuro y cómodo, con capacidad para hasta 4 pasajeros y viaje coordinado de forma directa.
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="reserva">
-      <div class="container section-grid">
-        <div class="form-card">
-          <h2 class="card-title">Reserva tu traslado</h2>
-          <p class="card-subtitle">
-            Completa este formulario para cotizar tu viaje. El precio se actualiza automáticamente según la comuna seleccionada.
-          </p>
-
-          <form class="grid-2" action="#" method="post" onsubmit="return false;">
-            <div class="field">
-              <label for="nombre">Nombre</label>
-              <input id="nombre" type="text" placeholder="Tu nombre">
-            </div>
-
-            <div class="field">
-              <label for="telefono">Teléfono</label>
-              <input id="telefono" type="tel" placeholder="Tu teléfono">
-            </div>
-
-            <div class="field">
-              <label for="evento">Concierto o evento</label>
-              <input id="evento" type="text" placeholder="Ej: Movistar Arena">
-            </div>
-
-            <div class="field">
-              <label for="comuna">Comuna</label>
-              <select id="comuna" onchange="calcularPrecio()">
-                <option value="">Selecciona una comuna</option>
-                <option value="40000">Puente Alto</option>
-                <option value="35000">La Florida</option>
-                <option value="32000">Maipú</option>
-                <option value="30000">Ñuñoa</option>
-                <option value="32000">Santiago Centro</option>
-                <option value="38000">Las Condes</option>
-                <option value="42000">San Bernardo</option>
-                <option value="36000">La Cisterna</option>
-                <option value="39000">Providencia</option>
-                <option value="37000">Macul</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <div class="price-box" id="precio">Precio estimado: $0</div>
-              <div class="price-note">
-                Precio referencial por traslado. Puedes cambiar fácilmente los valores en el bloque de precios del script.
-              </div>
-            </div>
-
-            <div class="field full">
-              <label for="direccion">Dirección exacta</label>
-              <input id="direccion" type="text" placeholder="Dirección de recogida o destino">
-            </div>
-
-            <div class="field">
-              <label for="personas">Número de personas</label>
-              <select id="personas">
-                <option>1 persona</option>
-                <option>2 personas</option>
-                <option>3 personas</option>
-                <option>4 personas</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="servicio">Tipo de servicio</label>
-              <select id="servicio">
-                <option>Ida y vuelta</option>
-                <option>Solo ida</option>
-                <option>Solo regreso</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="mensaje">Observaciones</label>
-              <textarea id="mensaje" placeholder="Ej: horario del concierto, punto de encuentro, necesidades especiales, etc."></textarea>
-            </div>
-
-            <div class="field full">
-              <button class="submit-btn" type="submit">Reservar traslado</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="side-stack">
-          <div class="side-card" id="servicios">
-            <h3>Servicios</h3>
-            <ul class="list">
-              <li>Traslado privado a conciertos en Santiago.</li>
-              <li>Servicio ida y vuelta para recitales y eventos.</li>
-              <li>Traslado al Movistar Arena, Estadio Nacional, Caupolicán y Coliseo.</li>
-              <li>Vehículo SUV para hasta 4 pasajeros.</li>
-              <li>Atención personalizada y coordinación directa por WhatsApp.</li>
-            </ul>
-          </div>
-
-          <div class="side-card" id="comunas">
-            <h3>Comunas donde trabajamos</h3>
-            <div class="tags">
-              <span class="tag">Puente Alto</span>
-              <span class="tag">La Florida</span>
-              <span class="tag">Maipú</span>
-              <span class="tag">Ñuñoa</span>
-              <span class="tag">Santiago Centro</span>
-              <span class="tag">Las Condes</span>
-              <span class="tag">San Bernardo</span>
-              <span class="tag">La Cisterna</span>
-              <span class="tag">Providencia</span>
-              <span class="tag">Macul</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="shows-card" id="cartelera">
-          <h2>Próximos shows en Santiago</h2>
-          <p class="shows-intro">
-            Cartelera referencial de los próximos 3 meses para facilitar la reserva de traslados.
-          </p>
-
-          <div class="months">
-            <div class="month">
-              <h3>Abril 2026</h3>
-              <div class="show-list">
-                <div class="show-item">
-                  <span class="show-date">15 abril</span>
-                  <span class="show-name">Laura Pausini</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">18 abril</span>
-                  <span class="show-name">Sebastián Yatra</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">22 abril</span>
-                  <span class="show-name">Dream Theater</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">25–26 abril</span>
-                  <span class="show-name">Jorge Drexler</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="month">
-              <h3>Mayo 2026</h3>
-              <div class="show-list">
-                <div class="show-item">
-                  <span class="show-date">2 mayo</span>
-                  <span class="show-name">Christian Nodal</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">4–5 mayo</span>
-                  <span class="show-name">Megadeth</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">7 mayo</span>
-                  <span class="show-name">Sin Bandera</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">10–11 mayo</span>
-                  <span class="show-name">Jonas Brothers</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">16 mayo</span>
-                  <span class="show-name">Air Supply</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">17 mayo</span>
-                  <span class="show-name">Pimpinela</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">22 mayo</span>
-                  <span class="show-name">Natalia Lafourcade</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">30 mayo</span>
-                  <span class="show-name">Silvestre Dangond</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="month">
-              <h3>Junio 2026</h3>
-              <div class="show-list">
-                <div class="show-item">
-                  <span class="show-date">4 junio</span>
-                  <span class="show-name">Ricardo Montaner</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">5–20 junio</span>
-                  <span class="show-name">Ricardo Arjona</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">6 junio</span>
-                  <span class="show-name">Franco Simone y Dyango</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">8 junio</span>
-                  <span class="show-name">Pulp</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">11 junio</span>
-                  <span class="show-name">MONSTA X World Tour</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-                <div class="show-item">
-                  <span class="show-date">27 junio</span>
-                  <span class="show-name">Darkiel</span>
-                  <span class="show-venue">Movistar Arena</span>
-                </div>
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="destino">Recinto de destino</label>
+            <select id="destino" name="destino" required>
+              <option value="">Seleccione recinto</option>
+            </select>
           </div>
         </div>
 
-        <div class="seo-card">
-          <h2>Transporte a conciertos en Santiago</h2>
-          <p>
-            En ConcertHome ofrecemos transporte privado a conciertos en Santiago, incluyendo traslado al Movistar Arena, Estadio Nacional y otros eventos importantes.
-          </p>
-          <p>
-            Nuestro servicio de traslado incluye ida y vuelta desde tu comuna, con vehículo SUV cómodo, seguro y puntual para hasta 4 personas.
-          </p>
-          <p>
-            Reserva fácilmente indicando tu comuna y obtén un precio estimado inmediato para tu traslado.
-          </p>
+        <div id="bloqueRegreso" class="form-section hidden">
+          <h3>Regreso</h3>
+
+          <div class="form-group">
+            <label for="salidaRegreso">Lugar de salida del regreso</label>
+            <select id="salidaRegreso" name="salidaRegreso">
+              <option value="">Seleccione recinto</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="comunaRegreso">Comuna de destino del regreso</label>
+            <select id="comunaRegreso" name="comunaRegreso">
+              <option value="">Seleccione comuna</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="direccionRegreso">Dirección exacta de destino</label>
+            <input
+              type="text"
+              id="direccionRegreso"
+              name="direccionRegreso"
+              placeholder="Ej: Vicuña Mackenna 456"
+            />
+          </div>
         </div>
-      </div>
+
+        <div class="summary">
+          <h3>Resumen de valores</h3>
+          <p>Valor ida: <strong id="valorIda">$0</strong></p>
+          <p>Valor regreso: <strong id="valorRegreso">$0</strong></p>
+          <p>Total final: <strong id="valorTotal">$0</strong></p>
+          <small>
+            El valor puede variar según comuna de origen, recinto, horario y tipo de regreso.
+          </small>
+        </div>
+
+        <button type="submit" class="btn">Reservar</button>
+      </form>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      © 2026 ConcertHome. Transporte a conciertos en Santiago.
-    </div>
-  </footer>
-
-  <script>
-    /*
-      EDITA PRECIOS AQUÍ
-      Si quieres cambiar un valor, solo cambias el número.
-    */
-    const preciosPorComuna = {
-      "Puente Alto": 40000,
-      "La Florida": 35000,
-      "Maipú": 32000,
-      "Ñuñoa": 30000,
-      "Santiago Centro": 32000,
-      "Las Condes": 38000,
-      "San Bernardo": 42000,
-      "La Cisterna": 36000,
-      "Providencia": 39000,
-      "Macul": 37000
-    };
-
-    function calcularPrecio() {
-      const comunaSelect = document.getElementById("comuna");
-      const precioBox = document.getElementById("precio");
-      const comuna = comunaSelect.options[comunaSelect.selectedIndex].text;
-
-      if (!comunaSelect.value) {
-        precioBox.textContent = "Precio estimado: $0";
-        return;
-      }
-
-      const valor = preciosPorComuna[comuna] || 0;
-      precioBox.textContent = "Precio estimado: $" + valor.toLocaleString("es-CL");
-    }
-  </script>
+  <script src="js/data.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
