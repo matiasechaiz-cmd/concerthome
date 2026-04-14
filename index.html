@@ -7,20 +7,66 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="overlay"></div>
-    <div class="header-content">
-      <img src="logo.png" alt="Logo" class="logo" />
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="logo.png" alt="ConcertHome" class="hero-logo" />
       <h1>Transporte Seguro<br>a Conciertos y Eventos</h1>
-      <p>Reserva tu traslado de ida, regreso o ida y vuelta con precio claro según comuna y recinto.</p>
+      <p>
+        Traslados privados, cómodos y seguros para ida, regreso o ida y vuelta
+        en Santiago.
+      </p>
     </div>
   </header>
 
-  <main class="container">
-    <section class="card">
-      <h2>Reserva tu traslado</h2>
+  <main class="page-container">
+    <section class="section-card services-section">
+      <div class="section-heading">
+        <span class="section-kicker">Nuestro servicio</span>
+        <h2>Viaja tranquilo, llega seguro</h2>
+        <p>
+          Un servicio pensado para conciertos, teatros y eventos, con atención
+          personalizada y reserva rápida.
+        </p>
+      </div>
 
-      <form id="reservaForm">
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon">🚗</div>
+          <h3>Solo ida</h3>
+          <p>Te llevamos desde tu comuna hasta el recinto de forma directa y segura.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">↩️</div>
+          <h3>Solo regreso</h3>
+          <p>Retiro desde el evento hacia tu destino con tarifa definida por zona.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🔁</div>
+          <h3>Ida y regreso</h3>
+          <p>La opción más cómoda para asistir al show sin preocuparte por la vuelta.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>Servicio privado</h3>
+          <p>SUV cómoda, atención personalizada y coordinación rápida por WhatsApp.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card booking-section">
+      <div class="section-heading centered">
+        <span class="section-kicker">Reserva</span>
+        <h2>Reserva tu traslado</h2>
+        <p>
+          Cotiza tu viaje según comuna, recinto y tipo de servicio, con cálculo automático.
+        </p>
+      </div>
+
+      <form id="reservaForm" class="booking-form">
         <div class="form-group">
           <label for="tipoServicio">Tipo de servicio</label>
           <select id="tipoServicio" name="tipoServicio" required>
@@ -31,7 +77,7 @@
           </select>
         </div>
 
-        <div class="form-section">
+        <div class="form-block">
           <h3>Salida de origen</h3>
 
           <div class="form-group">
@@ -53,7 +99,7 @@
           </div>
         </div>
 
-        <div class="form-section">
+        <div class="form-block">
           <h3>Hacia</h3>
 
           <div class="form-group">
@@ -64,7 +110,7 @@
           </div>
         </div>
 
-        <div id="bloqueRegreso" class="form-section hidden">
+        <div id="bloqueRegreso" class="form-block hidden">
           <h3>Regreso</h3>
 
           <div class="form-group">
@@ -92,7 +138,7 @@
           </div>
         </div>
 
-        <div class="summary">
+        <div class="summary-box">
           <h3>Resumen de valores</h3>
           <p>Valor ida: <strong id="valorIda">$0</strong></p>
           <p>Valor regreso: <strong id="valorRegreso">$0</strong></p>
@@ -102,43 +148,65 @@
           </small>
         </div>
 
-        <button type="submit" class="btn">Reservar</button>
+        <button type="submit" class="primary-btn">Reservar</button>
       </form>
     </section>
-    <section class="card cartelera">
-  <h2>Cartelera próximos meses</h2>
 
-  <div class="eventos-grid">
-    <div class="evento">
-      <span class="evento-fecha">Abril</span>
-      <h3>Dream Theater</h3>
-      <p>Movistar Arena</p>
-    </div>
+    <section class="section-card events-section">
+      <div class="section-heading centered">
+        <span class="section-kicker">Cartelera</span>
+        <h2>Próximos shows</h2>
+        <p>Revisa algunos eventos destacados para organizar tu traslado con anticipación.</p>
+      </div>
 
-    <div class="evento">
-      <span class="evento-fecha">Abril</span>
-      <h3>Roxette</h3>
-      <p>Movistar Arena</p>
-    </div>
+      <div class="events-grid">
+        <article class="event-card">
+          <div class="event-top">
+            <span class="event-badge">Abril 2026</span>
+            <span class="event-venue">Movistar Arena</span>
+          </div>
+          <h3>Dream Theater</h3>
+          <p>Show internacional en Santiago.</p>
+        </article>
 
-    <div class="evento">
-      <span class="evento-fecha">Mayo</span>
-      <h3>Air Supply</h3>
-      <p>Movistar Arena</p>
-    </div>
+        <article class="event-card">
+          <div class="event-top">
+            <span class="event-badge">Abril 2026</span>
+            <span class="event-venue">Movistar Arena</span>
+          </div>
+          <h3>Roxette</h3>
+          <p>Concierto programado en Santiago.</p>
+        </article>
 
-    <div class="evento">
-      <span class="evento-fecha">Junio</span>
-      <h3>Ricardo Montaner</h3>
-      <p>Movistar Arena</p>
-    </div>
-  </div>
-</section>
+        <article class="event-card">
+          <div class="event-top">
+            <span class="event-badge">Mayo 2026</span>
+            <span class="event-venue">Movistar Arena</span>
+          </div>
+          <h3>Air Supply</h3>
+          <p>Evento destacado del mes.</p>
+        </article>
 
-<a href="https://wa.me/56954190451" class="whatsapp-float">
-  WhatsApp
-</a>
+        <article class="event-card">
+          <div class="event-top">
+            <span class="event-badge">Junio 2026</span>
+            <span class="event-venue">Movistar Arena</span>
+          </div>
+          <h3>Ricardo Montaner</h3>
+          <p>Show confirmado para Santiago.</p>
+        </article>
+      </div>
+    </section>
   </main>
+
+  <a
+    href="https://wa.me/56954190451"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WhatsApp
+  </a>
 
   <script src="js/data.js"></script>
   <script src="js/pricing.js"></script>
