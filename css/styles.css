@@ -35,8 +35,10 @@ body {
 }
 
 .hero-logo {
-  width: 260px;
-  filter: brightness(1.4) contrast(1.2);
+  width: 520px;
+  height: auto;
+  transform: scaleX(1.1);
+  filter: brightness(1.8) contrast(1.2);
 }
 
 .hero-kicker {
