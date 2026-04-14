@@ -54,8 +54,9 @@ body {
   line-height: 1.05;
   font-weight: 800;
   margin-bottom: 18px;
+  color: #00c853;
+  text-shadow: 0px 4px 20px rgba(0,0,0,0.9);
 }
-
 .hero-text {
   font-size: 1.18rem;
   line-height: 1.65;
