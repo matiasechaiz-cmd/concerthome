@@ -413,5 +413,6 @@ body {
   color: #0f172a;
 }
 .hero-logo {
-  width: 350px;
+  width: 380px;
+  height: auto;
 }
