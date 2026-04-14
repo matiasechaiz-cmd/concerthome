@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+  color: #1f2937;
+}
+
+/* HEADER CON IMAGEN */
+.header {
+  position: relative;
+  background: url("../fondo-concierto.jpg") center/cover no-repeat;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 850px;
+}
+
+.logo {
+  width: 140px;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+}
+
+.header p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* CONTENEDOR */
+.container {
+  max-width: 900px;
+  margin: -40px auto 40px;
+  padding: 0 16px;
+}
+
+/* TARJETA */
+.card {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+/* SECCIONES */
+.form-section {
+  margin-bottom: 24px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fafafa;
+}
+
+.form-section h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+/* CAMPOS */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: white;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* RESUMEN */
+.summary {
+  margin: 24px 0;
+  padding: 18px;
+  border-radius: 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.summary h3 {
+  margin-top: 0;
+}
+
+.summary p {
+  margin: 8px 0;
+  font-size: 1.05rem;
+}
+
+.summary small {
+  display: block;
+  margin-top: 10px;
+  color: #475569;
+}
+
+/* BOTÓN */
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+/* OCULTO */
+.hidden {
+  display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
