@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const direccionOrigen = elementos.direccionOrigen.value.trim() || "No indicada";
     const direccionRegreso = elementos.direccionRegreso.value.trim() || "No indicada";
 
-    let mensaje = `Hola, quiero cotizar/reservar un traslado.%0A%0A`;
+  let mensaje = `Hola! 👋 ¿A qué experiencia quieres que te llevemos? 🚗✨%0A%0A`;
     mensaje += `Tipo de servicio: ${tipoServicio}%0A`;
     mensaje += `Comuna de origen: ${comunaOrigen}%0A`;
     mensaje += `Dirección de origen: ${direccionOrigen}%0A`;
