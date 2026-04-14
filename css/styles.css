@@ -1,251 +1,226 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
   background: #0f172a;
-  color: #111827;
+  color: #0f172a;
 }
 
-/* HEADER */
-.header {
+/* HERO */
+
+.hero {
   position: relative;
-  background: url("../fondo-concierto.jpg") center center / cover no-repeat;
-  min-height: 430px;
+  height: 75vh;
+  background: url('../fondo-concierto.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 50px 20px 90px;
 }
 
-.overlay {
+.hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.58);
+  background: rgba(0,0,0,0.6);
 }
 
-.header-content {
+.hero-content {
   position: relative;
-  z-index: 2;
-  color: white;
-  max-width: 900px;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  padding: 20px;
 }
 
-.logo {
-  width: 95px;
-  height: 95px;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto 18px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+.hero-logo {
+  width: 140px;
+  margin-bottom: 20px;
 }
 
-.header h1 {
-  margin: 0 0 12px;
-  font-size: 3rem;
-  line-height: 1.1;
-  font-weight: 800;
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 12px;
 }
 
-.header p {
-  margin: 0 auto;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  max-width: 760px;
-  color: rgba(255, 255, 255, 0.95);
+.hero p {
+  font-size: 1.1rem;
+  color: #e2e8f0;
 }
 
 /* CONTENEDOR */
-.container {
-  max-width: 1000px;
-  margin: -55px auto 50px;
+
+.page-container {
+  max-width: 1100px;
+  margin: -80px auto 60px;
   padding: 0 20px;
-  position: relative;
-  z-index: 3;
 }
 
-/* TARJETA PRINCIPAL */
-.card {
+/* TARJETAS GENERALES */
+
+.section-card {
   background: #ffffff;
   border-radius: 24px;
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
-  padding: 34px 30px;
+  padding: 35px;
+  margin-bottom: 28px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-.card h2 {
-  margin: 0 0 28px;
+/* TITULOS */
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading.centered {
   text-align: center;
-  font-size: 2rem;
-  color: #0f172a;
 }
 
-/* SECCIONES DEL FORMULARIO */
-.form-section {
-  margin-bottom: 22px;
-  padding: 22px;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
+.section-kicker {
+  font-size: 0.8rem;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.section-heading h2 {
+  font-size: 1.8rem;
+  margin: 6px 0 10px;
+}
+
+.section-heading p {
+  color: #64748b;
+}
+
+/* SERVICIOS */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.service-card {
   background: #f8fafc;
-}
-
-.form-section h3 {
-  margin: 0 0 18px;
-  color: #0f172a;
-  font-size: 1.6rem;
-}
-
-/* CAMPOS */
-.form-group {
-  margin-bottom: 18px;
-}
-
-label {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #0f172a;
-  font-size: 1.05rem;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 15px 16px;
-  border: 1px solid #cbd5e1;
-  border-radius: 14px;
-  font-size: 1.05rem;
-  background: #ffffff;
-  color: #0f172a;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-}
-
-/* RESUMEN */
-.summary {
-  margin: 28px 0 24px;
-  padding: 22px;
+  padding: 20px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  border: 1px solid #bfdbfe;
+  text-align: center;
 }
 
-.summary h3 {
-  margin: 0 0 14px;
-  color: #0f172a;
-  font-size: 1.5rem;
+.service-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
-.summary p {
-  margin: 10px 0;
-  font-size: 1.1rem;
+.service-card h3 {
+  margin-bottom: 8px;
 }
 
-.summary strong {
-  color: #1d4ed8;
+/* FORMULARIO */
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.summary small {
-  display: block;
-  margin-top: 12px;
-  color: #334155;
-  line-height: 1.4;
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-/* BOTÓN */
-.btn {
+.form-group input,
+.form-group select {
   width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  margin-top: 5px;
+}
+
+.form-block {
+  background: #f1f5f9;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.summary-box {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.primary-btn {
+  background: linear-gradient(90deg,#2563eb,#1d4ed8);
+  color: #fff;
   border: none;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-  padding: 16px;
-  font-size: 1.08rem;
-  font-weight: 800;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
 }
 
-.btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.98;
+/* CARTELERA */
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 16px;
 }
 
-.hidden {
-  display: none;
+.event-card {
+  background: #f8fafc;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.event-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.event-badge {
+  background: #dbeafe;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.event-venue {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* WHATSAPP */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #22c55e;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 999px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 /* RESPONSIVE */
+
 @media (max-width: 900px) {
-  .header {
-    min-height: 380px;
-    padding: 40px 18px 80px;
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .header h1 {
-    font-size: 2.35rem;
+  .events-grid {
+    grid-template-columns: 1fr;
   }
 
-  .header p {
-    font-size: 1.08rem;
-  }
-
-  .container {
-    margin: -40px auto 36px;
-    padding: 0 14px;
-  }
-
-  .card {
-    padding: 24px 18px;
-  }
-
-  .card h2 {
-    font-size: 1.7rem;
-  }
-
-  .form-section {
-    padding: 18px;
-  }
-
-  .form-section h3 {
-    font-size: 1.35rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .header {
-    min-height: 320px;
-    padding: 32px 14px 70px;
-  }
-
-  .logo {
-    width: 78px;
-    height: 78px;
-  }
-
-  .header h1 {
-    font-size: 1.9rem;
-  }
-
-  .header p {
-    font-size: 1rem;
-  }
-
-  .container {
-    margin: -30px auto 28px;
-  }
-
-  .card {
-    border-radius: 20px;
+  .hero h1 {
+    font-size: 2rem;
   }
 }
