@@ -54,42 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
  function construirMensajeWhatsApp() {
-  const datos = obtenerDatosFormulario(elementos);
-  const resumen = calcularResumen(datos);
-
-  const tipoServicio = obtenerTextoServicio(datos.tipoServicio);
-  const comunaOrigen = obtenerLabelDesdeSelect(elementos.comunaOrigen);
-  const destino = obtenerLabelDesdeSelect(elementos.destino);
-
-  const direccionOrigen = elementos.direccionOrigen.value.trim();
-
-  let mensaje = `Hola! 👋 ¿A qué experiencia quieres que te llevemos? 🚗✨`;
-
-  const hayDatosMinimos =
-    datos.tipoServicio ||
-    datos.comunaOrigen ||
-    datos.destino ||
-    direccionOrigen;
-
-  if (hayDatosMinimos) {
-    mensaje += `\n\n`;
-  }
-
-  if (datos.tipoServicio) {
-    mensaje += `Servicio: ${tipoServicio}\n`;
-  }
-
-  if (datos.comunaOrigen) {
-    mensaje += `Origen: ${comunaOrigen}\n`;
-  }
-
-  if (direccionOrigen) {
-    mensaje += `Dirección de origen: ${direccionOrigen}\n`;
-  }
-
-  if (datos.destino) {
-    mensaje += `Destino: ${destino}\n`;
-  }
+  const mensaje = "Hola! 👋 ¿A qué experiencia quieres que te llevemos? 🚗✨";
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+}
 
   if (resumen.total > 0) {
     mensaje += `Total estimado: ${formatoPesos(resumen.total)}`;
