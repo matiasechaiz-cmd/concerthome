@@ -7,7 +7,7 @@
 
 body {
   background: #0f172a;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .hero {
@@ -380,4 +380,35 @@ body {
     padding: 12px 16px;
     font-size: 0.95rem;
   }
+}
+.services-section .section-heading,
+.services-section .section-heading h2,
+.services-section .section-heading p,
+.services-section .section-kicker {
+  color: #0f172a;
+}
+
+.service-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.service-card h3 {
+  color: #0f172a;
+}
+
+.service-card p {
+  color: #475569;
+}
+
+.booking-section .section-heading,
+.booking-section .section-heading h2,
+.booking-section .section-heading p,
+.booking-section .section-kicker,
+.events-section .section-heading,
+.events-section .section-heading h2,
+.events-section .section-heading p,
+.events-section .section-kicker {
+  color: #0f172a;
 }
