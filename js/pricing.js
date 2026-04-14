@@ -2,49 +2,56 @@ function formatoPesos(valor) {
   return "$" + Number(valor).toLocaleString("es-CL");
 }
 
+// -------- IDA --------
 function obtenerValorIda(tipoServicio, comunaOrigen, destino) {
-  if (!(tipoServicio === "ida" || tipoServicio === "ida_vuelta")) {
+  if (tipoServicio !== "ida" && tipoServicio !== "ida_vuelta") {
     return 0;
   }
 
-  if (!comunaOrigen || !destino) {
-    return 0;
-  }
+  if (!comunaOrigen || !destino) return 0;
 
-  if (!TARIFAS_IDA[comunaOrigen]) {
-    return 0;
-  }
+  const valor = TARIFAS_IDA[comunaOrigen]?.[destino];
 
-  return TARIFAS_IDA[comunaOrigen][destino] || 0;
+  return valor || 0;
 }
 
-function obtenerValorRegreso(tipoServicio, salidaRegreso, comunaRegreso) {
-  if (!(tipoServicio === "regreso" || tipoServicio === "ida_vuelta")) {
+// -------- REGRESO --------
+function obtenerValorRegreso(
+  tipoServicio,
+  salidaRegreso,
+  comunaRegreso,
+  comunaOrigen,
+  destino
+) {
+  if (tipoServicio !== "regreso" && tipoServicio !== "ida_vuelta") {
     return 0;
   }
 
-  if (!salidaRegreso || !comunaRegreso) {
-    return 0;
-  }
+  // 🔥 CLAVE: valores por defecto
+  const recinto = salidaRegreso || destino;
+  const comuna = comunaRegreso || comunaOrigen;
 
-  if (!TARIFAS_REGRESO[salidaRegreso]) {
-    return 0;
-  }
+  if (!recinto || !comuna) return 0;
 
-  return TARIFAS_REGRESO[salidaRegreso][comunaRegreso] || 0;
+  const valor = TARIFAS_REGRESO[recinto]?.[comuna];
+
+  return valor || 0;
 }
 
-function calcularResumen(dataFormulario) {
+// -------- RESUMEN --------
+function calcularResumen(data) {
   const valorIda = obtenerValorIda(
-    dataFormulario.tipoServicio,
-    dataFormulario.comunaOrigen,
-    dataFormulario.destino
+    data.tipoServicio,
+    data.comunaOrigen,
+    data.destino
   );
 
   const valorRegreso = obtenerValorRegreso(
-    dataFormulario.tipoServicio,
-    dataFormulario.salidaRegreso,
-    dataFormulario.comunaRegreso
+    data.tipoServicio,
+    data.salidaRegreso,
+    data.comunaRegreso,
+    data.comunaOrigen,
+    data.destino
   );
 
   return {
