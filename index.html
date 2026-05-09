@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ConcertHome | Traslados a conciertos</title>
+  <title>ConcertHome | Transporte privado a conciertos</title>
 
   <style>
     * {
@@ -22,18 +22,69 @@
       scroll-behavior: smooth;
     }
 
-    .page {
+    .hero {
+      min-height: 820px;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.7)),
+        url("fondo-concierto.jpg");
+      background-size: cover;
+      background-position: center;
+      padding: 80px 24px 60px;
+      text-align: center;
+      color: white;
+    }
+
+    .logo-box {
+      background: #080a0f;
       width: 100%;
-      max-width: 1180px;
+      max-width: 560px;
+      margin: 0 auto 28px;
+      padding: 34px 26px;
+    }
+
+    .logo-box img {
+      width: 100%;
+      max-width: 360px;
+      display: block;
       margin: auto;
-      padding: 24px;
+    }
+
+    .hero-kicker {
+      color: #93c5fd;
+      letter-spacing: 5px;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      color: #22c55e;
+      font-size: 58px;
+      line-height: 1.12;
+      max-width: 760px;
+      margin: 0 auto 34px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      color: #ffffff;
+      font-size: 28px;
+      line-height: 1.6;
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: -80px auto 0;
+      padding: 0 24px 40px;
     }
 
     .section-card {
-      background: #ffffff;
+      background: white;
       border-radius: 34px;
-      padding: 46px;
-      margin: 34px 0;
+      padding: 48px;
+      margin-bottom: 34px;
       box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
     }
 
@@ -41,63 +92,62 @@
       text-align: center;
       letter-spacing: 4px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 17px;
       margin-bottom: 12px;
-      color: #111827;
-    }
-
-    h1, h2, h3 {
       color: #111827;
     }
 
     .section-title {
       text-align: center;
-      font-size: 42px;
+      font-size: 46px;
       margin-bottom: 18px;
+      color: #111827;
+      font-weight: 500;
     }
 
     .section-text {
       text-align: center;
-      font-size: 24px;
+      font-size: 27px;
       line-height: 1.7;
-      color: #4b5563;
-      max-width: 850px;
-      margin: 0 auto 34px;
+      color: #374151;
+      max-width: 920px;
+      margin: 0 auto 42px;
     }
 
     .features {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .feature {
       background: #f8fafc;
       border: 1px solid #dbe3ee;
       border-radius: 28px;
-      padding: 42px 28px;
+      padding: 38px 22px;
       text-align: center;
     }
 
     .feature .icon {
-      font-size: 44px;
-      margin-bottom: 18px;
+      font-size: 42px;
+      margin-bottom: 20px;
     }
 
     .feature h3 {
-      font-size: 26px;
+      font-size: 22px;
       margin-bottom: 14px;
+      color: #111827;
     }
 
     .feature p {
       color: #5b6472;
-      font-size: 20px;
+      font-size: 17px;
       line-height: 1.6;
     }
 
     label {
       display: block;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       margin-bottom: 10px;
       color: #111827;
@@ -110,7 +160,7 @@
       border-radius: 18px;
       border: 1px solid #cfd8e3;
       padding: 0 22px;
-      font-size: 19px;
+      font-size: 18px;
       color: #111827;
       background: #ffffff;
       outline: none;
@@ -123,7 +173,7 @@
     }
 
     .form-group {
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .inner-box {
@@ -135,8 +185,9 @@
     }
 
     .inner-box h3 {
-      font-size: 32px;
+      font-size: 30px;
       margin-bottom: 24px;
+      color: #111827;
     }
 
     .grid-2 {
@@ -163,7 +214,7 @@
     }
 
     .summary p {
-      font-size: 20px;
+      font-size: 19px;
       margin: 9px 0;
     }
 
@@ -174,27 +225,43 @@
 
     .note {
       color: #5b6472;
-      font-size: 16px !important;
+      font-size: 15px !important;
       line-height: 1.5;
       margin-top: 18px !important;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: center;
     }
 
     .btn-reservar {
       width: 100%;
       height: 66px;
-      margin-top: 28px;
       border: none;
       border-radius: 18px;
       background: #1557e8;
-      color: #ffffff;
+      color: white;
       font-size: 20px;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 12px 24px rgba(21, 87, 232, 0.28);
     }
 
-    .btn-reservar:hover {
-      background: #0f48c8;
+    .btn-whatsapp {
+      height: 66px;
+      border-radius: 999px;
+      background: #22c55e;
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .whatsapp-float {
@@ -257,26 +324,67 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 768px) {
+    footer {
+      padding: 36px 24px;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .features,
+      .shows {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-2,
+      .actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        min-height: 900px;
+        padding: 54px 24px 70px;
+      }
+
+      .logo-box {
+        margin-top: 0;
+        padding: 30px 18px;
+      }
+
+      .hero-kicker {
+        font-size: 19px;
+        line-height: 1.5;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .hero p {
+        font-size: 25px;
+      }
+
       .page {
-        padding: 24px 14px;
+        padding: 0 24px 34px;
+        margin-top: -80px;
       }
 
       .section-card {
-        padding: 34px 22px;
-        border-radius: 30px;
+        padding: 42px 32px;
+        border-radius: 32px;
       }
 
       .section-title {
-        font-size: 36px;
+        font-size: 42px;
       }
 
       .section-text {
-        font-size: 22px;
+        font-size: 25px;
       }
 
       .features,
-      .grid-2,
       .shows {
         grid-template-columns: 1fr;
       }
@@ -285,14 +393,22 @@
         padding: 38px 24px;
       }
 
+      .feature h3 {
+        font-size: 24px;
+      }
+
+      .feature p {
+        font-size: 20px;
+      }
+
       .inner-box {
-        padding: 26px 20px;
+        padding: 28px 20px;
       }
 
       .whatsapp-float {
         right: 14px;
         bottom: 14px;
-        padding: 15px 22px;
+        padding: 15px 24px;
         font-size: 18px;
       }
     }
@@ -300,6 +416,21 @@
 </head>
 
 <body>
+
+  <section class="hero">
+    <div class="logo-box">
+      <img src="logo.png" alt="ConcertHome">
+    </div>
+
+    <div class="hero-kicker">TRANSPORTE PRIVADO PARA CONCIERTOS Y EVENTOS</div>
+
+    <h1>Transporte Seguro a Conciertos y Eventos</h1>
+
+    <p>
+      Reserva tu traslado con cálculo automático según comuna de origen,
+      recinto y tipo de servicio.
+    </p>
+  </section>
 
   <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/569XXXXXXXX" target="_blank">
     WhatsApp
@@ -309,7 +440,8 @@
 
     <section class="section-card">
       <div class="eyebrow">SERVICIO</div>
-      <h1 class="section-title">Qué ofrecemos</h1>
+      <h2 class="section-title">Qué ofrecemos</h2>
+
       <p class="section-text">
         Un servicio pensado para quienes quieren llegar y volver de un show con comodidad,
         seguridad y coordinación rápida.
@@ -345,6 +477,7 @@
     <section class="section-card" id="reserva">
       <div class="eyebrow">RESERVA</div>
       <h2 class="section-title">Reserva tu traslado</h2>
+
       <p class="section-text">
         Completa el formulario y revisa el valor de ida, regreso y total final.
       </p>
@@ -416,19 +549,22 @@
         <p>Valor ida: <span id="valorIda">$0</span></p>
         <p>Valor regreso: <span id="valorRegreso">$0</span></p>
         <p>Total final: <span id="valorTotal">$0</span></p>
+
         <p class="note">
           El valor puede variar según comuna de origen, recinto, comuna de regreso y tipo de servicio.
         </p>
       </div>
 
-      <button class="btn-reservar" id="btnReservar">
-        Reservar
-      </button>
+      <div class="actions">
+        <button class="btn-reservar" id="btnReservar">Reservar</button>
+        <a class="btn-whatsapp" id="btnWhatsapp" href="https://wa.me/569XXXXXXXX" target="_blank">WhatsApp</a>
+      </div>
     </section>
 
     <section class="section-card">
       <div class="eyebrow">CARTELERA</div>
       <h2 class="section-title">Próximos shows</h2>
+
       <p class="section-text">
         Algunos eventos destacados para que planifiques tu traslado con anticipación.
       </p>
@@ -464,6 +600,10 @@
     </section>
 
   </main>
+
+  <footer>
+    ConcertHome.cl - Transporte privado a conciertos y eventos
+  </footer>
 
   <script>
     const telefonoWhatsApp = "56954190451";
@@ -539,6 +679,7 @@
     const valorTotal = document.getElementById("valorTotal");
 
     const btnReservar = document.getElementById("btnReservar");
+    const btnWhatsapp = document.getElementById("btnWhatsapp");
     const whatsappFloat = document.getElementById("whatsappFloat");
 
     function formatoCLP(valor) {
@@ -546,9 +687,7 @@
     }
 
     function cargarComunas() {
-      const comunas = Object.keys(preciosComunas).sort((a, b) =>
-        a.localeCompare(b, "es")
-      );
+      const comunas = Object.keys(preciosComunas).sort((a, b) => a.localeCompare(b, "es"));
 
       comunas.forEach((comuna) => {
         const optionIda = document.createElement("option");
@@ -618,11 +757,12 @@
 
       const link = "https://wa.me/" + telefonoWhatsApp + "?text=" + mensaje;
 
+      btnWhatsapp.href = link;
+      whatsappFloat.href = link;
+
       btnReservar.onclick = function () {
         window.open(link, "_blank");
       };
-
-      whatsappFloat.href = link;
     }
 
     tipoServicio.addEventListener("change", actualizarVista);
