@@ -3,221 +3,375 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ConcertHome | Transporte Seguro a Conciertos</title>
-  <meta
-    name="description"
-    content="Transporte privado para conciertos y eventos en Santiago. Reserva ida, regreso o ida y vuelta con cálculo automático por comuna y recinto."
-  />
-  <link rel="stylesheet" href="css/styles.css" />
+  <title>ConcertHome - Traslados a conciertos</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+
+    header {
+      padding: 30px 20px;
+      text-align: center;
+      background: #000;
+      border-bottom: 1px solid #1db954;
+    }
+
+    .logo {
+      font-size: 38px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span:first-child {
+      color: #ffffff;
+    }
+
+    .logo span:last-child {
+      color: #1db954;
+    }
+
+    .hero {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: #cccccc;
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #111;
+      border-radius: 18px;
+      box-shadow: 0 0 25px rgba(29, 185, 84, 0.15);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1db954;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      color: #dddddd;
+      font-weight: bold;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #1b1b1b;
+      color: #ffffff;
+      font-size: 16px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .resultado {
+      margin-top: 25px;
+      padding: 20px;
+      background: #0b2615;
+      border: 1px solid #1db954;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .resultado h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .precio {
+      font-size: 34px;
+      font-weight: bold;
+      color: #1db954;
+    }
+
+    .nota {
+      margin-top: 10px;
+      color: #cccccc;
+      font-size: 14px;
+    }
+
+    .btn-whatsapp {
+      display: block;
+      margin-top: 25px;
+      padding: 15px;
+      text-align: center;
+      background: #1db954;
+      color: #000;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .btn-whatsapp:hover {
+      background: #19a84c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
-  <header class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-   <img src="logo.png" alt="ConcertHome" class="hero-logo" />
-      <p class="hero-kicker">Transporte privado para conciertos y eventos</p>
-      <h1>Transporte Seguro<br>a Conciertos y Eventos</h1>
-      <p class="hero-text">
-        Reserva tu traslado con cálculo automático según comuna de origen,
-        recinto y tipo de servicio.
-      </p>
+
+  <header>
+    <div class="logo">
+      <span>Concert</span><span>Home</span>
     </div>
   </header>
 
-  <main class="page-container">
-    <section class="section-card services-section">
-      <div class="section-heading centered">
-        <span class="section-kicker">Servicio</span>
-        <h2>Qué ofrecemos</h2>
-        <p>
-          Un servicio pensado para quienes quieren llegar y volver de un show
-          con comodidad, seguridad y coordinación rápida.
-        </p>
-      </div>
+  <section class="hero">
+    <h1>Traslados seguros a conciertos y eventos</h1>
+    <p>
+      Cotiza tu traslado desde o hacia los principales estadios de Santiago.
+      Valores por persona según comuna y tipo de viaje.
+    </p>
+  </section>
 
-      <div class="services-grid">
-        <article class="service-card">
-          <div class="service-icon">🚘</div>
-          <h3>Traslado privado</h3>
-          <p>
-            Servicio cómodo y directo desde tu comuna hasta el recinto del evento.
-          </p>
-        </article>
+  <main class="container">
+    <h2>Cotiza tu traslado</h2>
 
-        <article class="service-card">
-          <div class="service-icon">↔️</div>
-          <h3>Ida y regreso</h3>
-          <p>
-            Puedes cotizar solo ida, solo regreso o ida y vuelta con valor separado.
-          </p>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">📍</div>
-          <h3>Cálculo automático</h3>
-          <p>
-            El sistema calcula tu tarifa según comuna de origen, recinto y regreso.
-          </p>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">📲</div>
-          <h3>Atención rápida</h3>
-          <p>
-            Coordinación directa por WhatsApp para resolver dudas y confirmar reservas.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-card booking-section">
-      <div class="section-heading centered">
-        <span class="section-kicker">Reserva</span>
-        <h2>Reserva tu traslado</h2>
-        <p>
-          Completa el formulario y revisa el valor de ida, regreso y total final.
-        </p>
-      </div>
-<form id="reservaForm" class="booking-form">
-  <div class="form-group">
-    <label for="tipoServicio">Tipo de servicio</label>
-    <select id="tipoServicio" name="tipoServicio" required>
-      <option value="">Seleccione</option>
+    <label for="tipoViaje">Tipo de viaje</label>
+    <select id="tipoViaje" onchange="actualizarFormulario()">
+      <option value="">Selecciona una opción</option>
       <option value="ida">Solo ida</option>
       <option value="regreso">Solo regreso</option>
-      <option value="ida_vuelta">Ida y regreso</option>
+      <option value="ida_vuelta">Ida y vuelta</option>
     </select>
-  </div>
 
-  <div id="salidaBlock" class="form-block">
-    <h3 id="tituloSalida">Lugar de salida</h3>
+    <div id="bloqueIda" class="hidden">
+      <label for="comunaIda">Comuna de salida</label>
+      <select id="comunaIda"></select>
 
-    <div class="form-group">
-      <label id="labelComunaOrigen" for="comunaOrigen">Comuna de salida</label>
-      <select id="comunaOrigen" name="comunaOrigen">
-        <option value="">Seleccione comuna</option>
+      <label for="estadioIda">Estadio de destino</label>
+      <select id="estadioIda">
+        <option>Estadio Nacional</option>
+        <option>Movistar Arena</option>
+        <option>Estadio Monumental</option>
+        <option>Estadio Bicentenario La Florida</option>
+        <option>Estadio Santa Laura</option>
+        <option>Club Hípico</option>
+        <option>Parque O'Higgins</option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label id="labelDireccionOrigen" for="direccionOrigen">Dirección exacta de salida</label>
-      <input
-        type="text"
-        id="direccionOrigen"
-        name="direccionOrigen"
-        placeholder="Ej: Gran Avenida 1234"
-      />
-    </div>
-  </div>
-
-  <div id="destinoBlock" class="form-block">
-    <h3 id="tituloDestino">Estadio o recinto</h3>
-
-    <div class="form-group">
-      <label id="labelDestino" for="destino">Estadio o recinto</label>
-      <select id="destino" name="destino">
-        <option value="">Seleccione recinto</option>
+    <div id="bloqueRegreso" class="hidden">
+      <label for="estadioRegreso">Estadio de salida</label>
+      <select id="estadioRegreso">
+        <option>Estadio Nacional</option>
+        <option>Movistar Arena</option>
+        <option>Estadio Monumental</option>
+        <option>Estadio Bicentenario La Florida</option>
+        <option>Estadio Santa Laura</option>
+        <option>Club Hípico</option>
+        <option>Parque O'Higgins</option>
       </select>
-    </div>
-  </div>
 
-  <div id="bloqueRegreso" class="form-block hidden">
-    <h3 id="tituloRegreso">Lugar de regreso</h3>
-
-    <div class="form-group">
-      <label id="labelComunaRegreso" for="comunaRegreso">Comuna de regreso</label>
-      <select id="comunaRegreso" name="comunaRegreso">
-        <option value="">Seleccione comuna</option>
-      </select>
+      <label for="comunaRegreso">Comuna de regreso</label>
+      <select id="comunaRegreso"></select>
     </div>
 
-    <div class="form-group">
-      <label id="labelDireccionRegreso" for="direccionRegreso">Dirección exacta de regreso</label>
-      <input
-        type="text"
-        id="direccionRegreso"
-        name="direccionRegreso"
-        placeholder="Ej: Vicuña Mackenna 456"
-      />
+    <div id="resultado" class="resultado hidden">
+      <h3>Valor estimado por persona</h3>
+      <div class="precio" id="precioFinal">$0</div>
+      <p class="nota">
+        Valor referencial. Puede variar según horario, disponibilidad, punto exacto de retiro y cantidad de pasajeros.
+      </p>
+
+      <a id="whatsappBtn" class="btn-whatsapp" href="#" target="_blank">
+        Reservar por WhatsApp
+      </a>
     </div>
-  </div>
-
-  <div class="summary-box">
-    <h3>Resumen de valores</h3>
-    <p>Valor ida: <strong id="valorIda">$0</strong></p>
-    <p>Valor regreso: <strong id="valorRegreso">$0</strong></p>
-    <p>Total final: <strong id="valorTotal">$0</strong></p>
-    <small>
-      El valor puede variar según comuna de salida, recinto, comuna de regreso y tipo de servicio.
-    </small>
-  </div>
-
-  <button type="submit" class="primary-btn">Reservar</button>
-</form>
-    </section>
-
-    <section class="section-card events-section">
-      <div class="section-heading centered">
-        <span class="section-kicker">Cartelera</span>
-        <h2>Próximos shows</h2>
-        <p>
-          Algunos eventos destacados para que planifiques tu traslado con anticipación.
-        </p>
-      </div>
-
-      <div class="events-grid">
-        <article class="event-card">
-          <div class="event-top">
-            <span class="event-badge">Abril 2026</span>
-            <span class="event-venue">Movistar Arena</span>
-          </div>
-          <h3>Dream Theater</h3>
-          <p>Evento internacional programado en Santiago.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <span class="event-badge">Abril 2026</span>
-            <span class="event-venue">Movistar Arena</span>
-          </div>
-          <h3>Roxette</h3>
-          <p>Show destacado para el mes de abril.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <span class="event-badge">Mayo 2026</span>
-            <span class="event-venue">Movistar Arena</span>
-          </div>
-          <h3>Air Supply</h3>
-          <p>Una de las fechas destacadas del próximo mes.</p>
-        </article>
-
-        <article class="event-card">
-          <div class="event-top">
-            <span class="event-badge">Junio 2026</span>
-            <span class="event-venue">Movistar Arena</span>
-          </div>
-          <h3>Ricardo Montaner</h3>
-          <p>Show confirmado para la cartelera de junio.</p>
-        </article>
-      </div>
-    </section>
   </main>
 
- <a
-  href="#"
-  id="whatsappBtn"
-  class="whatsapp-float"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  WhatsApp
-</a>
+  <footer>
+    ConcertHome.cl - Transporte privado para conciertos y eventos
+  </footer>
 
-  <script src="js/data.js"></script>
-  <script src="js/pricing.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+    const preciosComunas = {
+      "Santiago": 14000,
+      "Providencia": 14000,
+      "Ñuñoa": 14000,
+      "San Miguel": 14000,
+      "Macul": 15000,
+      "San Joaquín": 15000,
+      "Pedro Aguirre Cerda": 15000,
+      "Estación Central": 15000,
+      "Independencia": 15000,
+      "Recoleta": 15000,
+      "Quinta Normal": 15000,
+
+      "Las Condes": 16000,
+      "Vitacura": 17000,
+      "La Reina": 16000,
+      "Lo Barnechea": 19000,
+      "Peñalolén": 16000,
+
+      "La Florida": 16000,
+      "La Granja": 16000,
+      "San Ramón": 16000,
+      "La Cisterna": 16000,
+      "El Bosque": 17000,
+      "La Pintana": 17000,
+      "Lo Espejo": 16000,
+      "San Bernardo": 18000,
+      "Puente Alto": 18000,
+
+      "Maipú": 17000,
+      "Cerrillos": 16000,
+      "Lo Prado": 16000,
+      "Cerro Navia": 17000,
+      "Renca": 17000,
+      "Pudahuel": 18000,
+      "Pudahuel Norte": 19000,
+      "Padre Hurtado": 19000,
+
+      "Conchalí": 16000,
+      "Huechuraba": 17000,
+      "Quilicura": 18000,
+      "Lampa": 22000,
+      "Colina": 23000,
+      "Til Til": 28000,
+
+      "Pirque": 21000,
+      "San José de Maipo": 28000,
+
+      "Buin": 22000,
+      "Paine": 24000,
+      "Calera de Tango": 20000,
+
+      "Talagante": 22000,
+      "Peñaflor": 21000,
+      "El Monte": 23000,
+      "Isla de Maipo": 24000,
+
+      "Curacaví": 26000,
+      "María Pinto": 28000,
+      "Melipilla": 30000,
+      "San Pedro": 34000,
+      "Alhué": 36000
+    };
+
+    const comunaIda = document.getElementById("comunaIda");
+    const comunaRegreso = document.getElementById("comunaRegreso");
+
+    function cargarComunas() {
+      const comunasOrdenadas = Object.keys(preciosComunas).sort();
+
+      comunaIda.innerHTML = '<option value="">Selecciona comuna</option>';
+      comunaRegreso.innerHTML = '<option value="">Selecciona comuna</option>';
+
+      comunasOrdenadas.forEach(comuna => {
+        comunaIda.innerHTML += `<option value="${comuna}">${comuna}</option>`;
+        comunaRegreso.innerHTML += `<option value="${comuna}">${comuna}</option>`;
+      });
+    }
+
+    function actualizarFormulario() {
+      const tipoViaje = document.getElementById("tipoViaje").value;
+      const bloqueIda = document.getElementById("bloqueIda");
+      const bloqueRegreso = document.getElementById("bloqueRegreso");
+      const resultado = document.getElementById("resultado");
+
+      bloqueIda.classList.add("hidden");
+      bloqueRegreso.classList.add("hidden");
+      resultado.classList.add("hidden");
+
+      if (tipoViaje === "ida") {
+        bloqueIda.classList.remove("hidden");
+      }
+
+      if (tipoViaje === "regreso") {
+        bloqueRegreso.classList.remove("hidden");
+      }
+
+      if (tipoViaje === "ida_vuelta") {
+        bloqueIda.classList.remove("hidden");
+        bloqueRegreso.classList.remove("hidden");
+      }
+
+      calcularPrecio();
+    }
+
+    function calcularPrecio() {
+      const tipoViaje = document.getElementById("tipoViaje").value;
+      const comunaSalida = document.getElementById("comunaIda").value;
+      const comunaDestino = document.getElementById("comunaRegreso").value;
+      const resultado = document.getElementById("resultado");
+      const precioFinal = document.getElementById("precioFinal");
+      const whatsappBtn = document.getElementById("whatsappBtn");
+
+      let total = 0;
+
+      if (tipoViaje === "ida") {
+        if (!comunaSalida) return;
+        total = preciosComunas[comunaSalida];
+      }
+
+      if (tipoViaje === "regreso") {
+        if (!comunaDestino) return;
+        total = preciosComunas[comunaDestino];
+      }
+
+      if (tipoViaje === "ida_vuelta") {
+        if (!comunaSalida || !comunaDestino) return;
+        total = preciosComunas[comunaSalida] + preciosComunas[comunaDestino];
+      }
+
+      precioFinal.textContent = `$${total.toLocaleString("es-CL")}`;
+      resultado.classList.remove("hidden");
+
+      const mensaje = `Hola, quiero cotizar/reservar un traslado en ConcertHome.%0A
+Tipo de viaje: ${tipoViaje}%0A
+Comuna ida: ${comunaSalida || "No aplica"}%0A
+Comuna regreso: ${comunaDestino || "No aplica"}%0A
+Valor estimado por persona: $${total.toLocaleString("es-CL")}`;
+
+      whatsappBtn.href = `https://wa.me/569XXXXXXXX?text=${mensaje}`;
+    }
+
+    document.getElementById("comunaIda").addEventListener("change", calcularPrecio);
+    document.getElementById("comunaRegreso").addEventListener("change", calcularPrecio);
+    document.getElementById("tipoViaje").addEventListener("change", calcularPrecio);
+
+    cargarComunas();
+  </script>
+
 </body>
 </html>
