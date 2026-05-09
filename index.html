@@ -3,374 +3,637 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ConcertHome - Traslados a conciertos</title>
+  <title>ConcertHome | Traslados a conciertos</title>
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: #050505;
-      color: #ffffff;
-      line-height: 1.5;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #071226;
+      color: #111827;
     }
 
-    header {
-      padding: 30px 20px;
-      text-align: center;
-      background: #000;
-      border-bottom: 1px solid #1db954;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .logo {
-      font-size: 38px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .logo span:first-child {
-      color: #ffffff;
-    }
-
-    .logo span:last-child {
-      color: #1db954;
-    }
-
-    .hero {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      max-width: 700px;
+    .page {
+      width: 100%;
+      max-width: 1180px;
       margin: auto;
-      color: #cccccc;
-      font-size: 18px;
+      padding: 24px;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 25px;
-      background: #111;
-      border-radius: 18px;
-      box-shadow: 0 0 25px rgba(29, 185, 84, 0.15);
+    .section-card {
+      background: #ffffff;
+      border-radius: 34px;
+      padding: 46px;
+      margin: 34px 0;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #1db954;
+    .eyebrow {
       text-align: center;
+      letter-spacing: 4px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+
+    h1, h2, h3 {
+      color: #111827;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .section-text {
+      text-align: center;
+      font-size: 24px;
+      line-height: 1.7;
+      color: #4b5563;
+      max-width: 850px;
+      margin: 0 auto 34px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .feature {
+      background: #f8fafc;
+      border: 1px solid #dbe3ee;
+      border-radius: 28px;
+      padding: 42px 28px;
+      text-align: center;
+    }
+
+    .feature .icon {
+      font-size: 44px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .feature p {
+      color: #5b6472;
+      font-size: 20px;
+      line-height: 1.6;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      margin-bottom: 6px;
-      color: #dddddd;
-      font-weight: bold;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #111827;
     }
 
     select,
     input {
       width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid #333;
-      background: #1b1b1b;
-      color: #ffffff;
-      font-size: 16px;
+      height: 62px;
+      border-radius: 18px;
+      border: 1px solid #cfd8e3;
+      padding: 0 22px;
+      font-size: 19px;
+      color: #111827;
+      background: #ffffff;
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .inner-box {
+      background: #f8fafc;
+      border: 1px solid #dbe3ee;
+      border-radius: 28px;
+      padding: 32px;
+      margin-top: 28px;
+    }
+
+    .inner-box h3 {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
     }
 
     .hidden {
       display: none;
     }
 
-    .resultado {
-      margin-top: 25px;
-      padding: 20px;
-      background: #0b2615;
-      border: 1px solid #1db954;
-      border-radius: 14px;
-      text-align: center;
+    .summary {
+      background: linear-gradient(135deg, #eef7ff, #dcebff);
+      border: 1px solid #bfd8ff;
+      border-radius: 28px;
+      padding: 32px;
+      margin-top: 28px;
     }
 
-    .resultado h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
+    .summary h3 {
+      font-size: 28px;
+      margin-bottom: 18px;
     }
 
-    .precio {
-      font-size: 34px;
-      font-weight: bold;
-      color: #1db954;
+    .summary p {
+      font-size: 20px;
+      margin: 9px 0;
     }
 
-    .nota {
-      margin-top: 10px;
-      color: #cccccc;
-      font-size: 14px;
+    .summary span {
+      color: #165dcc;
+      font-weight: 700;
     }
 
-    .btn-whatsapp {
-      display: block;
-      margin-top: 25px;
-      padding: 15px;
-      text-align: center;
-      background: #1db954;
-      color: #000;
+    .note {
+      color: #5b6472;
+      font-size: 16px !important;
+      line-height: 1.5;
+      margin-top: 18px !important;
+    }
+
+    .btn-reservar {
+      width: 100%;
+      height: 66px;
+      margin-top: 28px;
+      border: none;
+      border-radius: 18px;
+      background: #1557e8;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(21, 87, 232, 0.28);
+    }
+
+    .btn-reservar:hover {
+      background: #0f48c8;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      background: #22c55e;
+      color: white;
       text-decoration: none;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 17px;
+      padding: 17px 28px;
+      border-radius: 999px;
+      font-size: 20px;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      z-index: 999;
     }
 
-    .btn-whatsapp:hover {
-      background: #19a84c;
+    .shows {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #888;
-      font-size: 14px;
+    .show-card {
+      background: #f8fafc;
+      border: 1px solid #dbe3ee;
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .show-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      background: #dbeafe;
+      color: #165dcc;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .badge-gray {
+      background: #edf1f5;
+      color: #475569;
+    }
+
+    .show-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .show-card p {
+      color: #64748b;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 24px 14px;
+      }
+
+      .section-card {
+        padding: 34px 22px;
+        border-radius: 30px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .section-text {
+        font-size: 22px;
+      }
+
+      .features,
+      .grid-2,
+      .shows {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        padding: 38px 24px;
+      }
+
+      .inner-box {
+        padding: 26px 20px;
+      }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        padding: 15px 22px;
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">
-      <span>Concert</span><span>Home</span>
-    </div>
-  </header>
+  <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/569XXXXXXXX" target="_blank">
+    WhatsApp
+  </a>
 
-  <section class="hero">
-    <h1>Traslados seguros a conciertos y eventos</h1>
-    <p>
-      Cotiza tu traslado desde o hacia los principales estadios de Santiago.
-      Valores por persona según comuna y tipo de viaje.
-    </p>
-  </section>
+  <main class="page">
 
-  <main class="container">
-    <h2>Cotiza tu traslado</h2>
-
-    <label for="tipoViaje">Tipo de viaje</label>
-    <select id="tipoViaje" onchange="actualizarFormulario()">
-      <option value="">Selecciona una opción</option>
-      <option value="ida">Solo ida</option>
-      <option value="regreso">Solo regreso</option>
-      <option value="ida_vuelta">Ida y vuelta</option>
-    </select>
-
-    <div id="bloqueIda" class="hidden">
-      <label for="comunaIda">Comuna de salida</label>
-      <select id="comunaIda"></select>
-
-      <label for="estadioIda">Estadio de destino</label>
-      <select id="estadioIda">
-        <option>Estadio Nacional</option>
-        <option>Movistar Arena</option>
-        <option>Estadio Monumental</option>
-        <option>Estadio Bicentenario La Florida</option>
-        <option>Estadio Santa Laura</option>
-        <option>Club Hípico</option>
-        <option>Parque O'Higgins</option>
-      </select>
-    </div>
-
-    <div id="bloqueRegreso" class="hidden">
-      <label for="estadioRegreso">Estadio de salida</label>
-      <select id="estadioRegreso">
-        <option>Estadio Nacional</option>
-        <option>Movistar Arena</option>
-        <option>Estadio Monumental</option>
-        <option>Estadio Bicentenario La Florida</option>
-        <option>Estadio Santa Laura</option>
-        <option>Club Hípico</option>
-        <option>Parque O'Higgins</option>
-      </select>
-
-      <label for="comunaRegreso">Comuna de regreso</label>
-      <select id="comunaRegreso"></select>
-    </div>
-
-    <div id="resultado" class="resultado hidden">
-      <h3>Valor estimado por persona</h3>
-      <div class="precio" id="precioFinal">$0</div>
-      <p class="nota">
-        Valor referencial. Puede variar según horario, disponibilidad, punto exacto de retiro y cantidad de pasajeros.
+    <section class="section-card">
+      <div class="eyebrow">SERVICIO</div>
+      <h1 class="section-title">Qué ofrecemos</h1>
+      <p class="section-text">
+        Un servicio pensado para quienes quieren llegar y volver de un show con comodidad,
+        seguridad y coordinación rápida.
       </p>
 
-      <a id="whatsappBtn" class="btn-whatsapp" href="#" target="_blank">
-        Reservar por WhatsApp
-      </a>
-    </div>
+      <div class="features">
+        <div class="feature">
+          <div class="icon">🚗</div>
+          <h3>Traslado privado</h3>
+          <p>Servicio cómodo y directo desde tu comuna hasta el recinto del evento.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">↔️</div>
+          <h3>Ida y regreso</h3>
+          <p>Puedes cotizar solo ida, solo regreso o ida y vuelta con valor separado.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">📍</div>
+          <h3>Cálculo automático</h3>
+          <p>El sistema calcula tu tarifa según comuna de origen, recinto y regreso.</p>
+        </div>
+
+        <div class="feature">
+          <div class="icon">📲</div>
+          <h3>Atención rápida</h3>
+          <p>Coordinación directa por WhatsApp para resolver dudas y confirmar reservas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="reserva">
+      <div class="eyebrow">RESERVA</div>
+      <h2 class="section-title">Reserva tu traslado</h2>
+      <p class="section-text">
+        Completa el formulario y revisa el valor de ida, regreso y total final.
+      </p>
+
+      <div class="form-group">
+        <label for="tipoServicio">Tipo de servicio</label>
+        <select id="tipoServicio">
+          <option value="ida">Solo ida</option>
+          <option value="regreso" selected>Solo regreso</option>
+          <option value="ida_vuelta">Ida y vuelta</option>
+        </select>
+      </div>
+
+      <div class="inner-box" id="bloqueIda">
+        <h3>Lugar de salida</h3>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="comunaIda">Comuna de salida</label>
+            <select id="comunaIda">
+              <option value="">Seleccione comuna</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="direccionIda">Dirección exacta de salida</label>
+            <input id="direccionIda" type="text" placeholder="Ej: Gran Avenida 1234" />
+          </div>
+        </div>
+      </div>
+
+      <div class="inner-box">
+        <h3>Estadio o recinto</h3>
+
+        <div class="form-group">
+          <label for="recinto">Estadio o recinto</label>
+          <select id="recinto">
+            <option>Estadio Nacional</option>
+            <option>Movistar Arena</option>
+            <option>Estadio Monumental</option>
+            <option>Estadio Bicentenario La Florida</option>
+            <option>Estadio Santa Laura</option>
+            <option>Club Hípico</option>
+            <option>Parque O'Higgins</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="inner-box" id="bloqueRegreso">
+        <h3>Lugar de regreso</h3>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="comunaRegreso">Comuna de regreso</label>
+            <select id="comunaRegreso">
+              <option value="">Seleccione comuna</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="direccionRegreso">Dirección exacta de regreso</label>
+            <input id="direccionRegreso" type="text" placeholder="Ej: Av. Principal 456" />
+          </div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <h3>Resumen de valores</h3>
+        <p>Valor ida: <span id="valorIda">$0</span></p>
+        <p>Valor regreso: <span id="valorRegreso">$0</span></p>
+        <p>Total final: <span id="valorTotal">$0</span></p>
+        <p class="note">
+          El valor puede variar según comuna de origen, recinto, comuna de regreso y tipo de servicio.
+        </p>
+      </div>
+
+      <button class="btn-reservar" id="btnReservar">
+        Reservar
+      </button>
+    </section>
+
+    <section class="section-card">
+      <div class="eyebrow">CARTELERA</div>
+      <h2 class="section-title">Próximos shows</h2>
+      <p class="section-text">
+        Algunos eventos destacados para que planifiques tu traslado con anticipación.
+      </p>
+
+      <div class="shows">
+        <div class="show-card">
+          <div class="show-top">
+            <span class="badge">Abril 2026</span>
+            <span class="badge badge-gray">Movistar Arena</span>
+          </div>
+          <h3>Dream Theater</h3>
+          <p>Evento internacional programado en Santiago.</p>
+        </div>
+
+        <div class="show-card">
+          <div class="show-top">
+            <span class="badge">Abril 2026</span>
+            <span class="badge badge-gray">Movistar Arena</span>
+          </div>
+          <h3>Roxette</h3>
+          <p>Show destacado para el mes de abril.</p>
+        </div>
+
+        <div class="show-card">
+          <div class="show-top">
+            <span class="badge">Mayo 2026</span>
+            <span class="badge badge-gray">Movistar Arena</span>
+          </div>
+          <h3>Air Supply</h3>
+          <p>Una de las fechas destacadas del próximo mes.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer>
-    ConcertHome.cl - Transporte privado para conciertos y eventos
-  </footer>
-
   <script>
+    const telefonoWhatsApp = "56954190451";
+
     const preciosComunas = {
-      "Santiago": 14000,
-      "Providencia": 14000,
-      "Ñuñoa": 14000,
-      "San Miguel": 14000,
-      "Macul": 15000,
-      "San Joaquín": 15000,
-      "Pedro Aguirre Cerda": 15000,
+      "Alhué": 36000,
+      "Buin": 22000,
+      "Calera de Tango": 20000,
+      "Cerrillos": 16000,
+      "Cerro Navia": 17000,
+      "Colina": 23000,
+      "Conchalí": 16000,
+      "Curacaví": 26000,
+      "El Bosque": 17000,
+      "El Monte": 23000,
       "Estación Central": 15000,
+      "Huechuraba": 17000,
       "Independencia": 15000,
-      "Recoleta": 15000,
-      "Quinta Normal": 15000,
-
-      "Las Condes": 16000,
-      "Vitacura": 17000,
-      "La Reina": 16000,
-      "Lo Barnechea": 19000,
-      "Peñalolén": 16000,
-
+      "Isla de Maipo": 24000,
+      "La Cisterna": 16000,
       "La Florida": 16000,
       "La Granja": 16000,
-      "San Ramón": 16000,
-      "La Cisterna": 16000,
-      "El Bosque": 17000,
       "La Pintana": 17000,
-      "Lo Espejo": 16000,
-      "San Bernardo": 18000,
-      "Puente Alto": 18000,
-
-      "Maipú": 17000,
-      "Cerrillos": 16000,
-      "Lo Prado": 16000,
-      "Cerro Navia": 17000,
-      "Renca": 17000,
-      "Pudahuel": 18000,
-      "Pudahuel Norte": 19000,
-      "Padre Hurtado": 19000,
-
-      "Conchalí": 16000,
-      "Huechuraba": 17000,
-      "Quilicura": 18000,
+      "La Reina": 16000,
       "Lampa": 22000,
-      "Colina": 23000,
-      "Til Til": 28000,
-
-      "Pirque": 21000,
-      "San José de Maipo": 28000,
-
-      "Buin": 22000,
-      "Paine": 24000,
-      "Calera de Tango": 20000,
-
-      "Talagante": 22000,
-      "Peñaflor": 21000,
-      "El Monte": 23000,
-      "Isla de Maipo": 24000,
-
-      "Curacaví": 26000,
+      "Las Condes": 16000,
+      "Lo Barnechea": 19000,
+      "Lo Espejo": 16000,
+      "Lo Prado": 16000,
+      "Macul": 15000,
+      "Maipú": 17000,
       "María Pinto": 28000,
       "Melipilla": 30000,
+      "Ñuñoa": 14000,
+      "Padre Hurtado": 19000,
+      "Paine": 24000,
+      "Pedro Aguirre Cerda": 15000,
+      "Peñaflor": 21000,
+      "Peñalolén": 16000,
+      "Pirque": 21000,
+      "Providencia": 14000,
+      "Pudahuel": 18000,
+      "Pudahuel Norte": 19000,
+      "Puente Alto": 18000,
+      "Quilicura": 18000,
+      "Quinta Normal": 15000,
+      "Recoleta": 15000,
+      "Renca": 17000,
+      "San Bernardo": 18000,
+      "San Joaquín": 15000,
+      "San José de Maipo": 28000,
+      "San Miguel": 14000,
       "San Pedro": 34000,
-      "Alhué": 36000
+      "San Ramón": 16000,
+      "Santiago": 14000,
+      "Talagante": 22000,
+      "Til Til": 28000,
+      "Vitacura": 17000
     };
 
+    const tipoServicio = document.getElementById("tipoServicio");
     const comunaIda = document.getElementById("comunaIda");
     const comunaRegreso = document.getElementById("comunaRegreso");
+    const direccionIda = document.getElementById("direccionIda");
+    const direccionRegreso = document.getElementById("direccionRegreso");
+    const recinto = document.getElementById("recinto");
+
+    const bloqueIda = document.getElementById("bloqueIda");
+    const bloqueRegreso = document.getElementById("bloqueRegreso");
+
+    const valorIda = document.getElementById("valorIda");
+    const valorRegreso = document.getElementById("valorRegreso");
+    const valorTotal = document.getElementById("valorTotal");
+
+    const btnReservar = document.getElementById("btnReservar");
+    const whatsappFloat = document.getElementById("whatsappFloat");
+
+    function formatoCLP(valor) {
+      return "$" + valor.toLocaleString("es-CL");
+    }
 
     function cargarComunas() {
-      const comunasOrdenadas = Object.keys(preciosComunas).sort();
+      const comunas = Object.keys(preciosComunas).sort((a, b) =>
+        a.localeCompare(b, "es")
+      );
 
-      comunaIda.innerHTML = '<option value="">Selecciona comuna</option>';
-      comunaRegreso.innerHTML = '<option value="">Selecciona comuna</option>';
+      comunas.forEach((comuna) => {
+        const optionIda = document.createElement("option");
+        optionIda.value = comuna;
+        optionIda.textContent = comuna;
+        comunaIda.appendChild(optionIda);
 
-      comunasOrdenadas.forEach(comuna => {
-        comunaIda.innerHTML += `<option value="${comuna}">${comuna}</option>`;
-        comunaRegreso.innerHTML += `<option value="${comuna}">${comuna}</option>`;
+        const optionRegreso = document.createElement("option");
+        optionRegreso.value = comuna;
+        optionRegreso.textContent = comuna;
+        comunaRegreso.appendChild(optionRegreso);
       });
     }
 
-    function actualizarFormulario() {
-      const tipoViaje = document.getElementById("tipoViaje").value;
-      const bloqueIda = document.getElementById("bloqueIda");
-      const bloqueRegreso = document.getElementById("bloqueRegreso");
-      const resultado = document.getElementById("resultado");
+    function actualizarVista() {
+      const tipo = tipoServicio.value;
 
-      bloqueIda.classList.add("hidden");
-      bloqueRegreso.classList.add("hidden");
-      resultado.classList.add("hidden");
+      bloqueIda.classList.remove("hidden");
+      bloqueRegreso.classList.remove("hidden");
 
-      if (tipoViaje === "ida") {
-        bloqueIda.classList.remove("hidden");
+      if (tipo === "ida") {
+        bloqueRegreso.classList.add("hidden");
       }
 
-      if (tipoViaje === "regreso") {
-        bloqueRegreso.classList.remove("hidden");
+      if (tipo === "regreso") {
+        bloqueIda.classList.add("hidden");
       }
 
-      if (tipoViaje === "ida_vuelta") {
-        bloqueIda.classList.remove("hidden");
-        bloqueRegreso.classList.remove("hidden");
-      }
-
-      calcularPrecio();
+      calcular();
     }
 
-    function calcularPrecio() {
-      const tipoViaje = document.getElementById("tipoViaje").value;
-      const comunaSalida = document.getElementById("comunaIda").value;
-      const comunaDestino = document.getElementById("comunaRegreso").value;
-      const resultado = document.getElementById("resultado");
-      const precioFinal = document.getElementById("precioFinal");
-      const whatsappBtn = document.getElementById("whatsappBtn");
+    function calcular() {
+      const tipo = tipoServicio.value;
 
-      let total = 0;
+      let ida = 0;
+      let regreso = 0;
 
-      if (tipoViaje === "ida") {
-        if (!comunaSalida) return;
-        total = preciosComunas[comunaSalida];
+      if ((tipo === "ida" || tipo === "ida_vuelta") && comunaIda.value) {
+        ida = preciosComunas[comunaIda.value] || 0;
       }
 
-      if (tipoViaje === "regreso") {
-        if (!comunaDestino) return;
-        total = preciosComunas[comunaDestino];
+      if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
+        regreso = preciosComunas[comunaRegreso.value] || 0;
       }
 
-      if (tipoViaje === "ida_vuelta") {
-        if (!comunaSalida || !comunaDestino) return;
-        total = preciosComunas[comunaSalida] + preciosComunas[comunaDestino];
-      }
+      const total = ida + regreso;
 
-      precioFinal.textContent = `$${total.toLocaleString("es-CL")}`;
-      resultado.classList.remove("hidden");
+      valorIda.textContent = formatoCLP(ida);
+      valorRegreso.textContent = formatoCLP(regreso);
+      valorTotal.textContent = formatoCLP(total);
 
-      const mensaje = `Hola, quiero cotizar/reservar un traslado en ConcertHome.%0A
-Tipo de viaje: ${tipoViaje}%0A
-Comuna ida: ${comunaSalida || "No aplica"}%0A
-Comuna regreso: ${comunaDestino || "No aplica"}%0A
-Valor estimado por persona: $${total.toLocaleString("es-CL")}`;
-
-      whatsappBtn.href = `https://wa.me/56954190451?text=${mensaje}`;
+      actualizarWhatsApp(total, ida, regreso);
     }
 
-    document.getElementById("comunaIda").addEventListener("change", calcularPrecio);
-    document.getElementById("comunaRegreso").addEventListener("change", calcularPrecio);
-    document.getElementById("tipoViaje").addEventListener("change", calcularPrecio);
+    function actualizarWhatsApp(total, ida, regreso) {
+      const mensaje =
+        "Hola, quiero cotizar o reservar un traslado en ConcertHome.%0A%0A" +
+        "Tipo de servicio: " + tipoServicio.options[tipoServicio.selectedIndex].text + "%0A" +
+        "Recinto: " + recinto.value + "%0A" +
+        "Comuna de ida: " + (comunaIda.value || "No aplica") + "%0A" +
+        "Dirección ida: " + (direccionIda.value || "No indicada") + "%0A" +
+        "Comuna de regreso: " + (comunaRegreso.value || "No aplica") + "%0A" +
+        "Dirección regreso: " + (direccionRegreso.value || "No indicada") + "%0A%0A" +
+        "Valor ida: " + formatoCLP(ida) + "%0A" +
+        "Valor regreso: " + formatoCLP(regreso) + "%0A" +
+        "Total estimado: " + formatoCLP(total);
+
+      const link = "https://wa.me/" + telefonoWhatsApp + "?text=" + mensaje;
+
+      btnReservar.onclick = function () {
+        window.open(link, "_blank");
+      };
+
+      whatsappFloat.href = link;
+    }
+
+    tipoServicio.addEventListener("change", actualizarVista);
+    comunaIda.addEventListener("change", calcular);
+    comunaRegreso.addEventListener("change", calcular);
+    direccionIda.addEventListener("input", calcular);
+    direccionRegreso.addEventListener("input", calcular);
+    recinto.addEventListener("change", calcular);
 
     cargarComunas();
+    actualizarVista();
   </script>
 
 </body>
