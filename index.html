@@ -651,62 +651,73 @@
 
   <script>
     const telefonoWhatsApp = "56954190451";
+const preciosComunas = {
+  // ZONA 1
+  "Santiago": 19990,
+  "Providencia": 19990,
+  "Ñuñoa": 19990,
+  "Macul": 19990,
+  "San Miguel": 19990,
+  "Independencia": 19990,
+  "Recoleta": 19990,
+  "Estación Central": 19990,
+  "Quinta Normal": 19990,
 
-    const preciosComunas = {
-      "Alhué": 36000,
-      "Buin": 22000,
-      "Calera de Tango": 20000,
-      "Cerrillos": 16000,
-      "Cerro Navia": 17000,
-      "Colina": 23000,
-      "Conchalí": 16000,
-      "Curacaví": 26000,
-      "El Bosque": 17000,
-      "El Monte": 23000,
-      "Estación Central": 15000,
-      "Huechuraba": 17000,
-      "Independencia": 15000,
-      "Isla de Maipo": 24000,
-      "La Cisterna": 16000,
-      "La Florida": 16000,
-      "La Granja": 16000,
-      "La Pintana": 17000,
-      "La Reina": 16000,
-      "Lampa": 22000,
-      "Las Condes": 16000,
-      "Lo Barnechea": 19000,
-      "Lo Espejo": 16000,
-      "Lo Prado": 16000,
-      "Macul": 15000,
-      "Maipú": 17000,
-      "María Pinto": 28000,
-      "Melipilla": 30000,
-      "Ñuñoa": 14000,
-      "Padre Hurtado": 19000,
-      "Paine": 24000,
-      "Pedro Aguirre Cerda": 15000,
-      "Peñaflor": 21000,
-      "Peñalolén": 16000,
-      "Pirque": 21000,
-      "Providencia": 14000,
-      "Pudahuel": 18000,
-      "Pudahuel Norte": 19000,
-      "Puente Alto": 18000,
-      "Quilicura": 18000,
-      "Quinta Normal": 15000,
-      "Recoleta": 15000,
-      "Renca": 17000,
-      "San Bernardo": 18000,
-      "San Joaquín": 15000,
-      "San José de Maipo": 28000,
-      "San Miguel": 14000,
-      "San Pedro": 34000,
-      "San Ramón": 16000,
-      "Santiago": 14000,
-      "Talagante": 22000,
-      "Til Til": 28000,
-      "Vitacura": 17000
-    };
+  // ZONA 2
+  "La Florida": 24990,
+  "Peñalolén": 24990,
+  "San Joaquín": 24990,
+  "La Cisterna": 24990,
+  "Huechuraba": 24990,
+  "Conchalí": 24990,
+  "Lo Prado": 24990,
+  "Cerrillos": 24990,
+  "Pedro Aguirre Cerda": 24990,
+  "El Bosque": 24990,
+  "La Granja": 24990,
+  "La Pintana": 24990,
+  "San Ramón": 24990,
+  "La Reina": 24990,
+  "Las Condes": 24990,
+
+  // ZONA 3
+  "Maipú": 29990,
+  "Puente Alto": 29990,
+  "Quilicura": 29990,
+  "Pudahuel": 29990,
+  "Pudahuel Norte": 29990,
+  "San Bernardo": 29990,
+  "Renca": 29990,
+  "Cerro Navia": 29990,
+  "Lo Espejo": 29990,
+  "Vitacura": 29990,
+  "Lo Barnechea": 29990,
+
+  // ZONA 4
+  "Colina": 34990,
+  "Lampa": 34990,
+  "Padre Hurtado": 34990,
+  "Peñaflor": 34990,
+  "Talagante": 34990,
+  "Buin": 34990,
+  "Calera de Tango": 34990,
+  "Paine": 34990,
+
+  // ZONA 5
+  "Melipilla": 49990,
+  "Curacaví": 49990,
+  "Pirque": 49990,
+  "San José de Maipo": 49990,
+  "El Monte": 49990,
+  "Isla de Maipo": 49990,
+  "Til Til": 49990,
+  "María Pinto": 49990,
+
+  // ZONAS ESPECIALES
+  "San Pedro": 59990,
+  "Alhué": 59990
+};
+   
 
     const tipoServicio = document.getElementById("tipoServicio");
     const comunaIda = document.getElementById("comunaIda");
