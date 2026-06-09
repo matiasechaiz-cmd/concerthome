@@ -820,10 +820,37 @@ const preciosComunas = {
       if ((tipo === "ida" || tipo === "ida_vuelta") && comunaIda.value) {
         ida = preciosComunas[comunaIda.value] || 0;
       }
+if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 
-      if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
-        regreso = preciosComunas[comunaRegreso.value] || 0;
-      }
+  if (comunaRegreso.value === "Aeropuerto de Santiago") {
+
+    switch (recinto.value) {
+      case "Movistar Arena":
+        regreso = 34990;
+        break;
+
+      case "Estadio Nacional":
+        regreso = 36990;
+        break;
+
+      case "Estadio Monumental":
+        regreso = 39990;
+        break;
+
+      case "Teatro Caupolicán":
+        regreso = 32990;
+        break;
+
+      default:
+        regreso = 34990;
+    }
+
+  } else {
+
+    regreso = preciosComunas[comunaRegreso.value] || 0;
+
+  }
+}
 
       const total = ida + regreso;
 
