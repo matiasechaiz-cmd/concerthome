@@ -822,9 +822,9 @@ const preciosComunas = {
       }
 if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 
-  if (comunaRegreso.value === "Aeropuerto de Santiago") {
+  if (comunaRegreso.value.trim() === "Aeropuerto de Santiago") {
 
-    switch (recinto.value) {
+   switch (recinto.value.trim()) {
       case "Movistar Arena":
         regreso = 34990;
         break;
