@@ -388,9 +388,10 @@
   font-size: 16px;
   line-height: 1.6;
 }
-  .beneficios {
-    grid-template-columns: 1fr;
-  }
+ .beneficios {
+  display: grid;
+  grid-template-columns: 1fr;
+}
 
   .beneficio-card,
   .feature {
@@ -447,11 +448,11 @@
   margin-bottom: 25px;
   color: #333;
 }
-    .beneficios {
-  display: flex;
+   .beneficios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
   margin: 40px auto;
   max-width: 1200px;
   padding: 0 20px;
@@ -773,27 +774,28 @@
     </section>
 
   </main>
-<section id="quienes-somos" class="quienes-somos">
+<section id="quienes-somos" class="beneficios">
 
-  <h2>Quiénes Somos</h2>
+  <div class="beneficio-card">
+    <h3>Quiénes Somos</h3>
+    <p>
+      ConcertHome nace con el objetivo de entregar una alternativa segura,
+      cómoda y confiable para quienes asisten a conciertos, eventos y
+      espectáculos en Santiago. Nos especializamos en traslados de regreso
+      a domicilio, aeropuerto y terminales de buses, permitiendo que nuestros
+      pasajeros disfruten su experiencia sin preocuparse por cómo volver.
+    </p>
+  </div>
 
-  <p>
-    ConcertHome nace con el objetivo de entregar una alternativa segura,
-    cómoda y confiable para quienes asisten a conciertos, eventos y
-    espectáculos en Santiago. Nos especializamos en traslados de regreso
-    a domicilio, aeropuerto y terminales de buses, permitiendo que nuestros
-    pasajeros disfruten su experiencia sin preocuparse por cómo volver y que
-    lleguen de una manera segura a casa.
-  </p>
-
-  <h2>Nuestra Visión</h2>
-
-  <p>
-    Ser la empresa líder en traslados post eventos en Chile, reconocida por
-    su puntualidad, seguridad, transparencia y compromiso con cada pasajero,
-    convirtiéndonos en la primera opción para quienes buscan una forma
-    confiable de regresar a su destino.
-  </p>
+  <div class="beneficio-card">
+    <h3>Nuestra Visión</h3>
+    <p>
+      Ser la empresa líder en traslados post eventos en Chile, reconocida por
+      su puntualidad, seguridad, transparencia y compromiso con cada pasajero,
+      convirtiéndonos en la primera opción para quienes buscan una forma
+      confiable de regresar a su destino.
+    </p>
+  </div>
 
 </section>
 <footer>
