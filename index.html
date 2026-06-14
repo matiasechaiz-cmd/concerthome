@@ -323,98 +323,92 @@
       .grid-2, .actions { grid-template-columns: 1fr; }
     }
 
-   @media (max-width: 600px) {
+ @media (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
 
   .hero {
-    min-height: 700px;
-    padding: 54px 24px 70px;
+    min-height: auto;
+    padding: 35px 18px 45px;
+    text-align: center;
   }
 
   .logo-box {
-    padding: 20px 10px;
+    padding: 12px;
   }
 
   .logo-box img {
-    width: 95%;
-    max-width: 450px;
+    width: 85%;
+    max-width: 260px;
+    height: auto;
     display: block;
     margin: auto;
   }
 
   .hero-kicker {
-    font-size: 19px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
   .hero h1 {
-    font-size: 42px;
-    line-height: 1.15;
+    font-size: 28px;
+    line-height: 1.2;
   }
 
   .hero p {
-    font-size: 22px;
+    font-size: 16px;
     line-height: 1.5;
   }
 
   .page {
-    padding: 0 24px 34px;
-    margin-top: -80px;
+    padding: 20px 14px 30px;
+    margin-top: 0;
   }
 
   .section-card {
-    padding: 42px 32px;
-    border-radius: 32px;
+    padding: 24px 18px;
+    border-radius: 20px;
   }
 
   .section-title {
-    font-size: 42px;
+    font-size: 28px;
   }
 
   .section-text {
-    font-size: 22px;
+    font-size: 16px;
   }
 
   .features,
-  .shows {
+  .shows,
+  .beneficios {
     grid-template-columns: 1fr;
   }
 
+  .beneficio-card,
   .feature {
-    padding: 38px 24px;
-  }
-
-  .feature h3 {
-    font-size: 24px;
-  }
-
-  .feature p {
-    font-size: 20px;
+    width: 100%;
+    padding: 22px 18px;
   }
 
   .inner-box {
-    padding: 28px 20px;
+    padding: 22px 16px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    width: 100%;
+    font-size: 16px;
   }
 
   .whatsapp-float {
-    right: 14px;
-    bottom: 14px;
-    padding: 15px 24px;
-    font-size: 18px;
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 18px;
+    font-size: 15px;
   }
-
-} 
-    .quienes-somos {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.quienes-somos h2 {
-  color: #0d47a1;
-  margin-bottom: 15px;
 }
 
 .quienes-somos p {
