@@ -406,10 +406,9 @@
     margin: 35px auto;
   }
 
-  .beneficio-card {
-  .beneficio-card {
-  width: 32%;
-  max-width: 32%;
+      .beneficio-card {
+    width: 32%;
+    max-width: 32%;
     margin: 0 auto;
     padding: 26px 22px;
   }
@@ -476,7 +475,35 @@
   color: #444;
   line-height: 1.6;
 }
- 
+.quienes-somos-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto 44px;
+  padding: 0 24px;
+}
+
+.quienes-somos-card {
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(219,227,238,.95);
+  border-radius: 24px;
+  padding: 34px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.18);
+}
+
+.quienes-somos-card h3 {
+  color: #0d47a1;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.quienes-somos-card p {
+  color: #243041;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 0;
+} 
     @media (max-width: 600px) {
 
   .shows {
@@ -487,21 +514,7 @@
     width: 100% !important;
   }
 
- #quienes-somos {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
 
- 
-#quienes-somos {
-    grid-template-columns: 1fr !important;
-    padding: 30px 20px !important;
-}
-
-#quienes-somos .beneficio-card {
-    width: 100% !important;
-    max-width: 100% !important;
-}
 .beneficios {
   display: flex !important;
   gap: 8px;
@@ -516,6 +529,24 @@ max-width: 31% !important;
   flex-shrink: 0;
   padding: 12px 8px !important;
 }
+ .quienes-somos-section {
+  grid-template-columns: 1fr;
+  padding: 0 14px;
+  margin: 0 auto 32px;
+}
+
+.quienes-somos-card {
+  padding: 24px 18px;
+  border-radius: 20px;
+}
+
+.quienes-somos-card h3 {
+  font-size: 24px;
+}
+
+.quienes-somos-card p {
+  font-size: 16px;
+}     
 }
   </style>
 </head>
@@ -815,9 +846,9 @@ max-width: 31% !important;
     </section>
 
   </main>
-<section id="quienes-somos" class="beneficios">
+<section id="quienes-somos" class="quienes-somos-section">
 
-  <div class="beneficio-card">
+  <div class="quienes-somos-card">
     <h3>Quiénes Somos</h3>
     <p>
       ConcertHome nace con el objetivo de entregar una alternativa segura,
@@ -828,7 +859,7 @@ max-width: 31% !important;
     </p>
   </div>
 
- <div class="beneficio-card">
+ <div class="quienes-somos-card">
     <h3>Nuestra Visión</h3>
     <p>
       Ser la empresa líder en traslados post eventos en Chile, reconocida por
