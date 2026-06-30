@@ -328,6 +328,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 18px;
       line-height: 1.5;
     }
+    .turismo-section {
+  background: #ffffff;
+}
+
+.turismo-content {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 28px;
+}
+
+.turismo-text p {
+  color: #374151;
+  font-size: 19px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.turismo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.turismo-card {
+  background: #f8fafc;
+  border: 1px solid #dbe3ee;
+  border-radius: 18px;
+  padding: 18px 16px;
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
 
     footer {
       padding: 36px 24px;
@@ -336,9 +371,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     @media (max-width: 900px) {
-      .features, .shows { grid-template-columns: repeat(2, 1fr); }
-      .grid-2, .actions { grid-template-columns: 1fr; }
-    }
+  .features, .shows { grid-template-columns: repeat(2, 1fr); }
+  .grid-2, .actions { grid-template-columns: 1fr; }
+
+  .turismo-content {
+    grid-template-columns: 1fr;
+  }
+
+  .turismo-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 600px) {
   body {
@@ -522,6 +565,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .show-card {
     width: 100% !important;
   }
+        .turismo-text p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .turismo-card {
+    font-size: 15px;
+    padding: 16px 14px;
+  }
 
 
 .beneficios {
@@ -660,7 +712,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </section>
+    <section class="section-card turismo-section">
+      <div class="eyebrow">TURISMO Y AEROPUERTO</div>
+      <h2 class="section-title">Traslados privados para turismo, hoteles y aeropuerto</h2>
 
+      <p class="section-text">
+        Además de nuestros servicios para conciertos y eventos, en ConcertHome ofrecemos traslados privados
+        para pasajeros, turistas, hoteles y empresas en Santiago.
+      </p>
+
+      <div class="turismo-content">
+        <div class="turismo-text">
+          <p>
+            Realizamos servicios desde y hacia el Aeropuerto de Santiago, hoteles, terminales de buses,
+            recintos de eventos, restaurantes y puntos turísticos, entregando una experiencia segura,
+            cómoda y personalizada.
+          </p>
+
+          <p>
+            Nuestro servicio está pensado para turistas nacionales y extranjeros que buscan puntualidad,
+            confianza y atención directa, ya sea para viajes individuales, parejas, familias pequeñas
+            o grupos de hasta 4 pasajeros.
+          </p>
+        </div>
+
+        <div class="turismo-grid">
+          <div class="turismo-card">Aeropuerto → Hotel</div>
+          <div class="turismo-card">Hotel → Aeropuerto</div>
+          <div class="turismo-card">Hotel → Conciertos y eventos</div>
+          <div class="turismo-card">Traslados por horas</div>
+          <div class="turismo-card">City tour privado por Santiago</div>
+          <div class="turismo-card">Convenios con hoteles, Airbnb y empresas</div>
+        </div>
+      </div>
+    </section>
     <section class="section-card" id="reserva">
       <div class="eyebrow">RESERVA</div>
       <h2 class="section-title">Reserva tu traslado</h2>
