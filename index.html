@@ -753,7 +753,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p class="section-text">
         Completa el formulario y revisa el valor de ida, regreso y total final.
       </p>
-
+      <div class="form-group">
+        <label for="categoriaServicio">Servicio que necesitas</label>
+        <select id="categoriaServicio">
+          <option value="concierto">Concierto o evento</option>
+          <option value="aeropuerto_hotel">Aeropuerto a hotel</option>
+          <option value="hotel_aeropuerto">Hotel a aeropuerto</option>
+          <option value="hotel_evento">Hotel a concierto o evento</option>
+          <option value="por_horas">Traslado por horas</option>
+          <option value="city_tour">City tour privado</option>
+          <option value="empresa_hotel">Convenio hotel, Airbnb o empresa</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="tipoServicio">Tipo de servicio</label>
         <select id="tipoServicio">
@@ -980,7 +991,7 @@ const preciosComunas = {
   "Alhué": 59990
 };
    
-
+const categoriaServicio = document.getElementById("categoriaServicio");
     const tipoServicio = document.getElementById("tipoServicio");
     const comunaIda = document.getElementById("comunaIda");
     const comunaRegreso = document.getElementById("comunaRegreso");
@@ -1089,6 +1100,7 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
     function actualizarWhatsApp(total, ida, regreso) {
       const mensaje =
         "Hola, quiero cotizar o reservar un traslado en ConcertHome.%0A%0A" +
+                "Servicio solicitado: " + categoriaServicio.options[categoriaServicio.selectedIndex].text + "%0A" +
         "Tipo de servicio: " + tipoServicio.options[tipoServicio.selectedIndex].text + "%0A" +
         "Recinto: " + recinto.value + "%0A" +
         "Comuna de ida: " + (comunaIda.value || "No aplica") + "%0A" +
@@ -1108,7 +1120,7 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
         window.open(link, "_blank");
       };
     }
-
+categoriaServicio.addEventListener("change", calcular);
     tipoServicio.addEventListener("change", actualizarVista);
     comunaIda.addEventListener("change", calcular);
     comunaRegreso.addEventListener("change", calcular);
