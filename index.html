@@ -746,6 +746,70 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </section>
+       <section class="section-card turismo-form-section">
+      <div class="eyebrow">COTIZA TURISMO</div>
+      <h2 class="section-title">Cotiza tu traslado turístico</h2>
+
+      <p class="section-text">
+        Completa los datos principales y te enviaremos una cotización personalizada por WhatsApp.
+      </p>
+
+      <div class="turismo-form">
+        <div class="form-group">
+          <label for="turismoServicio">Tipo de servicio</label>
+          <select id="turismoServicio">
+            <option>Aeropuerto a hotel</option>
+            <option>Hotel a aeropuerto</option>
+            <option>Hotel a concierto o evento</option>
+            <option>Traslado por horas</option>
+            <option>City tour privado por Santiago</option>
+            <option>Convenio hotel, Airbnb o empresa</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="turismoSalida">Lugar de salida</label>
+            <input id="turismoSalida" type="text" placeholder="Ej: Aeropuerto de Santiago, hotel o dirección" />
+          </div>
+
+          <div class="form-group">
+            <label for="turismoDestino">Lugar de destino</label>
+            <input id="turismoDestino" type="text" placeholder="Ej: Hotel, restaurante, recinto o punto turístico" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="turismoFecha">Fecha del servicio</label>
+            <input id="turismoFecha" type="date" />
+          </div>
+
+          <div class="form-group">
+            <label for="turismoHora">Hora aproximada</label>
+            <input id="turismoHora" type="time" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="turismoPasajeros">Cantidad de pasajeros</label>
+            <input id="turismoPasajeros" type="number" min="1" max="4" placeholder="Ej: 2" />
+          </div>
+
+          <div class="form-group">
+            <label for="turismoComentarios">Maletas o comentarios</label>
+            <input id="turismoComentarios" type="text" placeholder="Ej: 2 maletas, silla de niño, espera, paradas" />
+          </div>
+        </div>
+
+        <div class="turismo-actions">
+          <a class="btn-turismo-whatsapp" id="btnTurismoWhatsapp" href="#" target="_blank">
+            Cotizar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
     <section class="section-card" id="reserva">
       <div class="eyebrow">RESERVA</div>
       <h2 class="section-title">Reserva tu traslado</h2>
@@ -753,18 +817,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p class="section-text">
         Completa el formulario y revisa el valor de ida, regreso y total final.
       </p>
-      <div class="form-group">
-        <label for="categoriaServicio">Servicio que necesitas</label>
-        <select id="categoriaServicio">
-          <option value="concierto">Concierto o evento</option>
-          <option value="aeropuerto_hotel">Aeropuerto a hotel</option>
-          <option value="hotel_aeropuerto">Hotel a aeropuerto</option>
-          <option value="hotel_evento">Hotel a concierto o evento</option>
-          <option value="por_horas">Traslado por horas</option>
-          <option value="city_tour">City tour privado</option>
-          <option value="empresa_hotel">Convenio hotel, Airbnb o empresa</option>
-        </select>
-      </div>
+      
       <div class="form-group">
         <label for="tipoServicio">Tipo de servicio</label>
         <select id="tipoServicio">
@@ -991,7 +1044,7 @@ const preciosComunas = {
   "Alhué": 59990
 };
    
-const categoriaServicio = document.getElementById("categoriaServicio");
+
     const tipoServicio = document.getElementById("tipoServicio");
     const comunaIda = document.getElementById("comunaIda");
     const comunaRegreso = document.getElementById("comunaRegreso");
@@ -1009,7 +1062,14 @@ const categoriaServicio = document.getElementById("categoriaServicio");
     const btnReservar = document.getElementById("btnReservar");
     const btnWhatsapp = document.getElementById("btnWhatsapp");
     const whatsappFloat = document.getElementById("whatsappFloat");
-
+const turismoServicio = document.getElementById("turismoServicio");
+const turismoSalida = document.getElementById("turismoSalida");
+const turismoDestino = document.getElementById("turismoDestino");
+const turismoFecha = document.getElementById("turismoFecha");
+const turismoHora = document.getElementById("turismoHora");
+const turismoPasajeros = document.getElementById("turismoPasajeros");
+const turismoComentarios = document.getElementById("turismoComentarios");
+const btnTurismoWhatsapp = document.getElementById("btnTurismoWhatsapp");
     function formatoCLP(valor) {
       return "$" + valor.toLocaleString("es-CL");
     }
@@ -1096,11 +1156,23 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 
       actualizarWhatsApp(total, ida, regreso);
     }
+function actualizarWhatsAppTurismo() {
+  const mensaje =
+    "Hola, quiero cotizar un servicio turístico en ConcertHome.%0A%0A" +
+    "Servicio: " + turismoServicio.value + "%0A" +
+    "Lugar de salida: " + (turismoSalida.value || "No indicado") + "%0A" +
+    "Lugar de destino: " + (turismoDestino.value || "No indicado") + "%0A" +
+    "Fecha: " + (turismoFecha.value || "No indicada") + "%0A" +
+    "Hora aproximada: " + (turismoHora.value || "No indicada") + "%0A" +
+    "Pasajeros: " + (turismoPasajeros.value || "No indicado") + "%0A" +
+    "Comentarios: " + (turismoComentarios.value || "Sin comentarios");
 
+  btnTurismoWhatsapp.href = "https://wa.me/" + telefonoWhatsApp + "?text=" + mensaje;
+}
     function actualizarWhatsApp(total, ida, regreso) {
       const mensaje =
         "Hola, quiero cotizar o reservar un traslado en ConcertHome.%0A%0A" +
-                "Servicio solicitado: " + categoriaServicio.options[categoriaServicio.selectedIndex].text + "%0A" +
+                
         "Tipo de servicio: " + tipoServicio.options[tipoServicio.selectedIndex].text + "%0A" +
         "Recinto: " + recinto.value + "%0A" +
         "Comuna de ida: " + (comunaIda.value || "No aplica") + "%0A" +
@@ -1120,14 +1192,22 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
         window.open(link, "_blank");
       };
     }
-categoriaServicio.addEventListener("change", calcular);
+
     tipoServicio.addEventListener("change", actualizarVista);
     comunaIda.addEventListener("change", calcular);
     comunaRegreso.addEventListener("change", calcular);
     direccionIda.addEventListener("input", calcular);
     direccionRegreso.addEventListener("input", calcular);
     recinto.addEventListener("change", calcular);
+turismoServicio.addEventListener("change", actualizarWhatsAppTurismo);
+turismoSalida.addEventListener("input", actualizarWhatsAppTurismo);
+turismoDestino.addEventListener("input", actualizarWhatsAppTurismo);
+turismoFecha.addEventListener("change", actualizarWhatsAppTurismo);
+turismoHora.addEventListener("change", actualizarWhatsAppTurismo);
+turismoPasajeros.addEventListener("input", actualizarWhatsAppTurismo);
+turismoComentarios.addEventListener("input", actualizarWhatsAppTurismo);
 
+actualizarWhatsAppTurismo();
     cargarComunas();
     actualizarVista();
   </script>
