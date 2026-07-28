@@ -10,7 +10,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MF9P6RGQ');
 </script>
 <!-- End Google Tag Manager -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ConcertHome | Transporte privado a conciertos</title>
@@ -46,13 +45,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: white;
 }
 
-   .logo-box img {
+    .logo-box img {
   width: 100%;
   max-width: 650px;
   display: block;
   margin: auto;
   object-fit: contain;
 }
+
+    .logo-wordmark {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 48px;
+      font-weight: 800;
+      text-decoration: none;
+      margin: 42px auto 70px;
+    }
+
+    .logo-wordmark span { color: #22c55e; }
 
  .logo-box img {
   width: 100%;
@@ -406,6 +416,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin: auto;
   }
 
+  .logo-wordmark {
+    font-size: 30px;
+    margin: 18px auto 42px;
+  }
+
   .hero-kicker {
     font-size: 14px;
     line-height: 1.4;
@@ -634,7 +649,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager (noscript) -->
   <section class="hero">
     <div class="logo-box">
-      <img src="logo.png.png" alt="ConcertHome">
+      <a class="logo-wordmark" href="index.html" aria-label="Inicio de ConcertHome">Concert<span>Home</span></a>
     </div>
 
     <div class="hero-kicker">TRANSPORTE PRIVADO PARA CONCIERTOS Y EVENTOS</div>
@@ -900,6 +915,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </section>
 
+    <section class="section-card">
+      <div class="eyebrow">RECINTOS</div>
+      <h2 class="section-title">Traslados a recintos de Santiago</h2>
+      <p class="section-text">
+        Revisa información y cotiza un servicio privado para tu próximo concierto.
+      </p>
+      <div class="shows">
+        <article class="show-card">
+          <div class="show-top">
+            <span class="badge">Santiago</span>
+            <span class="badge badge-gray">Parque O'Higgins</span>
+          </div>
+          <h3>Movistar Arena</h3>
+          <p>Conoce el servicio, revisa las comunas disponibles y calcula tu traslado.</p>
+          <p style="margin-top:18px">
+            <a class="btn-whatsapp" href="traslado-movistar-arena.html">Ver traslado al Movistar Arena</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
        <section class="section-card">
       <div class="eyebrow">CARTELERA</div>
       <h2 class="section-title">Próximos shows</h2>
@@ -970,79 +1006,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   © 2026 ConcertHome.cl | Transporte privado a conciertos, aeropuerto y terminales de buses.
 </footer>
 
+  <script src="concert-home-data.js"></script>
   <script>
-    const telefonoWhatsApp = "56965195972";
-const preciosComunas = {
-  // ZONA 1
-  "Santiago": 19990,
-  "Providencia": 19990,
-  "Ñuñoa": 19990,
-  "Macul": 19990,
-  "San Miguel": 19990,
-  "Independencia": 19990,
-  "Recoleta": 19990,
-  "Estación Central": 19990,
-  "Quinta Normal": 19990,
-// DESTINOS ESPECIALES
-"Aeropuerto de Santiago": 34990,
-"Terminal Alameda": 19990,
-"Terminal Sur": 19990,
-"Terminal San Borja": 21990,
-"Terminal Pajaritos": 24990,
-  // ZONA 2
-  "La Florida": 24990,
-  "Peñalolén": 24990,
-  "San Joaquín": 24990,
-  "La Cisterna": 24990,
-  "Huechuraba": 24990,
-  "Conchalí": 24990,
-  "Lo Prado": 24990,
-  "Cerrillos": 24990,
-  "Pedro Aguirre Cerda": 24990,
-  "El Bosque": 24990,
-  "La Granja": 24990,
-  "La Pintana": 24990,
-  "San Ramón": 24990,
-  "La Reina": 24990,
-  "Las Condes": 24990,
-
-  // ZONA 3
-  "Maipú": 29990,
-  "Puente Alto": 29990,
-  "Quilicura": 29990,
-  "Pudahuel": 29990,
-  "Pudahuel Norte": 29990,
-  "San Bernardo": 29990,
-  "Renca": 29990,
-  "Cerro Navia": 29990,
-  "Lo Espejo": 29990,
-  "Vitacura": 29990,
-  "Lo Barnechea": 29990,
-
-  // ZONA 4
-  "Colina": 34990,
-  "Lampa": 34990,
-  "Padre Hurtado": 34990,
-  "Peñaflor": 34990,
-  "Talagante": 34990,
-  "Buin": 34990,
-  "Calera de Tango": 34990,
-  "Paine": 34990,
-
-  // ZONA 5
-  "Melipilla": 49990,
-  "Curacaví": 49990,
-  "Pirque": 49990,
-  "San José de Maipo": 49990,
-  "El Monte": 49990,
-  "Isla de Maipo": 49990,
-  "Til Til": 49990,
-  "María Pinto": 49990,
-
-  // ZONAS ESPECIALES
-  "San Pedro": 59990,
-  "Alhué": 59990
-};
    
 
     const tipoServicio = document.getElementById("tipoServicio");
