@@ -132,14 +132,16 @@
       color: white;
     }
     .brand {
-      display: inline-block;
-      color: white;
-      font-size: 34px;
-      font-weight: 800;
-      text-decoration: none;
-      margin-bottom: 60px;
+      display: block;
+      max-width: 520px;
+      margin: 0 auto 52px;
     }
-    .brand span { color: #22c55e; }
+    .brand img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
     .hero-kicker {
       color: #93c5fd;
       letter-spacing: 4px;
@@ -316,7 +318,7 @@
     @media (max-width: 600px) {
       body { overflow-x: hidden; }
       .hero { min-height: auto; padding: 30px 18px 70px; }
-      .brand { font-size: 27px; margin-bottom: 38px; }
+      .brand { max-width: 260px; margin-bottom: 34px; }
       .hero-kicker { font-size: 13px; line-height: 1.5; }
       .hero h1 { font-size: 32px; }
       .hero p { font-size: 17px; }
@@ -339,7 +341,9 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <header class="hero">
-    <a class="brand" href="index.html" aria-label="Volver al inicio de ConcertHome">Concert<span>Home</span></a>
+    <a class="brand" href="index.html" aria-label="Volver al inicio de ConcertHome">
+      <img src="logo.png.png" alt="ConcertHome">
+    </a>
     <div class="hero-kicker">TRANSPORTE PRIVADO PARA CONCIERTOS</div>
     <h1>Traslado al Movistar Arena en Santiago</h1>
     <p>Viaja de forma cómoda y segura a tus conciertos en el Movistar Arena con ConcertHome. Ofrecemos traslados privados de ida, regreso o ida y vuelta desde distintas comunas de Santiago, con reserva anticipada y atención personalizada.</p>
