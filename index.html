@@ -328,6 +328,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 18px;
       line-height: 1.5;
     }
+
+    .venue-list { display: block; }
+
+    .venue-card {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .venue-link {
+      min-height: 66px;
+      height: auto;
+      padding: 14px 20px;
+      text-align: center;
+      line-height: 1.25;
+    }
     .turismo-section {
   background: #ffffff;
 }
@@ -907,8 +923,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p class="section-text">
         Revisa información y cotiza un servicio privado para tu próximo concierto.
       </p>
-      <div class="shows">
-        <article class="show-card">
+      <div class="shows venue-list">
+        <article class="show-card venue-card">
           <div class="show-top">
             <span class="badge">Santiago</span>
             <span class="badge badge-gray">Parque O'Higgins</span>
@@ -916,7 +932,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <h3>Movistar Arena</h3>
           <p>Conoce el servicio, revisa las comunas disponibles y calcula tu traslado.</p>
           <p style="margin-top:18px">
-            <a class="btn-whatsapp" href="traslado-movistar-arena.html">Ver traslado al Movistar Arena</a>
+            <a class="btn-whatsapp venue-link" href="traslado-movistar-arena.html">Ver traslado al Movistar Arena</a>
           </p>
         </article>
       </div>
