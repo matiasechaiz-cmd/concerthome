@@ -60,3 +60,29 @@ const preciosComunas = {
   "San Pedro": 61190,
   "Alhué": 61190
 };
+
+
+// Las tarifas anteriores ya incluyen el aumento del 2%, redondeado a $10.
+// No volver a aplicar el porcentaje al sumar ida y regreso.
+function cotizacionCompleta() {
+  const tipo = document.getElementById("tipoServicio").value;
+  const ida = document.getElementById("comunaIda").value;
+  const regreso = document.getElementById("comunaRegreso").value;
+  const valida = comuna => Object.prototype.hasOwnProperty.call(preciosComunas, comuna);
+  if (tipo === "ida") return valida(ida);
+  if (tipo === "regreso") return valida(regreso);
+  return tipo === "ida_vuelta" && valida(ida) && valida(regreso);
+}
+
+function protegerCotizacion() {
+  ["btnReservar", "btnWhatsapp", "whatsappFloat"].forEach(id => {
+    const boton = document.getElementById(id);
+    if (!boton) return;
+    boton.addEventListener("click", event => {
+      if (cotizacionCompleta()) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      alert("Selecciona la comuna de cada trayecto para calcular el total. Para ida y vuelta debes indicar la comuna de salida y la de regreso.");
+    }, true);
+  });
+}

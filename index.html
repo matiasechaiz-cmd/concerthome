@@ -1225,23 +1225,23 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 
    switch (recinto.value.trim()) {
       case "Movistar Arena":
-        regreso = 34990;
+        regreso = 35690;
         break;
 
       case "Estadio Nacional":
-        regreso = 36990;
+        regreso = 37730;
         break;
 
       case "Estadio Monumental":
-        regreso = 39990;
+        regreso = 40790;
         break;
 
       case "Teatro Caupolicán":
-        regreso = 32990;
+        regreso = 33650;
         break;
 
       default:
-        regreso = 34990;
+        regreso = 35690;
     }
 
   } else {
@@ -1255,7 +1255,7 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 
       valorIda.textContent = formatoCLP(ida);
       valorRegreso.textContent = formatoCLP(regreso);
-      valorTotal.textContent = formatoCLP(total);
+      valorTotal.textContent = cotizacionCompleta() ? formatoCLP(total) : "Selecciona las comunas de cada trayecto";
 
       actualizarWhatsApp(total, ida, regreso);
     }
@@ -1311,6 +1311,7 @@ turismoPasajeros.addEventListener("input", actualizarWhatsAppTurismo);
 turismoComentarios.addEventListener("input", actualizarWhatsAppTurismo);
 
 actualizarWhatsAppTurismo();
+    protegerCotizacion();
     cargarComunas();
     actualizarVista();
   </script>

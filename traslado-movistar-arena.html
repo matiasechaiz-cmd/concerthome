@@ -508,7 +508,7 @@
       const total = ida + regreso;
       valorIda.textContent = formatoCLP(ida);
       valorRegreso.textContent = formatoCLP(regreso);
-      valorTotal.textContent = formatoCLP(total);
+      valorTotal.textContent = cotizacionCompleta() ? formatoCLP(total) : "Selecciona las comunas de cada trayecto";
 
       const mensaje = [
         "Hola, quiero cotizar un traslado al Movistar Arena.",
@@ -533,8 +533,10 @@
     comunaRegreso.addEventListener("change", calcular);
     direccionIda.addEventListener("input", calcular);
     direccionRegreso.addEventListener("input", calcular);
+    protegerCotizacion();
     cargarComunas();
     actualizarVista();
   </script>
 </body>
 </html>
+
