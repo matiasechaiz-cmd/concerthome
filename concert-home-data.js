@@ -61,7 +61,6 @@ const preciosComunas = {
   "Alhué": 61190
 };
 
-
 // Las tarifas anteriores ya incluyen el aumento del 2%, redondeado a $10.
 // No volver a aplicar el porcentaje al sumar ida y regreso.
 function cotizacionCompleta() {
@@ -87,9 +86,7 @@ function protegerCotizacion() {
   });
 }
 
-// Redes sociales oficiales de ConcertHome.
-// Se insertan en el footer para mantener el HTML principal y su responsive intactos.
-document.addEventListener("DOMContentLoaded", () => {
+function insertarRedesConcertHome() {
   const footer = document.querySelector("footer");
   if (!footer || document.getElementById("concertHomeSocials")) return;
 
@@ -116,4 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   footer.insertBefore(socials, footer.firstChild);
-});
+}
+
+// El script se carga al final del HTML, por lo que el footer ya existe en la mayoría de los casos.
+insertarRedesConcertHome();
+
+// Fallback por si el navegador todavía está terminando de construir el documento.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", insertarRedesConcertHome, { once: true });
+}
