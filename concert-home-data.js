@@ -86,3 +86,34 @@ function protegerCotizacion() {
     }, true);
   });
 }
+
+// Redes sociales oficiales de ConcertHome.
+// Se insertan en el footer para mantener el HTML principal y su responsive intactos.
+document.addEventListener("DOMContentLoaded", () => {
+  const footer = document.querySelector("footer");
+  if (!footer || document.getElementById("concertHomeSocials")) return;
+
+  const socials = document.createElement("div");
+  socials.id = "concertHomeSocials";
+  socials.setAttribute("aria-label", "Redes sociales de ConcertHome");
+  socials.style.cssText = "display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 18px;";
+
+  const redes = [
+    { nombre: "Instagram", icono: "◎", url: "https://www.instagram.com/concerthome_chile/" },
+    { nombre: "Facebook", icono: "f", url: "https://www.facebook.com/share/1Dbw91QKbe/" }
+  ];
+
+  redes.forEach(red => {
+    const enlace = document.createElement("a");
+    enlace.href = red.url;
+    enlace.target = "_blank";
+    enlace.rel = "noopener noreferrer";
+    enlace.setAttribute("aria-label", red.nombre + " de ConcertHome");
+    enlace.title = red.nombre;
+    enlace.style.cssText = "display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid rgba(255,255,255,.28);border-radius:999px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;background:rgba(255,255,255,.08);";
+    enlace.innerHTML = '<span aria-hidden="true" style="font-size:20px;font-weight:800">' + red.icono + '</span><span>' + red.nombre + '</span>';
+    socials.appendChild(enlace);
+  });
+
+  footer.insertBefore(socials, footer.firstChild);
+});
