@@ -148,7 +148,7 @@ function decideReservation_(token, action) {
 }
 
 function nextTicketCode_(sheet, serviceDate) {
-  const parsed = new Date(`${serviceDate}T12:00:00`);
+  const parsed = serviceDate instanceof Date ? new Date(serviceDate) : new Date(`${serviceDate}T12:00:00`);
   if (Number.isNaN(parsed.getTime())) throw new Error('La fecha del servicio no es válida.');
   const prefix = `CH-${Utilities.formatDate(parsed, CONFIG.TIMEZONE, 'ddMMyy')}-`;
   const codes = sheet.getLastRow() > 1 ? sheet.getRange(2, 5, sheet.getLastRow() - 1, 1).getDisplayValues().flat() : [];
@@ -254,7 +254,7 @@ function recordToRow_(r) {
 }
 
 function displayDate_(iso) {
-  const date = new Date(`${iso}T12:00:00`);
+  const date = iso instanceof Date ? new Date(iso) : new Date(`${iso}T12:00:00`);
   return Number.isNaN(date.getTime()) ? String(iso) : Utilities.formatDate(date, CONFIG.TIMEZONE, 'dd MMM yyyy').toUpperCase();
 }
 
