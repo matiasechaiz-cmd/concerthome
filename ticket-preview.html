@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Generador de tickets | ConcertHome</title>
+  <style>
+    :root{--navy:#071226;--navy2:#10304a;--green:#22c55e;--blue:#93c5fd;--muted:#8fa9c1;--paper:#eaf1f6}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Arial,Helvetica,sans-serif;color:#111827}
+    .page{width:min(1240px,calc(100% - 32px));margin:40px auto 70px}.head{margin-bottom:26px}.head h1{margin:0 0 8px;color:var(--navy);font-size:34px}.head p{margin:0;color:#526273}
+    .workspace{display:grid;grid-template-columns:380px minmax(0,1fr);gap:28px;align-items:start}.panel{background:#fff;border:1px solid #dbe3ea;border-radius:24px;padding:24px;box-shadow:0 14px 35px rgba(7,18,38,.1)}
+    .panel h2{margin:0 0 20px;font-size:22px}.field{margin-bottom:15px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:800;letter-spacing:.05em;color:#475569}.field input{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:12px;padding:0 14px;font-size:16px}.field input:focus{outline:3px solid rgba(34,197,94,.18);border-color:var(--green)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.buttons{display:grid;gap:10px;margin-top:20px}.btn{min-height:50px;border:0;border-radius:13px;font-size:16px;font-weight:800;cursor:pointer}.primary{background:var(--green);color:#04150b}.secondary{background:#1557e8;color:#fff}.hint{margin:14px 0 0;color:#64748b;font-size:13px;line-height:1.5}
+    .preview{min-width:0}.ticket{position:relative;overflow:hidden;aspect-ratio:12/5;min-height:360px;background:linear-gradient(100deg,var(--navy),var(--navy2));border-radius:34px;color:#fff;box-shadow:0 18px 45px rgba(7,18,38,.24)}
+    .ticket:before{content:"";position:absolute;inset:0 0 auto;height:14px;background:var(--green)}.ticket-main{position:absolute;inset:0 25% 0 0;padding:42px 48px}.ticket-stub{position:absolute;inset:0 0 0 75%;display:flex;flex-direction:column;align-items:center;padding:60px 26px 30px;border-left:3px dashed #8299ae;text-align:center}
+    .notch{position:absolute;left:75%;width:48px;height:48px;margin-left:-24px;border-radius:50%;background:var(--paper);z-index:2}.notch.top{top:-24px}.notch.bottom{bottom:-24px}
+    .logo{font-size:43px;font-weight:900;letter-spacing:-2.5px}.logo span{color:var(--green)}.status{margin-top:28px;color:var(--green);font-size:18px;font-weight:900;letter-spacing:4px}.artist{margin:24px 0 8px;font-size:34px;font-weight:900;text-transform:uppercase}.venue{color:#b5c7d7;font-size:20px}
+    .ticket-data{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;margin-top:40px}.datum.full{grid-column:1/-1}.label{display:block;margin-bottom:8px;color:var(--muted);font-size:14px;font-weight:900;letter-spacing:1.4px}.value{font-size:21px;font-weight:800}.code-label{color:var(--blue);font-size:14px;font-weight:900;letter-spacing:1.4px}.code{margin-top:20px;color:var(--green);font-size:23px;font-weight:900;overflow-wrap:anywhere}.barcode{display:flex;gap:9px;height:145px;margin:48px 0 26px;align-items:stretch}.barcode i{display:block;background:#fff}.barcode i:nth-child(1){width:15px}.barcode i:nth-child(2){width:7px}.barcode i:nth-child(3){width:13px}.barcode i:nth-child(4){width:5px}.barcode i:nth-child(5){width:18px}.barcode i:nth-child(6){width:8px}.barcode i:nth-child(7){width:14px}.total{margin-top:auto}.total .value{font-size:26px}
+    .privacy{margin-top:18px;color:#526273;font-size:14px;text-align:center}
+    @media(max-width:980px){.workspace{grid-template-columns:1fr}.ticket{min-height:0}.ticket-main{padding:34px 34px}.artist{font-size:28px}.ticket-data{margin-top:28px;gap:22px}.ticket-stub{padding-left:16px;padding-right:16px}.barcode{gap:6px}}
+    @media(max-width:650px){.page{width:min(100% - 20px,1240px);margin-top:22px}.panel{padding:18px}.grid2{grid-template-columns:1fr}.ticket{aspect-ratio:auto;min-height:670px}.ticket-main{inset:0 0 205px;padding:34px 26px}.ticket-stub{inset:auto 0 0;height:205px;flex-direction:row;justify-content:space-around;border-left:0;border-top:3px dashed #8299ae;padding:24px}.notch{left:auto;top:auto!important;bottom:181px}.notch.top{left:-24px}.notch.bottom{right:-24px}.ticket-data{grid-template-columns:1fr}.datum.full{grid-column:auto}.barcode{height:105px;margin:0 18px}.code{max-width:155px}.total{margin:0}.logo{font-size:36px}.status{font-size:14px;letter-spacing:2.5px}.artist{font-size:27px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="head"><h1>Generador de ticket ConcertHome</h1><p>Vista privada de prueba. Completa los datos, genera el pase y descárgalo como imagen.</p></header>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="datosTitle">
+        <h2 id="datosTitle">Datos de la reserva</h2>
+        <div class="field"><label for="artista">ARTISTA</label><input id="artista" value="Robbie Williams"></div>
+        <div class="field"><label for="recintoTicket">RECINTO</label><input id="recintoTicket" value="Estadio Bicentenario La Florida"></div>
+        <div class="field"><label for="pasajero">PASAJERO</label><input id="pasajero" value="Matías Echaiz"></div>
+        <div class="grid2">
+          <div class="field"><label for="fecha">FECHA</label><input id="fecha" type="date" value="2026-09-27"></div>
+          <div class="field"><label for="hora">HORA DE RECOGIDA</label><input id="hora" type="time" value="18:30"></div>
+        </div>
+        <div class="field"><label for="recogida">LUGAR DE RECOGIDA</label><input id="recogida" value="La Cisterna"></div>
+        <div class="grid2">
+          <div class="field"><label for="pasajeros">PASAJEROS</label><input id="pasajeros" type="number" min="1" max="4" value="2"></div>
+          <div class="field"><label for="total">TOTAL CLP</label><input id="total" type="number" min="0" step="100" value="38900"></div>
+        </div>
+        <div class="field"><label for="correlativo">N.º DE RESERVA DEL DÍA</label><input id="correlativo" type="number" min="1" max="999" value="1"></div>
+        <div class="buttons"><button class="btn primary" id="generar" type="button">Generar ticket</button><button class="btn secondary" id="descargar" type="button">Descargar PNG</button></div>
+        <p class="hint">El código se forma automáticamente con la fecha y el número de reserva: CH-DDMMYY-001.</p>
+      </section>
+
+      <section class="preview" aria-label="Vista previa del ticket">
+        <article class="ticket" id="ticket">
+          <span class="notch top"></span><span class="notch bottom"></span>
+          <div class="ticket-main">
+            <div class="logo">Concert<span>Home</span></div>
+            <div class="status">PASE DE TRASLADO CONFIRMADO</div>
+            <div class="artist" id="outArtista">ROBBIE WILLIAMS</div>
+            <div class="venue" id="outRecinto">Estadio Bicentenario La Florida</div>
+            <div class="ticket-data">
+              <div class="datum"><span class="label">RECOGIDA</span><span class="value" id="outRecogida">La Cisterna · 18:30</span></div>
+              <div class="datum"><span class="label">FECHA</span><span class="value" id="outFecha">27 SEP 2026</span></div>
+              <div class="datum full"><span class="label">PASAJERO</span><span class="value" id="outPasajero">Matías Echaiz · 2 pasajeros</span></div>
+            </div>
+          </div>
+          <aside class="ticket-stub">
+            <div><div class="code-label">CÓDIGO</div><div class="code" id="outCodigo">CH-270926-001</div></div>
+            <div class="barcode" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="total"><span class="label">TOTAL</span><span class="value" id="outTotal">$38.900</span></div>
+          </aside>
+        </article>
+        <p class="privacy">El ticket se genera en este navegador. Esta página de prueba todavía no envía correos.</p>
+      </section>
+    </div>
+  </main>
+  <script>
+    const $=id=>document.getElementById(id);
+    const meses=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+    const limpiar=(valor,respaldo)=>String(valor||'').trim()||respaldo;
+    const escapeXml=valor=>String(valor).replace(/[<>&'\"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','\"':'&quot;'}[c]));
+    function datosTicket(){
+      const fechaRaw=$('fecha').value||new Date().toISOString().slice(0,10);
+      const [anio,mes,dia]=fechaRaw.split('-').map(Number);
+      const correlativo=String(Math.min(999,Math.max(1,Number($('correlativo').value)||1))).padStart(3,'0');
+      return{artista:limpiar($('artista').value,'CONCIERTO').toUpperCase(),recinto:limpiar($('recintoTicket').value,'Recinto por confirmar'),pasajero:limpiar($('pasajero').value,'Pasajero'),fecha:`${String(dia).padStart(2,'0')} ${meses[mes-1]} ${anio}`,hora:$('hora').value||'--:--',recogida:limpiar($('recogida').value,'Por confirmar'),pasajeros:Math.min(4,Math.max(1,Number($('pasajeros').value)||1)),total:Math.max(0,Number($('total').value)||0),codigo:`CH-${String(dia).padStart(2,'0')}${String(mes).padStart(2,'0')}${String(anio).slice(-2)}-${correlativo}`};
+    }
+    function formatoCLP(valor){return new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(valor).replace('CLP','$').trim()}
+    function generar(){const d=datosTicket();$('outArtista').textContent=d.artista;$('outRecinto').textContent=d.recinto;$('outRecogida').textContent=`${d.recogida} · ${d.hora}`;$('outFecha').textContent=d.fecha;$('outPasajero').textContent=`${d.pasajero} · ${d.pasajeros} ${d.pasajeros===1?'pasajero':'pasajeros'}`;$('outCodigo').textContent=d.codigo;$('outTotal').textContent=formatoCLP(d.total);return d}
+    function svgTicket(d){
+      const bars=[18,8,14,5,20,9,16].map((w,i)=>`<rect x="${980+[0,28,48,74,91,123,143][i]}" y="230" width="${w}" height="150" fill="#fff"/>`).join('');
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500"><defs><linearGradient id="bg"><stop stop-color="#071226"/><stop offset="1" stop-color="#10304a"/></linearGradient></defs><rect width="1200" height="500" rx="34" fill="url(#bg)"/><rect width="1200" height="14" rx="7" fill="#22c55e"/><circle cx="910" r="24" fill="#eaf1f6"/><circle cx="910" cy="500" r="24" fill="#eaf1f6"/><path d="M910 25V475" stroke="#8299ae" stroke-width="3" stroke-dasharray="10 12"/><g font-family="Arial,Helvetica,sans-serif"><text x="60" y="94" fill="#fff" font-size="52" font-weight="900">Concert<tspan fill="#22c55e">Home</tspan></text><text x="60" y="150" fill="#22c55e" font-size="19" font-weight="900" letter-spacing="4">PASE DE TRASLADO CONFIRMADO</text><text x="60" y="212" fill="#fff" font-size="36" font-weight="900">${escapeXml(d.artista)}</text><text x="60" y="254" fill="#b5c7d7" font-size="21">${escapeXml(d.recinto)}</text><text x="60" y="322" fill="#8fa9c1" font-size="14" font-weight="900" letter-spacing="1.4">RECOGIDA</text><text x="60" y="356" fill="#fff" font-size="22" font-weight="800">${escapeXml(d.recogida)} · ${escapeXml(d.hora)}</text><text x="455" y="322" fill="#8fa9c1" font-size="14" font-weight="900" letter-spacing="1.4">FECHA</text><text x="455" y="356" fill="#fff" font-size="22" font-weight="800">${escapeXml(d.fecha)}</text><text x="60" y="423" fill="#8fa9c1" font-size="14" font-weight="900" letter-spacing="1.4">PASAJERO</text><text x="60" y="458" fill="#fff" font-size="22" font-weight="800">${escapeXml(d.pasajero)} · ${d.pasajeros} ${d.pasajeros===1?'pasajero':'pasajeros'}</text><text x="1055" y="91" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="900" letter-spacing="1.4">CÓDIGO</text><text x="1055" y="140" text-anchor="middle" fill="#22c55e" font-size="24" font-weight="900">${escapeXml(d.codigo.slice(0,-4))}</text><text x="1055" y="172" text-anchor="middle" fill="#22c55e" font-size="24" font-weight="900">${escapeXml(d.codigo.slice(-4))}</text>${bars}<text x="1055" y="423" text-anchor="middle" fill="#8fa9c1" font-size="14" font-weight="900" letter-spacing="1.4">TOTAL</text><text x="1055" y="461" text-anchor="middle" fill="#fff" font-size="27" font-weight="900">${escapeXml(formatoCLP(d.total))}</text></g></svg>`;
+    }
+    function descargar(){const d=generar(),svg=svgTicket(d),img=new Image(),url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}));img.onload=()=>{const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=500;canvas.getContext('2d').drawImage(img,0,0);URL.revokeObjectURL(url);const a=document.createElement('a');a.download=`Ticket-${d.codigo}.png`;a.href=canvas.toDataURL('image/png');a.click()};img.src=url}
+    $('generar').addEventListener('click',generar);$('descargar').addEventListener('click',descargar);generar();
+  </script>
+</body>
+</html>
