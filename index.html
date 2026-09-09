@@ -1002,6 +1002,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p class="section-text">
         Completa el formulario y revisa el valor de ida, regreso y total final.
       </p>
+
+      <div class="inner-box">
+        <h3>Datos para tu reserva</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="clienteNombre">Nombre completo</label>
+            <input id="clienteNombre" type="text" autocomplete="name" placeholder="Ej: Camila González" required />
+          </div>
+          <div class="form-group">
+            <label for="clienteEmail">Correo para recibir el ticket</label>
+            <input id="clienteEmail" type="email" autocomplete="email" placeholder="Ej: camila@email.com" required />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="clienteTelefono">Teléfono</label>
+            <input id="clienteTelefono" type="tel" autocomplete="tel" placeholder="Ej: +56 9 1234 5678" />
+          </div>
+          <div class="form-group">
+            <label for="artistaReserva">Artista o concierto</label>
+            <input id="artistaReserva" type="text" placeholder="Ej: Robbie Williams" required />
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="fechaReserva">Fecha del concierto</label>
+            <input id="fechaReserva" type="date" required />
+          </div>
+          <div class="form-group">
+            <label for="horaReserva">Hora de recogida</label>
+            <input id="horaReserva" type="time" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pasajerosReserva">Cantidad de pasajeros</label>
+          <input id="pasajerosReserva" type="number" min="1" max="4" value="1" required />
+        </div>
+      </div>
       
       <div class="form-group">
         <label for="tipoServicio">Tipo de servicio</label>
@@ -1080,9 +1118,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
 
       <div class="actions">
-        <button class="btn-reservar" id="btnReservar">Reservar</button>
+        <button class="btn-reservar" id="btnReservar" type="button">Enviar solicitud de reserva</button>
         <a class="btn-whatsapp" id="btnWhatsapp" href="https://wa.me/56965195972" target="_blank" onclick="gtag('event', 'whatsapp_click');">WhatsApp</a>
       </div>
+      <p class="note" id="estadoReserva" role="status" aria-live="polite"></p>
     </section>
 
     <section class="section-card">
@@ -1295,7 +1334,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script src="concert-home-data.js"></script>
   <script>
-   
+    // Se completa con la URL de la aplicación web de Google Apps Script antes de publicar.
+    const RESERVAS_ENDPOINT = "";
 
     const tipoServicio = document.getElementById("tipoServicio");
     const comunaIda = document.getElementById("comunaIda");
@@ -1303,6 +1343,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     const direccionIda = document.getElementById("direccionIda");
     const direccionRegreso = document.getElementById("direccionRegreso");
     const recinto = document.getElementById("recinto");
+    const clienteNombre = document.getElementById("clienteNombre");
+    const clienteEmail = document.getElementById("clienteEmail");
+    const clienteTelefono = document.getElementById("clienteTelefono");
+    const artistaReserva = document.getElementById("artistaReserva");
+    const fechaReserva = document.getElementById("fechaReserva");
+    const horaReserva = document.getElementById("horaReserva");
+    const pasajerosReserva = document.getElementById("pasajerosReserva");
+    const estadoReserva = document.getElementById("estadoReserva");
 
     const bloqueIda = document.getElementById("bloqueIda");
     const bloqueRegreso = document.getElementById("bloqueRegreso");
@@ -1322,6 +1370,7 @@ const turismoHora = document.getElementById("turismoHora");
 const turismoPasajeros = document.getElementById("turismoPasajeros");
 const turismoComentarios = document.getElementById("turismoComentarios");
 const btnTurismoWhatsapp = document.getElementById("btnTurismoWhatsapp");
+    let totalActual = 0;
     function formatoCLP(valor) {
       return "$" + valor.toLocaleString("es-CL");
     }
@@ -1401,6 +1450,7 @@ if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
 }
 
       const total = ida + regreso;
+      totalActual = total;
 
       valorIda.textContent = formatoCLP(ida);
       valorRegreso.textContent = formatoCLP(regreso);
@@ -1440,9 +1490,67 @@ function actualizarWhatsAppTurismo() {
       btnWhatsapp.href = link;
       whatsappFloat.href = link;
 
-      btnReservar.onclick = function () {
-        window.open(link, "_blank");
+    }
+
+    function camposReservaValidos() {
+      const campos = [clienteNombre, clienteEmail, artistaReserva, fechaReserva, horaReserva, pasajerosReserva];
+      for (const campo of campos) {
+        if (!campo.checkValidity()) {
+          campo.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    async function enviarSolicitudReserva() {
+      if (!cotizacionCompleta() || !camposReservaValidos()) return;
+      if (!RESERVAS_ENDPOINT) {
+        alert("El sistema de correo todavía está en configuración. Tu cotización no se ha enviado.");
+        return;
+      }
+
+      const tipo = tipoServicio.value;
+      const recogida = tipo === "regreso"
+        ? recinto.value + " (salida del concierto)"
+        : [comunaIda.value, direccionIda.value].filter(Boolean).join(" · ");
+      const data = {
+        name: clienteNombre.value.trim(),
+        email: clienteEmail.value.trim(),
+        phone: clienteTelefono.value.trim(),
+        artist: artistaReserva.value.trim(),
+        venue: recinto.value,
+        serviceDate: fechaReserva.value,
+        pickupTime: horaReserva.value,
+        pickup: recogida,
+        serviceType: tipoServicio.options[tipoServicio.selectedIndex].text,
+        passengers: pasajerosReserva.value,
+        total: totalActual,
+        comunaIda: comunaIda.value,
+        direccionIda: direccionIda.value.trim(),
+        comunaRegreso: comunaRegreso.value,
+        direccionRegreso: direccionRegreso.value.trim()
       };
+
+      btnReservar.disabled = true;
+      btnReservar.textContent = "Enviando solicitud...";
+      estadoReserva.textContent = "";
+      try {
+        await fetch(RESERVAS_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams(data)
+        });
+        estadoReserva.textContent = "Solicitud enviada. Revisa tu correo: recibirás el ticket cuando ConcertHome confirme la disponibilidad.";
+        estadoReserva.style.color = "#15803d";
+        if (typeof gtag === "function") gtag("event", "reserva_solicitada");
+      } catch (error) {
+        estadoReserva.textContent = "No fue posible enviar la solicitud. Escríbenos por WhatsApp para ayudarte.";
+        estadoReserva.style.color = "#b91c1c";
+      } finally {
+        btnReservar.disabled = false;
+        btnReservar.textContent = "Enviar solicitud de reserva";
+      }
     }
 
     tipoServicio.addEventListener("change", actualizarVista);
@@ -1451,6 +1559,7 @@ function actualizarWhatsAppTurismo() {
     direccionIda.addEventListener("input", calcular);
     direccionRegreso.addEventListener("input", calcular);
     recinto.addEventListener("change", calcular);
+btnReservar.addEventListener("click", enviarSolicitudReserva);
 turismoServicio.addEventListener("change", actualizarWhatsAppTurismo);
 turismoSalida.addEventListener("input", actualizarWhatsAppTurismo);
 turismoDestino.addEventListener("input", actualizarWhatsAppTurismo);
