@@ -1119,6 +1119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div class="actions">
         <button class="btn-reservar" id="btnReservar" type="button">Enviar solicitud de reserva</button>
+        <iframe id="reservasResponse" name="reservasResponse" title="Respuesta del sistema de reservas" hidden></iframe>
         <a class="btn-whatsapp" id="btnWhatsapp" href="https://wa.me/56965195972" target="_blank" onclick="gtag('event', 'whatsapp_click');">WhatsApp</a>
       </div>
       <p class="note" id="estadoReserva" role="status" aria-live="polite"></p>
@@ -1503,6 +1504,39 @@ function actualizarWhatsAppTurismo() {
       return true;
     }
 
+    function publicarReserva(data) {
+      return new Promise((resolve, reject) => {
+        const iframe = document.getElementById("reservasResponse");
+        const form = document.createElement("form");
+        const timeout = window.setTimeout(() => {
+          form.remove();
+          reject(new Error("Tiempo de espera agotado"));
+        }, 15000);
+
+        iframe.addEventListener("load", () => {
+          window.clearTimeout(timeout);
+          form.remove();
+          resolve();
+        }, { once: true });
+
+        form.method = "POST";
+        form.action = RESERVAS_ENDPOINT;
+        form.target = "reservasResponse";
+        form.hidden = true;
+
+        Object.entries(data).forEach(([name, value]) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = name;
+          input.value = String(value == null ? "" : value);
+          form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+      });
+    }
+
     async function enviarSolicitudReserva() {
       if (!cotizacionCompleta() || !camposReservaValidos()) return;
       if (!RESERVAS_ENDPOINT) {
@@ -1536,11 +1570,7 @@ function actualizarWhatsAppTurismo() {
       btnReservar.textContent = "Enviando solicitud...";
       estadoReserva.textContent = "";
       try {
-        await fetch(RESERVAS_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          body: new URLSearchParams(data)
-        });
+        await publicarReserva(data);
         estadoReserva.textContent = "Solicitud enviada. Revisa tu correo: recibirás el ticket cuando ConcertHome confirme la disponibilidad.";
         estadoReserva.style.color = "#15803d";
         if (typeof gtag === "function") gtag("event", "reserva_solicitada");
