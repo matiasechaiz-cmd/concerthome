@@ -26,196 +26,196 @@ const RECINTOS = [
 
 const TARIFAS_IDA = {
   la_cisterna: {
-    movistar_arena: 16500,
-    estadio_nacional: 20500,
-    teatro_caupolican: 15500,
-    teatro_coliseo: 15500,
-    club_hipico: 14500
+    movistar_arena: 19490,
+    estadio_nacional: 23490,
+    teatro_caupolican: 18490,
+    teatro_coliseo: 18490,
+    club_hipico: 17490
   },
   san_miguel: {
-    movistar_arena: 15500,
-    estadio_nacional: 19500,
-    teatro_caupolican: 14500,
-    teatro_coliseo: 14500,
-    club_hipico: 14000
+    movistar_arena: 18490,
+    estadio_nacional: 22490,
+    teatro_caupolican: 17490,
+    teatro_coliseo: 17490,
+    club_hipico: 16990
   },
   la_florida: {
-    movistar_arena: 22000,
-    estadio_nacional: 16500,
-    teatro_caupolican: 20000,
-    teatro_coliseo: 20000,
-    club_hipico: 21000
+    movistar_arena: 24990,
+    estadio_nacional: 19490,
+    teatro_caupolican: 22990,
+    teatro_coliseo: 22990,
+    club_hipico: 23990
   },
   maipu: {
-    movistar_arena: 20500,
-    estadio_nacional: 25500,
-    teatro_caupolican: 19500,
-    teatro_coliseo: 19500,
-    club_hipico: 18500
+    movistar_arena: 23490,
+    estadio_nacional: 28490,
+    teatro_caupolican: 22490,
+    teatro_coliseo: 22490,
+    club_hipico: 21490
   },
   puente_alto: {
-    movistar_arena: 25000,
-    estadio_nacional: 21500,
-    teatro_caupolican: 24000,
-    teatro_coliseo: 24000,
-    club_hipico: 25000
+    movistar_arena: 27990,
+    estadio_nacional: 24490,
+    teatro_caupolican: 26990,
+    teatro_coliseo: 26990,
+    club_hipico: 27990
   },
   santiago_centro: {
-    movistar_arena: 14000,
-    estadio_nacional: 16500,
-    teatro_caupolican: 13000,
-    teatro_coliseo: 13000,
-    club_hipico: 13000
+    movistar_arena: 16990,
+    estadio_nacional: 19490,
+    teatro_caupolican: 15990,
+    teatro_coliseo: 15990,
+    club_hipico: 15990
   },
   providencia: {
-    movistar_arena: 18000,
-    estadio_nacional: 15500,
-    teatro_caupolican: 17000,
-    teatro_coliseo: 16500,
-    club_hipico: 17000
+    movistar_arena: 20990,
+    estadio_nacional: 18490,
+    teatro_caupolican: 19990,
+    teatro_coliseo: 19490,
+    club_hipico: 19990
   },
   nunoa: {
-    movistar_arena: 19000,
-    estadio_nacional: 15000,
-    teatro_caupolican: 18000,
-    teatro_coliseo: 17500,
-    club_hipico: 18000
+    movistar_arena: 21990,
+    estadio_nacional: 17990,
+    teatro_caupolican: 20990,
+    teatro_coliseo: 20490,
+    club_hipico: 20990
   },
   las_condes: {
-    movistar_arena: 24000,
-    estadio_nacional: 20500,
-    teatro_caupolican: 23000,
-    teatro_coliseo: 22000,
-    club_hipico: 23000
+    movistar_arena: 26990,
+    estadio_nacional: 23490,
+    teatro_caupolican: 25990,
+    teatro_coliseo: 24990,
+    club_hipico: 25990
   },
   la_reina: {
-    movistar_arena: 22500,
-    estadio_nacional: 19000,
-    teatro_caupolican: 21500,
-    teatro_coliseo: 20500,
-    club_hipico: 21500
+    movistar_arena: 25490,
+    estadio_nacional: 21990,
+    teatro_caupolican: 24490,
+    teatro_coliseo: 23490,
+    club_hipico: 24490
   },
   penalolen: {
-    movistar_arena: 22500,
-    estadio_nacional: 18500,
-    teatro_caupolican: 21500,
-    teatro_coliseo: 20500,
-    club_hipico: 21500
+    movistar_arena: 25490,
+    estadio_nacional: 21490,
+    teatro_caupolican: 24490,
+    teatro_coliseo: 23490,
+    club_hipico: 24490
   },
   macul: {
-    movistar_arena: 20000,
-    estadio_nacional: 15500,
-    teatro_caupolican: 19000,
-    teatro_coliseo: 18500,
-    club_hipico: 19000
+    movistar_arena: 22990,
+    estadio_nacional: 18490,
+    teatro_caupolican: 21990,
+    teatro_coliseo: 21490,
+    club_hipico: 21990
   },
   estacion_central: {
-    movistar_arena: 14500,
-    estadio_nacional: 20000,
-    teatro_caupolican: 14500,
-    teatro_coliseo: 14500,
-    club_hipico: 14000
+    movistar_arena: 17490,
+    estadio_nacional: 22990,
+    teatro_caupolican: 17490,
+    teatro_coliseo: 17490,
+    club_hipico: 16990
   },
   independencia: {
-    movistar_arena: 17500,
-    estadio_nacional: 21000,
-    teatro_caupolican: 16500,
-    teatro_coliseo: 16500,
-    club_hipico: 16500
+    movistar_arena: 20490,
+    estadio_nacional: 23990,
+    teatro_caupolican: 19490,
+    teatro_coliseo: 19490,
+    club_hipico: 19490
   },
   recoleta: {
-    movistar_arena: 18500,
-    estadio_nacional: 22000,
-    teatro_caupolican: 17500,
-    teatro_coliseo: 17500,
-    club_hipico: 17500
+    movistar_arena: 21490,
+    estadio_nacional: 24990,
+    teatro_caupolican: 20490,
+    teatro_coliseo: 20490,
+    club_hipico: 20490
   }
 };
 
 const TARIFAS_REGRESO = {
   movistar_arena: {
-    la_cisterna: 18000,
-    san_miguel: 17000,
-    la_florida: 23500,
-    maipu: 22500,
-    puente_alto: 27500,
-    santiago_centro: 15500,
-    providencia: 20000,
-    nunoa: 21000,
-    las_condes: 26000,
-    la_reina: 24500,
-    penalolen: 24500,
-    macul: 22000,
-    estacion_central: 16500,
-    independencia: 19000,
-    recoleta: 20000
+    la_cisterna: 20990,
+    san_miguel: 19990,
+    la_florida: 26490,
+    maipu: 25490,
+    puente_alto: 30490,
+    santiago_centro: 18490,
+    providencia: 22990,
+    nunoa: 23990,
+    las_condes: 28990,
+    la_reina: 27490,
+    penalolen: 27490,
+    macul: 24990,
+    estacion_central: 19490,
+    independencia: 21990,
+    recoleta: 22990
   },
   estadio_nacional: {
-    la_cisterna: 22000,
-    san_miguel: 21000,
-    la_florida: 18500,
-    maipu: 27500,
-    puente_alto: 24000,
-    santiago_centro: 19000,
-    providencia: 17500,
-    nunoa: 17000,
-    las_condes: 23000,
-    la_reina: 21000,
-    penalolen: 20500,
-    macul: 18000,
-    estacion_central: 22000,
-    independencia: 23000,
-    recoleta: 24000
+    la_cisterna: 24990,
+    san_miguel: 23990,
+    la_florida: 21490,
+    maipu: 30490,
+    puente_alto: 26990,
+    santiago_centro: 21990,
+    providencia: 20490,
+    nunoa: 19990,
+    las_condes: 25990,
+    la_reina: 23990,
+    penalolen: 23490,
+    macul: 20990,
+    estacion_central: 24990,
+    independencia: 25990,
+    recoleta: 26990
   },
   teatro_caupolican: {
-    la_cisterna: 17500,
-    san_miguel: 16500,
-    la_florida: 22000,
-    maipu: 22000,
-    puente_alto: 26500,
-    santiago_centro: 14500,
-    providencia: 19000,
-    nunoa: 20000,
-    las_condes: 25000,
-    la_reina: 23500,
-    penalolen: 23500,
-    macul: 21000,
-    estacion_central: 16500,
-    independencia: 18500,
-    recoleta: 19500
+    la_cisterna: 20490,
+    san_miguel: 19490,
+    la_florida: 24990,
+    maipu: 24990,
+    puente_alto: 29490,
+    santiago_centro: 17490,
+    providencia: 21990,
+    nunoa: 22990,
+    las_condes: 27990,
+    la_reina: 26490,
+    penalolen: 26490,
+    macul: 23990,
+    estacion_central: 19490,
+    independencia: 21490,
+    recoleta: 22490
   },
   teatro_coliseo: {
-    la_cisterna: 17500,
-    san_miguel: 16500,
-    la_florida: 22000,
-    maipu: 22000,
-    puente_alto: 26500,
-    santiago_centro: 14500,
-    providencia: 18500,
-    nunoa: 19500,
-    las_condes: 24500,
-    la_reina: 23000,
-    penalolen: 23000,
-    macul: 20500,
-    estacion_central: 16500,
-    independencia: 18500,
-    recoleta: 19500
+    la_cisterna: 20490,
+    san_miguel: 19490,
+    la_florida: 24990,
+    maipu: 24990,
+    puente_alto: 29490,
+    santiago_centro: 17490,
+    providencia: 21490,
+    nunoa: 22490,
+    las_condes: 27490,
+    la_reina: 25990,
+    penalolen: 25990,
+    macul: 23490,
+    estacion_central: 19490,
+    independencia: 21490,
+    recoleta: 22490
   },
   club_hipico: {
-    la_cisterna: 16500,
-    san_miguel: 15500,
-    la_florida: 23000,
-    maipu: 20000,
-    puente_alto: 26500,
-    santiago_centro: 14000,
-    providencia: 19000,
-    nunoa: 20000,
-    las_condes: 25000,
-    la_reina: 23500,
-    penalolen: 23500,
-    macul: 21000,
-    estacion_central: 16000,
-    independencia: 18000,
-    recoleta: 19000
+    la_cisterna: 19490,
+    san_miguel: 18490,
+    la_florida: 25990,
+    maipu: 22990,
+    puente_alto: 29490,
+    santiago_centro: 16990,
+    providencia: 21990,
+    nunoa: 22990,
+    las_condes: 27990,
+    la_reina: 26490,
+    penalolen: 26490,
+    macul: 23990,
+    estacion_central: 18990,
+    independencia: 20990,
+    recoleta: 21990
   }
 };
