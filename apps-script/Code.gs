@@ -1,5 +1,5 @@
 const CONFIG = Object.freeze({
-  OWNER_EMAIL: 'matias.echaiz@gmail.com',
+  OWNER_EMAIL: 'm.echaiz@concerthome.cl',
   SHEET_NAME: 'Reservas',
   TIMEZONE: 'America/Santiago'
 });
