@@ -135,6 +135,8 @@ function decideReservation_(token, action) {
     const rowNumber = index + 1;
     const currentStatus = String(values[index][2]);
     const record = rowToRecord_(values[index]);
+    // Read the displayed clock time to avoid the spreadsheet's 1899 base date.
+    record.pickupTime = displayPickupTime_(sheet.getRange(rowNumber, 12).getDisplayValue());
     if (currentStatus !== 'Pendiente') return { alreadyProcessed: true, status: currentStatus, record };
 
     record.status = action === 'confirmar' ? 'Confirmada' : 'Rechazada';
@@ -212,7 +214,7 @@ function confirmedTicketHtml_(r) {
             <div style="margin-top:20px;font-size:30px;font-weight:900;text-transform:uppercase">${html_(r.artist)}</div>
             <div style="margin-top:8px;color:#b5c7d7;font-size:18px">${html_(r.venue)}</div>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:34px;color:#fff">
-              <tr><td style="padding-right:20px"><div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">RECOGIDA</div><div style="margin-top:7px;font-size:18px;font-weight:800">${html_(r.pickup)} · ${html_(r.pickupTime)}</div></td><td><div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">FECHA</div><div style="margin-top:7px;font-size:18px;font-weight:800">${html_(date)}</div></td></tr>
+              <tr><td style="padding-right:20px"><div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">RECOGIDA</div><div style="margin-top:7px;font-size:18px;font-weight:800">${html_(String(r.pickup).replace(/\s*\(salida del concierto\)\s*/gi, '').trim())}<br>Salida: ${html_(displayPickupTime_(r.pickupTime))}</div></td><td><div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">FECHA</div><div style="margin-top:7px;font-size:18px;font-weight:800">${html_(date)}</div></td></tr>
               <tr><td colspan="2" style="padding-top:28px"><div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">PASAJERO</div><div style="margin-top:7px;font-size:18px;font-weight:800">${html_(r.name)} · ${r.passengers} ${r.passengers === 1 ? 'pasajero' : 'pasajeros'}</div></td></tr>
             </table>
           </td>
@@ -233,7 +235,7 @@ function confirmedTicketHtml_(r) {
 function detailTable_(r, includeCode) {
   const rows = [
     ['Solicitud', r.requestId], ['Pasajero', r.name], ['Correo', r.email], ['Teléfono', r.phone || 'No indicado'],
-    ['Artista', r.artist], ['Recinto', r.venue], ['Fecha', displayDate_(r.serviceDate)], ['Hora', r.pickupTime],
+    ['Artista', r.artist], ['Recinto', r.venue], ['Fecha', displayDate_(r.serviceDate)], ['Hora', displayPickupTime_(r.pickupTime)],
     ['Recogida', r.pickup], ['Servicio', r.serviceType], ['Pasajeros', r.passengers], ['Total', formatClp_(r.total)]
   ];
   if (includeCode) rows.unshift(['Código', r.code]);
@@ -256,6 +258,17 @@ function recordToRow_(r) {
 function displayDate_(iso) {
   const date = iso instanceof Date ? new Date(iso) : new Date(`${iso}T12:00:00`);
   return Number.isNaN(date.getTime()) ? String(iso) : Utilities.formatDate(date, CONFIG.TIMEZONE, 'dd MMM yyyy').toUpperCase();
+}
+
+function displayPickupTime_(value) {
+  const text = String(value == null ? '' : value).trim();
+  const match = text.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*([ap])?\.?m?\.?$/i);
+  if (!match) return 'Por coordinar';
+  let hour = Number(match[1]);
+  const minute = Number(match[2]);
+  if (minute > 59 || hour > 23 || (match[3] && (hour < 1 || hour > 12))) return 'Por coordinar';
+  if (match[3]) hour = hour % 12 + (match[3].toLowerCase() === 'p' ? 12 : 0);
+  return String(hour).padStart(2, '0') + ':' + match[2];
 }
 
 function formatClp_(value) {
