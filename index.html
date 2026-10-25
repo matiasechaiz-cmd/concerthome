@@ -1108,7 +1108,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <option>Teatro Caupolicán</option>
             <option>Teatro Coliseo</option>
             <option>Espacio Riesco</option>
+            <option value="Sala Omnium">Sala Omnium — Las Condes</option>
           </select>
+          <p class="note" id="direccionSalaOmnium" hidden>Sala Omnium: Av. Apoquindo 4900, Las Condes (sector Escuela Militar).</p>
         </div>
       </div>
 
@@ -1770,6 +1772,7 @@ const btnTurismoWhatsapp = document.getElementById("btnTurismoWhatsapp");
 
     function calcular() {
       const tipo = tipoServicio.value;
+      document.getElementById("direccionSalaOmnium").hidden = recinto.value !== "Sala Omnium";
 
       let ida = 0;
       let regreso = 0;
