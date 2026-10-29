@@ -17,7 +17,7 @@ const COMUNAS = [
 ];
 
 const RECINTOS = [
-  { value: "movistar_arena", label: "Movistar Arena" },
+  { value: "santander_arena", label: "Santander Arena" },
   { value: "estadio_nacional", label: "Estadio Nacional" },
   { value: "teatro_caupolican", label: "Teatro Caupolicán" },
   { value: "teatro_coliseo", label: "Teatro Coliseo" },
@@ -26,105 +26,105 @@ const RECINTOS = [
 
 const TARIFAS_IDA = {
   la_cisterna: {
-    movistar_arena: 19490,
+    santander_arena: 19490,
     estadio_nacional: 23490,
     teatro_caupolican: 18490,
     teatro_coliseo: 18490,
     club_hipico: 17490
   },
   san_miguel: {
-    movistar_arena: 18490,
+    santander_arena: 18490,
     estadio_nacional: 22490,
     teatro_caupolican: 17490,
     teatro_coliseo: 17490,
     club_hipico: 16990
   },
   la_florida: {
-    movistar_arena: 24990,
+    santander_arena: 24990,
     estadio_nacional: 19490,
     teatro_caupolican: 22990,
     teatro_coliseo: 22990,
     club_hipico: 23990
   },
   maipu: {
-    movistar_arena: 23490,
+    santander_arena: 23490,
     estadio_nacional: 28490,
     teatro_caupolican: 22490,
     teatro_coliseo: 22490,
     club_hipico: 21490
   },
   puente_alto: {
-    movistar_arena: 27990,
+    santander_arena: 27990,
     estadio_nacional: 24490,
     teatro_caupolican: 26990,
     teatro_coliseo: 26990,
     club_hipico: 27990
   },
   santiago_centro: {
-    movistar_arena: 16990,
+    santander_arena: 16990,
     estadio_nacional: 19490,
     teatro_caupolican: 15990,
     teatro_coliseo: 15990,
     club_hipico: 15990
   },
   providencia: {
-    movistar_arena: 20990,
+    santander_arena: 20990,
     estadio_nacional: 18490,
     teatro_caupolican: 19990,
     teatro_coliseo: 19490,
     club_hipico: 19990
   },
   nunoa: {
-    movistar_arena: 21990,
+    santander_arena: 21990,
     estadio_nacional: 17990,
     teatro_caupolican: 20990,
     teatro_coliseo: 20490,
     club_hipico: 20990
   },
   las_condes: {
-    movistar_arena: 26990,
+    santander_arena: 26990,
     estadio_nacional: 23490,
     teatro_caupolican: 25990,
     teatro_coliseo: 24990,
     club_hipico: 25990
   },
   la_reina: {
-    movistar_arena: 25490,
+    santander_arena: 25490,
     estadio_nacional: 21990,
     teatro_caupolican: 24490,
     teatro_coliseo: 23490,
     club_hipico: 24490
   },
   penalolen: {
-    movistar_arena: 25490,
+    santander_arena: 25490,
     estadio_nacional: 21490,
     teatro_caupolican: 24490,
     teatro_coliseo: 23490,
     club_hipico: 24490
   },
   macul: {
-    movistar_arena: 22990,
+    santander_arena: 22990,
     estadio_nacional: 18490,
     teatro_caupolican: 21990,
     teatro_coliseo: 21490,
     club_hipico: 21990
   },
   estacion_central: {
-    movistar_arena: 17490,
+    santander_arena: 17490,
     estadio_nacional: 22990,
     teatro_caupolican: 17490,
     teatro_coliseo: 17490,
     club_hipico: 16990
   },
   independencia: {
-    movistar_arena: 20490,
+    santander_arena: 20490,
     estadio_nacional: 23990,
     teatro_caupolican: 19490,
     teatro_coliseo: 19490,
     club_hipico: 19490
   },
   recoleta: {
-    movistar_arena: 21490,
+    santander_arena: 21490,
     estadio_nacional: 24990,
     teatro_caupolican: 20490,
     teatro_coliseo: 20490,
@@ -133,7 +133,7 @@ const TARIFAS_IDA = {
 };
 
 const TARIFAS_REGRESO = {
-  movistar_arena: {
+  santander_arena: {
     la_cisterna: 20990,
     san_miguel: 19990,
     la_florida: 26490,
