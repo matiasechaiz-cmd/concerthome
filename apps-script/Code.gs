@@ -15,7 +15,12 @@ const HEADERS = [
 function doPost(e) {
   try {
     const data = parseRequest_(e);
+    if (data.action === 'cotizar') return json_(cotizarTraslado_(data));
     validateRequest_(data);
+    if (data.tipoCotizacion) {
+      const cotizacion = cotizarTraslado_({ ...data, tipo: data.tipoCotizacion });
+      if (Number(data.total) !== cotizacion.total) throw new Error('La tarifa cambió. Vuelve a cotizar antes de solicitar la reserva.');
+    }
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
@@ -33,6 +38,71 @@ function doPost(e) {
     console.error(error);
     return json_({ ok: false, error: error.message || 'No fue posible registrar la solicitud.' });
   }
+}
+
+const TARIFA_TRASLADO = Object.freeze({
+  porKm: 950, base: 8500, postconcierto: 4000, minimoIda: 24900, minimoRegreso: 28900
+});
+
+const RECINTOS_COTIZACION = Object.freeze({
+  'Santander Arena': 'Santander Arena, Parque O’Higgins, Santiago, Chile',
+  'Estadio Nacional': 'Estadio Nacional Julio Martínez Prádanos, Ñuñoa, Chile',
+  'Estadio Monumental': 'Estadio Monumental David Arellano, Macul, Chile',
+  'Estadio Bicentenario La Florida': 'Enrique Olivares 1003, La Florida, Chile',
+  'Claro Arena': 'Claro Arena, San Carlos de Apoquindo, Las Condes, Chile',
+  'Estadio Santa Laura': 'Estadio Santa Laura, Independencia, Chile',
+  'Club Hípico': 'Club Hípico de Santiago, Santiago, Chile',
+  'Club Chocolate': 'Club Chocolate, Recoleta, Chile',
+  "Parque O'Higgins": 'Parque O’Higgins, Santiago, Chile',
+  'Teatro Caupolicán': 'Teatro Caupolicán, Santiago, Chile',
+  'Teatro Coliseo': 'Teatro Coliseo, Santiago, Chile',
+  'Espacio Riesco': 'Espacio Riesco, Huechuraba, Chile',
+  'Sala Omnium': 'Avenida Apoquindo 4900, Las Condes, Chile'
+});
+
+function cotizarTraslado_(data) {
+  const tipo = data.tipo;
+  if (!['ida', 'regreso', 'ida_vuelta'].includes(tipo)
+      || !Object.prototype.hasOwnProperty.call(RECINTOS_COTIZACION, data.venue)) {
+    throw new Error('Selecciona un tipo de servicio y un recinto válidos.');
+  }
+  const recinto = RECINTOS_COTIZACION[data.venue];
+  const salida = tipo === 'regreso' ? null : direccionCotizacion_(data.direccionIda, data.comunaIda);
+  const llegada = tipo === 'ida' ? null : direccionCotizacion_(data.direccionRegreso, data.comunaRegreso);
+  const ida = salida ? cotizarTramo_(salida, recinto, false) : null;
+  const regreso = llegada ? cotizarTramo_(recinto, llegada, true) : null;
+  return { ok: true, ida, regreso, total: (ida?.valor || 0) + (regreso?.valor || 0) };
+}
+
+function direccionCotizacion_(direccion, comuna) {
+  const calle = String(direccion || '').trim();
+  const localidad = String(comuna || '').trim();
+  if (!calle || calle.length > 180 || !localidad || localidad.length > 60) {
+    throw new Error('Indica una dirección completa y la comuna de cada tramo.');
+  }
+  if (localidad === 'Aeropuerto de Santiago') {
+    return `${calle}, Aeropuerto Internacional Arturo Merino Benítez, Pudahuel, Chile`;
+  }
+  if (localidad.startsWith('Terminal ')) {
+    return `${calle}, ${localidad}, Santiago, Chile`;
+  }
+  return `${calle}, ${localidad === 'Pudahuel Norte' ? 'Pudahuel' : localidad}, Región Metropolitana, Chile`;
+}
+
+function cotizarTramo_(origen, destino, regreso) {
+  const resultado = Maps.newDirectionFinder()
+    .setOrigin(origen).setDestination(destino)
+    .setRegion('cl').setLanguage('es').setMode(Maps.DirectionFinder.Mode.DRIVING)
+    .getDirections();
+  const metros = resultado.routes?.[0]?.legs?.[0]?.distance?.value;
+  if (resultado.status !== 'OK' || !Number.isFinite(metros)
+      || resultado.geocoded_waypoints?.some(punto => punto.partial_match)) {
+    throw new Error('No encontramos una ruta para esa dirección. Revisa la calle, el número y la comuna.');
+  }
+  const { porKm, base, postconcierto, minimoIda, minimoRegreso } = TARIFA_TRASLADO;
+  const valor = Math.max(regreso ? minimoRegreso : minimoIda,
+    Math.round(base + (regreso ? postconcierto : 0) + metros * porKm / 1000));
+  return { metros, valor };
 }
 
 function doGet(e) {

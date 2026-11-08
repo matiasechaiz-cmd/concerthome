@@ -849,8 +849,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <h1>Transporte Seguro a Conciertos y Eventos</h1>
 
     <p>
-      Reserva tu traslado con cálculo automático según comuna de origen,
-      recinto y tipo de servicio.
+      Cotiza tu traslado privado según los kilómetros de tu recorrido en auto.
     </p>
   </section>
 <section class="beneficios">
@@ -909,7 +908,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="feature">
           <div class="icon">📍</div>
           <h3>Cálculo automático</h3>
-          <p>El sistema calcula tu tarifa según comuna de origen, recinto y regreso.</p>
+          <p>Ingresa tu dirección y el recinto para calcular el valor por tramo.</p>
         </div>
 
         <div class="feature">
@@ -1022,7 +1021,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h2 class="section-title">Reserva tu traslado</h2>
 
       <p class="section-text">
-        Completa el formulario y revisa el valor de ida, regreso y total final.
+        Selecciona el servicio, ingresa las direcciones y pulsa Calcular tarifa.
       </p>
 
       <div class="inner-box">
@@ -1085,7 +1084,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           <div class="form-group">
             <label for="direccionIda">Dirección exacta de salida</label>
-            <input id="direccionIda" type="text" placeholder="Ej: Gran Avenida 1234" />
+            <input id="direccionIda" type="text" maxlength="180" placeholder="Ej: Gran Avenida 1234" />
           </div>
         </div>
       </div>
@@ -1127,25 +1126,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           <div class="form-group">
             <label for="direccionRegreso">Dirección exacta de regreso</label>
-            <input id="direccionRegreso" type="text" placeholder="Ej: Av. Principal 456" />
+            <input id="direccionRegreso" type="text" maxlength="180" placeholder="Ej: Av. Principal 456" />
           </div>
         </div>
       </div>
 
       <div class="summary">
         <h3>Resumen de valores</h3>
-        <p>Valor ida: <span id="valorIda">$0</span></p>
-        <p>Valor regreso: <span id="valorRegreso">$0</span></p>
-        <p>Total final: <span id="valorTotal">$0</span></p>
-
-        <p class="note">
-          El valor puede variar según comuna de origen, recinto, comuna de regreso y tipo de servicio.
-        </p>
+        <p>Valor ida: <span id="valorIda">—</span></p>
+        <p>Valor regreso: <span id="valorRegreso">—</span></p>
+        <p>Total estimado: <span id="valorTotal">—</span></p>
+        <p class="note">Tarifa por vehículo de hasta 4 pasajeros. El cálculo usa $950/km y una base de $8.500.
+          La ida tiene un mínimo de $24.900. El regreso incluye $4.000 de coordinación postconcierto
+          y tiene un mínimo de $28.900. El TAG o estacionamiento, si corresponde, se confirma antes de reservar.</p>
+        <p class="note">La dirección y el recinto se consultan en Google Maps para calcular la ruta en auto.</p>
+        <button class="btn-reservar" id="btnCotizar" type="button">Calcular tarifa</button>
+        <p class="note" id="estadoCotizacion" role="status" aria-live="polite"></p>
       </div>
 
       <div class="actions">
         <button class="btn-reservar" id="btnReservar" type="button">Enviar solicitud de reserva</button>
-        <iframe id="reservasResponse" name="reservasResponse" title="Respuesta del sistema de reservas" hidden></iframe>
         <a class="btn-whatsapp" id="btnWhatsapp" href="https://wa.me/56965195972" target="_blank" onclick="gtag('event', 'whatsapp_click');">WhatsApp</a>
       </div>
       <p class="note" id="estadoReserva" role="status" aria-live="polite"></p>
@@ -1532,16 +1532,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   © 2026 ConcertHome.cl | Transporte privado a conciertos, aeropuerto y terminales de buses.
 </footer>
 
-  <script src="concert-home-data.js"></script>
+  <script src="concert-home-data.js?v=km950"></script>
   <script>
-    // Se completa con la URL de la aplicación web de Google Apps Script antes de publicar.
-    const RESERVAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzh6rduJaO2jMpz2JnSdQ645uOKxOs6b7jzlB3iljfWAOT4JXh4RJ93Pl9dj_uSZ-bW6A/exec";
-
     const tipoServicio = document.getElementById("tipoServicio");
-    const comunaIda = document.getElementById("comunaIda");
-    const comunaRegreso = document.getElementById("comunaRegreso");
-    const direccionIda = document.getElementById("direccionIda");
-    const direccionRegreso = document.getElementById("direccionRegreso");
     const recinto = document.getElementById("recinto");
     const clienteNombre = document.getElementById("clienteNombre");
     const clienteEmail = document.getElementById("clienteEmail");
@@ -1552,16 +1545,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     const pasajerosReserva = document.getElementById("pasajerosReserva");
     const estadoReserva = document.getElementById("estadoReserva");
 
-    const bloqueIda = document.getElementById("bloqueIda");
-    const bloqueRegreso = document.getElementById("bloqueRegreso");
-
-    const valorIda = document.getElementById("valorIda");
-    const valorRegreso = document.getElementById("valorRegreso");
-    const valorTotal = document.getElementById("valorTotal");
-
     const btnReservar = document.getElementById("btnReservar");
-    const btnWhatsapp = document.getElementById("btnWhatsapp");
-    const whatsappFloat = document.getElementById("whatsappFloat");
 const turismoServicio = document.getElementById("turismoServicio");
 const turismoSalida = document.getElementById("turismoSalida");
 const turismoDestino = document.getElementById("turismoDestino");
@@ -1570,95 +1554,8 @@ const turismoHora = document.getElementById("turismoHora");
 const turismoPasajeros = document.getElementById("turismoPasajeros");
 const turismoComentarios = document.getElementById("turismoComentarios");
 const btnTurismoWhatsapp = document.getElementById("btnTurismoWhatsapp");
-    let totalActual = 0;
-    function formatoCLP(valor) {
-      return "$" + valor.toLocaleString("es-CL");
-    }
+    const obtenerCotizacion = iniciarCotizador(() => recinto.value);
 
-    function cargarComunas() {
-      const comunas = Object.keys(preciosComunas).sort((a, b) => a.localeCompare(b, "es"));
-
-      comunas.forEach((comuna) => {
-        const optionIda = document.createElement("option");
-        optionIda.value = comuna;
-        optionIda.textContent = comuna;
-        comunaIda.appendChild(optionIda);
-
-        const optionRegreso = document.createElement("option");
-        optionRegreso.value = comuna;
-        optionRegreso.textContent = comuna;
-        comunaRegreso.appendChild(optionRegreso);
-      });
-    }
-
-    function actualizarVista() {
-      const tipo = tipoServicio.value;
-
-      bloqueIda.classList.remove("hidden");
-      bloqueRegreso.classList.remove("hidden");
-
-      if (tipo === "ida") {
-        bloqueRegreso.classList.add("hidden");
-      }
-
-      if (tipo === "regreso") {
-        bloqueIda.classList.add("hidden");
-      }
-
-      calcular();
-    }
-
-    function calcular() {
-      const tipo = tipoServicio.value;
-      document.getElementById("direccionSalaOmnium").hidden = recinto.value !== "Sala Omnium";
-
-      let ida = 0;
-      let regreso = 0;
-
-      if ((tipo === "ida" || tipo === "ida_vuelta") && comunaIda.value) {
-        ida = preciosComunas[comunaIda.value] || 0;
-      }
-if ((tipo === "regreso" || tipo === "ida_vuelta") && comunaRegreso.value) {
-
-  if (comunaRegreso.value.trim() === "Aeropuerto de Santiago") {
-
-   switch (recinto.value.trim()) {
-      case "Santander Arena":
-        regreso = 38680;
-        break;
-
-      case "Estadio Nacional":
-        regreso = 40720;
-        break;
-
-      case "Estadio Monumental":
-        regreso = 43780;
-        break;
-
-      case "Teatro Caupolicán":
-        regreso = 36640;
-        break;
-
-      default:
-        regreso = 38680;
-    }
-
-  } else {
-
-    regreso = preciosComunas[comunaRegreso.value] || 0;
-
-  }
-}
-
-      const total = ida + regreso;
-      totalActual = total;
-
-      valorIda.textContent = formatoCLP(ida);
-      valorRegreso.textContent = formatoCLP(regreso);
-      valorTotal.textContent = cotizacionCompleta() ? formatoCLP(total) : "Selecciona las comunas de cada trayecto";
-
-      actualizarWhatsApp(total, ida, regreso);
-    }
 function actualizarWhatsAppTurismo() {
   const mensaje =
     "Hola, quiero cotizar un servicio turístico en ConcertHome.%0A%0A" +
@@ -1672,27 +1569,6 @@ function actualizarWhatsAppTurismo() {
 
   btnTurismoWhatsapp.href = "https://wa.me/" + telefonoWhatsApp + "?text=" + mensaje;
 }
-    function actualizarWhatsApp(total, ida, regreso) {
-      const mensaje =
-        "Hola, quiero cotizar o reservar un traslado en ConcertHome.%0A%0A" +
-                
-        "Tipo de servicio: " + tipoServicio.options[tipoServicio.selectedIndex].text + "%0A" +
-        "Recinto: " + recinto.value + "%0A" +
-        "Comuna de ida: " + (comunaIda.value || "No aplica") + "%0A" +
-        "Dirección ida: " + (direccionIda.value || "No indicada") + "%0A" +
-        "Comuna de regreso: " + (comunaRegreso.value || "No aplica") + "%0A" +
-        "Dirección regreso: " + (direccionRegreso.value || "No indicada") + "%0A%0A" +
-        "Valor ida: " + formatoCLP(ida) + "%0A" +
-        "Valor regreso: " + formatoCLP(regreso) + "%0A" +
-        "Total estimado: " + formatoCLP(total);
-
-      const link = "https://wa.me/" + telefonoWhatsApp + "?text=" + mensaje;
-
-      btnWhatsapp.href = link;
-      whatsappFloat.href = link;
-
-    }
-
     function camposReservaValidos() {
       const campos = [clienteNombre, clienteEmail, artistaReserva, fechaReserva, horaReserva, pasajerosReserva];
       for (const campo of campos) {
@@ -1704,50 +1580,16 @@ function actualizarWhatsAppTurismo() {
       return true;
     }
 
-    function publicarReserva(data) {
-      return new Promise((resolve, reject) => {
-        const iframe = document.getElementById("reservasResponse");
-        const form = document.createElement("form");
-        const timeout = window.setTimeout(() => {
-          form.remove();
-          reject(new Error("Tiempo de espera agotado"));
-        }, 15000);
-
-        iframe.addEventListener("load", () => {
-          window.clearTimeout(timeout);
-          form.remove();
-          resolve();
-        }, { once: true });
-
-        form.method = "POST";
-        form.action = RESERVAS_ENDPOINT;
-        form.target = "reservasResponse";
-        form.hidden = true;
-
-        Object.entries(data).forEach(([name, value]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = name;
-          input.value = String(value == null ? "" : value);
-          form.appendChild(input);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
-      });
-    }
-
     async function enviarSolicitudReserva() {
-      if (!cotizacionCompleta() || !camposReservaValidos()) return;
-      if (!RESERVAS_ENDPOINT) {
-        alert("El sistema de correo todavía está en configuración. Tu cotización no se ha enviado.");
+      const cotizacion = obtenerCotizacion();
+      if (!cotizacion) {
+        estadoReserva.textContent = "Calcula la tarifa antes de enviar la solicitud.";
         return;
       }
-
-      const tipo = tipoServicio.value;
-      const recogida = tipo === "regreso"
-        ? recinto.value + " (salida del concierto)"
-        : [comunaIda.value, direccionIda.value].filter(Boolean).join(" · ");
+      if (!camposReservaValidos()) return;
+      const recogida = cotizacion.tipo === "regreso"
+        ? cotizacion.venue + " (salida del concierto)"
+        : [cotizacion.comunaIda, cotizacion.direccionIda].join(" · ");
       const data = {
         name: clienteNombre.value.trim(),
         email: clienteEmail.value.trim(),
@@ -1759,23 +1601,24 @@ function actualizarWhatsAppTurismo() {
         pickup: recogida,
         serviceType: tipoServicio.options[tipoServicio.selectedIndex].text,
         passengers: pasajerosReserva.value,
-        total: totalActual,
-        comunaIda: comunaIda.value,
-        direccionIda: direccionIda.value.trim(),
-        comunaRegreso: comunaRegreso.value,
-        direccionRegreso: direccionRegreso.value.trim()
+        total: cotizacion.total,
+        tipoCotizacion: cotizacion.tipo,
+        comunaIda: cotizacion.comunaIda || "",
+        direccionIda: cotizacion.direccionIda || "",
+        comunaRegreso: cotizacion.comunaRegreso || "",
+        direccionRegreso: cotizacion.direccionRegreso || ""
       };
 
       btnReservar.disabled = true;
       btnReservar.textContent = "Enviando solicitud...";
       estadoReserva.textContent = "";
       try {
-        await publicarReserva(data);
+        await solicitarConcertHome(data);
         estadoReserva.textContent = "Solicitud enviada. Revisa tu correo: recibirás el ticket cuando ConcertHome confirme la disponibilidad.";
         estadoReserva.style.color = "#15803d";
         if (typeof gtag === "function") gtag("event", "reserva_solicitada");
       } catch (error) {
-        estadoReserva.textContent = "No fue posible enviar la solicitud. Escríbenos por WhatsApp para ayudarte.";
+        estadoReserva.textContent = "No pudimos confirmar el envío de tu solicitud. Escríbenos por WhatsApp para ayudarte.";
         estadoReserva.style.color = "#b91c1c";
       } finally {
         btnReservar.disabled = false;
@@ -1783,12 +1626,6 @@ function actualizarWhatsAppTurismo() {
       }
     }
 
-    tipoServicio.addEventListener("change", actualizarVista);
-    comunaIda.addEventListener("change", calcular);
-    comunaRegreso.addEventListener("change", calcular);
-    direccionIda.addEventListener("input", calcular);
-    direccionRegreso.addEventListener("input", calcular);
-    recinto.addEventListener("change", calcular);
 btnReservar.addEventListener("click", enviarSolicitudReserva);
 turismoServicio.addEventListener("change", actualizarWhatsAppTurismo);
 turismoSalida.addEventListener("input", actualizarWhatsAppTurismo);
@@ -1799,9 +1636,6 @@ turismoPasajeros.addEventListener("input", actualizarWhatsAppTurismo);
 turismoComentarios.addEventListener("input", actualizarWhatsAppTurismo);
 
 actualizarWhatsAppTurismo();
-    protegerCotizacion();
-    cargarComunas();
-    actualizarVista();
   </script>
 
 <style>

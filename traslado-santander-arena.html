@@ -60,7 +60,7 @@
         "name": "¿Cuánto cuesta un traslado al Santander Arena?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El precio depende de la comuna y del tipo de servicio. La calculadora muestra el valor estimado antes de solicitar la reserva."
+          "text": "El precio depende de la distancia por carretera y del tipo de servicio. La calculadora muestra el valor estimado antes de solicitar la reserva."
         }
       },
       {
@@ -68,7 +68,7 @@
         "name": "¿El valor es por persona o por el viaje completo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El servicio admite hasta 4 pasajeros. Confirma por WhatsApp si el precio mostrado corresponde al viaje completo antes de reservar."
+          "text": "El precio es por el vehículo completo, para un máximo de 4 pasajeros."
         }
       },
       {
@@ -373,7 +373,7 @@
     <section class="section-card" id="cotizar">
       <div class="eyebrow">COTIZACIÓN</div>
       <h2 class="section-title">Cotiza tu traslado</h2>
-      <p class="section-text">Selecciona el tipo de servicio y la comuna. El recinto ya está configurado como Santander Arena.</p>
+      <p class="section-text">Selecciona el servicio e ingresa las direcciones para calcular la tarifa al Santander Arena.</p>
       <div class="form-group">
         <label for="tipoServicio">Tipo de servicio</label>
         <select id="tipoServicio">
@@ -391,7 +391,7 @@
           </div>
           <div class="form-group">
             <label for="direccionIda">Dirección exacta de salida</label>
-            <input id="direccionIda" type="text" placeholder="Ej: Gran Avenida 1234">
+            <input id="direccionIda" type="text" maxlength="180" placeholder="Ej: Gran Avenida 1234">
           </div>
         </div>
       </div>
@@ -404,17 +404,21 @@
           </div>
           <div class="form-group">
             <label for="direccionRegreso">Dirección exacta de regreso</label>
-            <input id="direccionRegreso" type="text" placeholder="Ej: Av. Principal 456">
+            <input id="direccionRegreso" type="text" maxlength="180" placeholder="Ej: Av. Principal 456">
           </div>
         </div>
       </div>
-      <div class="summary" aria-live="polite">
+      <div class="summary">
         <h3>Resumen de valores</h3>
-        <p>Recinto: <span>Santander Arena</span></p>
-        <p>Valor ida: <span id="valorIda">$0</span></p>
-        <p>Valor regreso: <span id="valorRegreso">$0</span></p>
-        <p>Total final: <span id="valorTotal">$0</span></p>
-        <p class="note">El valor puede variar según comuna y tipo de servicio. Confirma los detalles por WhatsApp antes de reservar.</p>
+        <p>Valor ida: <span id="valorIda">—</span></p>
+        <p>Valor regreso: <span id="valorRegreso">—</span></p>
+        <p>Total estimado: <span id="valorTotal">—</span></p>
+        <p class="note">Tarifa por vehículo de hasta 4 pasajeros. El cálculo usa $950/km y una base de $8.500.
+          La ida tiene un mínimo de $24.900. El regreso incluye $4.000 de coordinación postconcierto
+          y tiene un mínimo de $28.900. El TAG o estacionamiento, si corresponde, se confirma antes de reservar.</p>
+        <p class="note">La dirección y el recinto se consultan en Google Maps para calcular la ruta en auto.</p>
+        <button class="btn btn-primary" id="btnCotizar" type="button">Calcular tarifa</button>
+        <p class="note" id="estadoCotizacion" role="status" aria-live="polite"></p>
       </div>
       <div class="actions">
         <a class="btn btn-whatsapp" id="btnWhatsapp" href="https://wa.me/56965195972?text=Hola%2C%20quiero%20cotizar%20un%20traslado%20al%20Santander%20Arena." target="_blank" rel="noopener" onclick="gtag('event', 'whatsapp_click');">Cotizar traslado al Santander Arena</a>
@@ -444,9 +448,9 @@
     <section class="section-card faq">
       <div class="eyebrow">PREGUNTAS FRECUENTES</div>
       <h2 class="section-title">Dudas sobre el traslado al Santander Arena</h2>
-      <details><summary>¿Cuánto cuesta un traslado al Santander Arena?</summary><p>El precio depende de la comuna y del tipo de servicio. Usa la calculadora para conocer el valor estimado antes de solicitar la reserva.</p></details>
+      <details><summary>¿Cuánto cuesta un traslado al Santander Arena?</summary><p>El precio depende de la distancia por carretera y del tipo de servicio. Usa la calculadora para conocer el valor estimado antes de solicitar la reserva.</p></details>
       <!-- CONFIRMAR: indicar expresamente si todas las tarifas corresponden al vehículo completo. -->
-      <details><summary>¿El valor es por persona o por el viaje completo?</summary><p>El servicio admite hasta 4 pasajeros. Confirma por WhatsApp si el precio mostrado corresponde al viaje completo antes de reservar.</p></details>
+      <details><summary>¿El valor es por persona o por el viaje completo?</summary><p>El precio es por el vehículo completo, para un máximo de 4 pasajeros.</p></details>
       <details><summary>¿Puedo reservar solamente el regreso?</summary><p>Sí. La calculadora permite seleccionar solo ida, solo regreso o ida y vuelta.</p></details>
       <!-- CONFIRMAR: definir el punto o procedimiento habitual de encuentro después de cada evento. -->
       <details><summary>¿Dónde se coordina el encuentro después del concierto?</summary><p>El punto de encuentro se coordina directamente por WhatsApp antes del servicio.</p></details>
@@ -459,83 +463,9 @@
   </main>
 
   <footer>© 2026 ConcertHome.cl | Transporte privado a conciertos, aeropuerto y terminales de buses.</footer>
-  <script src="concert-home-data.js"></script>
+  <script src="concert-home-data.js?v=km950"></script>
   <script>
-    const tipoServicio = document.getElementById("tipoServicio");
-    const comunaIda = document.getElementById("comunaIda");
-    const comunaRegreso = document.getElementById("comunaRegreso");
-    const direccionIda = document.getElementById("direccionIda");
-    const direccionRegreso = document.getElementById("direccionRegreso");
-    const bloqueIda = document.getElementById("bloqueIda");
-    const bloqueRegreso = document.getElementById("bloqueRegreso");
-    const valorIda = document.getElementById("valorIda");
-    const valorRegreso = document.getElementById("valorRegreso");
-    const valorTotal = document.getElementById("valorTotal");
-    const btnWhatsapp = document.getElementById("btnWhatsapp");
-    const whatsappFloat = document.getElementById("whatsappFloat");
-
-    function formatoCLP(valor) {
-      return "$" + valor.toLocaleString("es-CL");
-    }
-
-    function cargarComunas() {
-      const comunas = Object.keys(preciosComunas).sort((a, b) => a.localeCompare(b, "es"));
-      comunas.forEach((comuna) => {
-        [comunaIda, comunaRegreso].forEach((select) => {
-          const option = document.createElement("option");
-          option.value = comuna;
-          option.textContent = comuna;
-          select.appendChild(option);
-        });
-        const item = document.createElement("span");
-        item.className = "commune";
-        item.textContent = comuna;
-        document.getElementById("listaComunas").appendChild(item);
-      });
-    }
-
-    function actualizarVista() {
-      const tipo = tipoServicio.value;
-      bloqueIda.classList.toggle("hidden", tipo === "regreso");
-      bloqueRegreso.classList.toggle("hidden", tipo === "ida");
-      calcular();
-    }
-
-    function calcular() {
-      const tipo = tipoServicio.value;
-      const ida = (tipo === "ida" || tipo === "ida_vuelta") ? (preciosComunas[comunaIda.value] || 0) : 0;
-      const regreso = (tipo === "regreso" || tipo === "ida_vuelta") ? (preciosComunas[comunaRegreso.value] || 0) : 0;
-      const total = ida + regreso;
-      valorIda.textContent = formatoCLP(ida);
-      valorRegreso.textContent = formatoCLP(regreso);
-      valorTotal.textContent = cotizacionCompleta() ? formatoCLP(total) : "Selecciona las comunas de cada trayecto";
-
-      const mensaje = [
-        "Hola, quiero cotizar un traslado al Santander Arena.",
-        "",
-        "Tipo de servicio: " + tipoServicio.options[tipoServicio.selectedIndex].text,
-        "Comuna de ida: " + (comunaIda.value || "No aplica"),
-        "Dirección ida: " + (direccionIda.value || "No indicada"),
-        "Comuna de regreso: " + (comunaRegreso.value || "No aplica"),
-        "Dirección regreso: " + (direccionRegreso.value || "No indicada"),
-        "",
-        "Valor ida: " + formatoCLP(ida),
-        "Valor regreso: " + formatoCLP(regreso),
-        "Total estimado: " + formatoCLP(total)
-      ].join("\n");
-      const link = "https://wa.me/" + telefonoWhatsApp + "?text=" + encodeURIComponent(mensaje);
-      btnWhatsapp.href = link;
-      whatsappFloat.href = link;
-    }
-
-    tipoServicio.addEventListener("change", actualizarVista);
-    comunaIda.addEventListener("change", calcular);
-    comunaRegreso.addEventListener("change", calcular);
-    direccionIda.addEventListener("input", calcular);
-    direccionRegreso.addEventListener("input", calcular);
-    protegerCotizacion();
-    cargarComunas();
-    actualizarVista();
+    iniciarCotizador(() => "Santander Arena");
   </script>
 </body>
 </html>

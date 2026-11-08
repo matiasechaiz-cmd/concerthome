@@ -1,89 +1,194 @@
 const telefonoWhatsApp = "56965195972";
 
-const preciosComunas = {
-  "Santiago": 23380,
-  "Providencia": 23380,
-  "Ñuñoa": 23380,
-  "Macul": 23380,
-  "San Miguel": 23380,
-  "Independencia": 23380,
-  "Recoleta": 23380,
-  "Estación Central": 23380,
-  "Quinta Normal": 23380,
-  "Aeropuerto de Santiago": 38680,
-  "Terminal Alameda": 23380,
-  "Terminal Sur": 23380,
-  "Terminal San Borja": 25420,
-  "Terminal Pajaritos": 28480,
-  "La Florida": 28480,
-  "Peñalolén": 28480,
-  "San Joaquín": 28480,
-  "La Cisterna": 28480,
-  "Huechuraba": 28480,
-  "Conchalí": 28480,
-  "Lo Prado": 28480,
-  "Cerrillos": 28480,
-  "Pedro Aguirre Cerda": 28480,
-  "El Bosque": 28480,
-  "La Granja": 28480,
-  "La Pintana": 28480,
-  "San Ramón": 28480,
-  "La Reina": 28480,
-  "Las Condes": 28480,
-  "Maipú": 33580,
-  "Puente Alto": 33580,
-  "Quilicura": 33580,
-  "Pudahuel": 33580,
-  "Pudahuel Norte": 33580,
-  "San Bernardo": 33580,
-  "Renca": 33580,
-  "Cerro Navia": 33580,
-  "Lo Espejo": 33580,
-  "Vitacura": 33580,
-  "Lo Barnechea": 33580,
-  "Colina": 38680,
-  "Lampa": 38680,
-  "Padre Hurtado": 38680,
-  "Peñaflor": 38680,
-  "Talagante": 38680,
-  "Buin": 38680,
-  "Calera de Tango": 38680,
-  "Paine": 38680,
-  "Melipilla": 53980,
-  "Curacaví": 53980,
-  "Pirque": 53980,
-  "San José de Maipo": 53980,
-  "El Monte": 53980,
-  "Isla de Maipo": 53980,
-  "Til Til": 53980,
-  "María Pinto": 53980,
-  "San Pedro": 64180,
-  "Alhué": 64180
-};
+const comunasTraslado = [
+  "Santiago",
+  "Providencia",
+  "Ñuñoa",
+  "Macul",
+  "San Miguel",
+  "Independencia",
+  "Recoleta",
+  "Estación Central",
+  "Quinta Normal",
+  "Aeropuerto de Santiago",
+  "Terminal Alameda",
+  "Terminal Sur",
+  "Terminal San Borja",
+  "Terminal Pajaritos",
+  "La Florida",
+  "Peñalolén",
+  "San Joaquín",
+  "La Cisterna",
+  "Huechuraba",
+  "Conchalí",
+  "Lo Prado",
+  "Cerrillos",
+  "Pedro Aguirre Cerda",
+  "El Bosque",
+  "La Granja",
+  "La Pintana",
+  "San Ramón",
+  "La Reina",
+  "Las Condes",
+  "Maipú",
+  "Puente Alto",
+  "Quilicura",
+  "Pudahuel",
+  "Pudahuel Norte",
+  "San Bernardo",
+  "Renca",
+  "Cerro Navia",
+  "Lo Espejo",
+  "Vitacura",
+  "Lo Barnechea",
+  "Colina",
+  "Lampa",
+  "Padre Hurtado",
+  "Peñaflor",
+  "Talagante",
+  "Buin",
+  "Calera de Tango",
+  "Paine",
+  "Melipilla",
+  "Curacaví",
+  "Pirque",
+  "San José de Maipo",
+  "El Monte",
+  "Isla de Maipo",
+  "Til Til",
+  "María Pinto",
+  "San Pedro",
+  "Alhué"
+];
 
-// Las tarifas incluyen un aumento adicional de $2.990 por cada trayecto.
-// Ida y vuelta suma ambos trayectos ya actualizados; no aplica un tercer recargo.
-function cotizacionCompleta() {
-  const tipo = document.getElementById("tipoServicio").value;
-  const ida = document.getElementById("comunaIda").value;
-  const regreso = document.getElementById("comunaRegreso").value;
-  const valida = comuna => Object.prototype.hasOwnProperty.call(preciosComunas, comuna);
-  if (tipo === "ida") return valida(ida);
-  if (tipo === "regreso") return valida(regreso);
-  return tipo === "ida_vuelta" && valida(ida) && valida(regreso);
+const RESERVAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzh6rduJaO2jMpz2JnSdQ645uOKxOs6b7jzlB3iljfWAOT4JXh4RJ93Pl9dj_uSZ-bW6A/exec";
+
+async function solicitarConcertHome(datos, signal) {
+  const respuesta = await fetch(RESERVAS_ENDPOINT, {
+    method: "POST",
+    body: new URLSearchParams(datos),
+    signal
+  });
+  if (!respuesta.ok) throw new Error("No fue posible conectar con ConcertHome.");
+  const resultado = await respuesta.json();
+  if (!resultado.ok) throw new Error(resultado.error || "No fue posible procesar la solicitud.");
+  return resultado;
 }
 
-function protegerCotizacion() {
-  ["btnReservar", "btnWhatsapp", "whatsappFloat"].forEach(id => {
-    const boton = document.getElementById(id);
-    if (!boton) return;
-    boton.addEventListener("click", event => {
-      if (cotizacionCompleta()) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      alert("Selecciona la comuna de cada trayecto para calcular el total. Para ida y vuelta debes indicar la comuna de salida y la de regreso.");
-    }, true);
+function iniciarCotizador(obtenerRecinto) {
+  const campo = id => document.getElementById(id);
+  const tipo = campo("tipoServicio");
+  const boton = campo("btnCotizar");
+  const estado = campo("estadoCotizacion");
+  const comunas = [...comunasTraslado].sort((a, b) => a.localeCompare(b, "es"));
+  let cotizacion = null;
+  let pendiente;
+
+  for (const comuna of comunas) {
+    for (const id of ["comunaIda", "comunaRegreso"]) {
+      campo(id).add(new Option(comuna, comuna));
+    }
+    const lista = campo("listaComunas");
+    if (lista) {
+      const item = document.createElement("span");
+      item.className = "commune";
+      item.textContent = comuna;
+      lista.append(item);
+    }
+  }
+
+  function datosRuta() {
+    const datos = { tipo: tipo.value, venue: obtenerRecinto() };
+    for (const tramo of ["Ida", "Regreso"]) {
+      if (tipo.value === (tramo === "Ida" ? "regreso" : "ida")) continue;
+      for (const prefijo of ["comuna", "direccion"]) {
+        const id = prefijo + tramo;
+        datos[id] = campo(id).value.trim();
+      }
+    }
+    return datos;
+  }
+
+  function mostrar() {
+    const datos = datosRuta();
+    const peso = valor => "$" + valor.toLocaleString("es-CL");
+    const tramo = dato => dato
+      ? `${peso(dato.valor)} · ${(dato.metros / 1000).toLocaleString("es-CL", { maximumFractionDigits: 2 })} km`
+      : "—";
+    campo("bloqueIda").classList.toggle("hidden", datos.tipo === "regreso");
+    campo("bloqueRegreso").classList.toggle("hidden", datos.tipo === "ida");
+    campo("valorIda").textContent = tramo(cotizacion?.ida);
+    campo("valorRegreso").textContent = tramo(cotizacion?.regreso);
+    campo("valorTotal").textContent = cotizacion ? peso(cotizacion.total) : "—";
+    const direccionSala = campo("direccionSalaOmnium");
+    if (direccionSala) direccionSala.hidden = datos.venue !== "Sala Omnium";
+
+    const mensaje = [
+      "Hola, quiero cotizar o reservar un traslado en ConcertHome.",
+      "Tipo de servicio: " + tipo.selectedOptions[0].text,
+      "Recinto: " + datos.venue,
+      datos.comunaIda && "Salida: " + [datos.direccionIda, datos.comunaIda].filter(Boolean).join(", "),
+      datos.comunaRegreso && "Regreso: " + [datos.direccionRegreso, datos.comunaRegreso].filter(Boolean).join(", "),
+      cotizacion && "Valor ida: " + tramo(cotizacion.ida),
+      cotizacion && "Valor regreso: " + tramo(cotizacion.regreso),
+      cotizacion && "Total estimado: " + peso(cotizacion.total)
+    ].filter(Boolean).join("\n");
+    const link = "https://wa.me/" + telefonoWhatsApp + "?text=" + encodeURIComponent(mensaje);
+    campo("btnWhatsapp").href = link;
+    campo("whatsappFloat").href = link;
+  }
+
+  function limpiar() {
+    pendiente?.abort();
+    pendiente = null;
+    boton.disabled = false;
+    cotizacion = null;
+    estado.textContent = "";
+    mostrar();
+  }
+
+  for (const id of ["tipoServicio", "recinto", "comunaIda", "comunaRegreso"]) {
+    campo(id)?.addEventListener("change", limpiar);
+  }
+  for (const id of ["direccionIda", "direccionRegreso"]) {
+    campo(id).addEventListener("input", limpiar);
+  }
+  boton.addEventListener("click", async () => {
+    const datos = datosRuta();
+    if (Object.values(datos).some(valor => !valor)) {
+      estado.textContent = "Completa la comuna y la dirección exacta de cada tramo.";
+      return;
+    }
+    const solicitud = new AbortController();
+    pendiente = solicitud;
+    boton.disabled = true;
+    cotizacion = null;
+    mostrar();
+    estado.textContent = "Calculando distancia y tarifa…";
+    const timeout = setTimeout(() => solicitud.abort(), 20000);
+    try {
+      const resultado = await solicitarConcertHome({ action: "cotizar", ...datos }, solicitud.signal);
+      if (pendiente !== solicitud) return;
+      if (!Number.isInteger(resultado.total) || resultado.total <= 0) throw new Error();
+      cotizacion = resultado;
+      estado.textContent = "";
+      mostrar();
+    } catch (error) {
+      if (pendiente === solicitud) {
+        estado.textContent = error instanceof SyntaxError || error.name === "AbortError"
+          ? "No pudimos calcular la ruta en este momento. Puedes cotizar por WhatsApp."
+          : error.message || "No pudimos calcular la ruta en este momento.";
+      }
+    } finally {
+      clearTimeout(timeout);
+      if (pendiente === solicitud) {
+        pendiente = null;
+        boton.disabled = false;
+      }
+    }
   });
+  mostrar();
+  return () => cotizacion && { ...datosRuta(), total: cotizacion.total };
 }
 
 function insertarRedesConcertHome() {
