@@ -96,7 +96,7 @@ function cotizarTramo_(origen, destino, regreso) {
     .getDirections();
   const metros = resultado.routes?.[0]?.legs?.[0]?.distance?.value;
   if (resultado.status !== 'OK' || !Number.isFinite(metros)
-      || resultado.geocoded_waypoints?.some(punto => punto.partial_match)) {
+      || resultado.geocoded_waypoints?.[regreso ? 1 : 0]?.partial_match) {
     throw new Error('No encontramos una ruta para esa dirección. Revisa la calle, el número y la comuna.');
   }
   const { porKm, base, postconcierto, minimoIda, minimoRegreso } = TARIFA_TRASLADO;
