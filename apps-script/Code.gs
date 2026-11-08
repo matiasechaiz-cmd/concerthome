@@ -41,7 +41,7 @@ function doPost(e) {
 }
 
 const TARIFA_TRASLADO = Object.freeze({
-  porKm: 950, base: 8500, postconcierto: 4000, minimoIda: 24900, minimoRegreso: 28900
+  porKm: 750, base: 8500, postconcierto: 4000, minimoIda: 24900, minimoRegreso: 28900
 });
 
 const RECINTOS_COTIZACION = Object.freeze({
