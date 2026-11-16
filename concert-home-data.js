@@ -1,5 +1,11 @@
 const telefonoWhatsApp = "56965195972";
 
+const aeropuertoSantiago = Object.freeze({
+  nombre: "Aeropuerto de Santiago",
+  comuna: "Pudahuel",
+  direccion: "Armando Cortínez Oriente 1704"
+});
+
 const comunasTraslado = [
   "Santiago",
   "Providencia",
@@ -10,7 +16,7 @@ const comunasTraslado = [
   "Recoleta",
   "Estación Central",
   "Quinta Normal",
-  "Aeropuerto de Santiago",
+  aeropuertoSantiago.nombre,
   "Terminal Alameda",
   "Terminal Sur",
   "Terminal San Borja",
@@ -97,20 +103,29 @@ function iniciarCotizador(obtenerRecinto) {
     }
   }
 
+  function esAeropuerto(tramo) {
+    return campo("comuna" + tramo).value === aeropuertoSantiago.nombre;
+  }
+
   function datosRuta() {
     const datos = { tipo: tipo.value, venue: obtenerRecinto() };
     for (const tramo of ["Ida", "Regreso"]) {
       if (tipo.value === (tramo === "Ida" ? "regreso" : "ida")) continue;
-      for (const prefijo of ["comuna", "direccion"]) {
-        const id = prefijo + tramo;
-        datos[id] = campo(id).value.trim();
-      }
+      const aeropuerto = esAeropuerto(tramo);
+      datos["comuna" + tramo] = aeropuerto ? aeropuertoSantiago.comuna : campo("comuna" + tramo).value.trim();
+      datos["direccion" + tramo] = aeropuerto ? aeropuertoSantiago.direccion : campo("direccion" + tramo).value.trim();
     }
     return datos;
   }
 
   function mostrar() {
     const datos = datosRuta();
+    for (const tramo of ["Ida", "Regreso"]) {
+      campo("direccion" + tramo).closest(".form-group").classList.toggle("hidden", esAeropuerto(tramo));
+    }
+    const lugar = tramo => esAeropuerto(tramo)
+      ? aeropuertoSantiago.nombre
+      : [datos["direccion" + tramo], datos["comuna" + tramo]].filter(Boolean).join(", ");
     const peso = valor => "$" + valor.toLocaleString("es-CL");
     const tramo = dato => dato
       ? `${peso(dato.valor)} · ${(dato.metros / 1000).toLocaleString("es-CL", { maximumFractionDigits: 2 })} km`
@@ -127,8 +142,8 @@ function iniciarCotizador(obtenerRecinto) {
       "Hola, quiero cotizar o reservar un traslado en ConcertHome.",
       "Tipo de servicio: " + tipo.selectedOptions[0].text,
       "Recinto: " + datos.venue,
-      datos.comunaIda && "Salida: " + [datos.direccionIda, datos.comunaIda].filter(Boolean).join(", "),
-      datos.comunaRegreso && "Regreso: " + [datos.direccionRegreso, datos.comunaRegreso].filter(Boolean).join(", "),
+      datos.comunaIda && "Salida: " + lugar("Ida"),
+      datos.comunaRegreso && "Regreso: " + lugar("Regreso"),
       cotizacion && "Valor ida: " + tramo(cotizacion.ida),
       cotizacion && "Valor regreso: " + tramo(cotizacion.regreso),
       cotizacion && "Total estimado: " + peso(cotizacion.total)
@@ -156,7 +171,7 @@ function iniciarCotizador(obtenerRecinto) {
   boton.addEventListener("click", async () => {
     const datos = datosRuta();
     if (Object.values(datos).some(valor => !valor)) {
-      estado.textContent = "Completa la comuna y la dirección exacta de cada tramo.";
+      estado.textContent = "Selecciona una comuna o el aeropuerto. Para una comuna, ingresa la dirección exacta.";
       return;
     }
     const solicitud = new AbortController();
