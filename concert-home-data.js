@@ -6,6 +6,12 @@ const aeropuertoSantiago = Object.freeze({
   direccion: "Armando Cortínez Oriente 1704"
 });
 
+const condominioSanPedro = Object.freeze({
+  nombre: "Condominio San Pedro, Chicureo",
+  comuna: "Colina",
+  direccion: "Calle San Pedro, Condominio San Pedro, Chicureo"
+});
+
 const comunasTraslado = [
   "Santiago",
   "Providencia",
@@ -48,6 +54,7 @@ const comunasTraslado = [
   "Vitacura",
   "Lo Barnechea",
   "Colina",
+  condominioSanPedro.nombre,
   "Lampa",
   "Padre Hurtado",
   "Peñaflor",
@@ -107,13 +114,20 @@ function iniciarCotizador(obtenerRecinto) {
     return campo("comuna" + tramo).value === aeropuertoSantiago.nombre;
   }
 
+  function esCondominioSanPedro(tramo) {
+    return campo("comuna" + tramo).value === condominioSanPedro.nombre;
+  }
+
   function datosRuta() {
     const datos = { tipo: tipo.value, venue: obtenerRecinto() };
     for (const tramo of ["Ida", "Regreso"]) {
       if (tipo.value === (tramo === "Ida" ? "regreso" : "ida")) continue;
       const aeropuerto = esAeropuerto(tramo);
-      datos["comuna" + tramo] = aeropuerto ? aeropuertoSantiago.comuna : campo("comuna" + tramo).value.trim();
-      datos["direccion" + tramo] = aeropuerto ? aeropuertoSantiago.direccion : campo("direccion" + tramo).value.trim();
+      const condominio = esCondominioSanPedro(tramo);
+      datos["comuna" + tramo] = aeropuerto ? aeropuertoSantiago.comuna
+        : condominio ? condominioSanPedro.comuna : campo("comuna" + tramo).value.trim();
+      datos["direccion" + tramo] = aeropuerto ? aeropuertoSantiago.direccion
+        : condominio ? condominioSanPedro.direccion : campo("direccion" + tramo).value.trim();
     }
     return datos;
   }
@@ -121,10 +135,11 @@ function iniciarCotizador(obtenerRecinto) {
   function mostrar() {
     const datos = datosRuta();
     for (const tramo of ["Ida", "Regreso"]) {
-      campo("direccion" + tramo).closest(".form-group").classList.toggle("hidden", esAeropuerto(tramo));
+      campo("direccion" + tramo).closest(".form-group").classList.toggle("hidden", esAeropuerto(tramo) || esCondominioSanPedro(tramo));
     }
     const lugar = tramo => esAeropuerto(tramo)
       ? aeropuertoSantiago.nombre
+      : esCondominioSanPedro(tramo) ? condominioSanPedro.nombre
       : [datos["direccion" + tramo], datos["comuna" + tramo]].filter(Boolean).join(", ");
     const peso = valor => "$" + valor.toLocaleString("es-CL");
     const tramo = dato => dato
