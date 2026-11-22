@@ -9,7 +9,7 @@ const aeropuertoSantiago = Object.freeze({
 const condominioSanPedro = Object.freeze({
   nombre: "Condominio San Pedro, Chicureo",
   comuna: "Colina",
-  direccion: "Calle San Pedro, Condominio San Pedro, Chicureo"
+  direccion: "Condominio San Pedro, Chicureo"
 });
 
 const comunasTraslado = [
