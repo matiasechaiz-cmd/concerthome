@@ -273,7 +273,6 @@ function sendRejection_(record) {
 
 function confirmedTicketHtml_(r) {
   const date = displayDate_(r.serviceDate);
-  const total = formatClp_(r.total);
   return `<div style="margin:0;padding:24px;background:#eaf1f6;font-family:Arial,sans-serif">
     <div style="max-width:900px;margin:auto;overflow:hidden;border-radius:26px;background:#071226;color:#fff;border-top:12px solid #22c55e">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
@@ -292,8 +291,6 @@ function confirmedTicketHtml_(r) {
             <div style="color:#93c5fd;font-size:12px;font-weight:900;letter-spacing:1px">CÓDIGO</div>
             <div style="margin-top:18px;color:#22c55e;font-size:21px;font-weight:900;word-break:break-word">${html_(r.code)}</div>
             <div style="margin:42px auto 28px;width:120px;height:115px;background:repeating-linear-gradient(90deg,#fff 0,#fff 9px,transparent 9px,transparent 16px)"></div>
-            <div style="color:#8fa9c1;font-size:12px;font-weight:900;letter-spacing:1px">TOTAL</div>
-            <div style="margin-top:8px;font-size:23px;font-weight:900">${html_(total)}</div>
           </td>
         </tr>
       </table>
