@@ -52,6 +52,7 @@ const RECINTOS_COTIZACION = Object.freeze({
   'Claro Arena': 'Claro Arena, San Carlos de Apoquindo, Las Condes, Chile',
   'Estadio Santa Laura': 'Estadio Santa Laura, Independencia, Chile',
   'Club Hípico': 'Club Hípico de Santiago, Santiago, Chile',
+  'Hipódromo de Chile': 'Av. Hipódromo Chile 1715, Independencia, Santiago, Chile',
   'Club Chocolate': 'Club Chocolate, Recoleta, Chile',
   "Parque O'Higgins": 'Parque O’Higgins, Santiago, Chile',
   'Teatro Caupolicán': 'Teatro Caupolicán, Santiago, Chile',
