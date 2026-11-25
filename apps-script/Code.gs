@@ -58,6 +58,7 @@ const RECINTOS_COTIZACION = Object.freeze({
   'Teatro Caupolicán': 'Teatro Caupolicán, Santiago, Chile',
   'Teatro Coliseo': 'Teatro Coliseo, Santiago, Chile',
   'Espacio Riesco': 'Espacio Riesco, Huechuraba, Chile',
+  'Parque Ciudad Empresarial': 'Parque Ciudad Empresarial, Huechuraba, Santiago, Chile',
   'Sala Omnium': 'Avenida Apoquindo 4900, Las Condes, Chile'
 });
 
