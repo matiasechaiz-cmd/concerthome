@@ -830,6 +830,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .consultas-form input, .consultas-form textarea { font-size: 16px; }
 }
   </style>
+<style>
+#puntos-de-encuentro { background:#fff; color:#111827; padding:clamp(20px,4vw,48px); }
+#puntos-de-encuentro .section-title {color:#111827;font-size:clamp(30px,4vw,44px);font-weight:750;}
+.meeting-intro,.meeting-note{text-align:center;color:#475569;line-height:1.55}
+.meeting-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0}
+.meeting-card{background:#f8fafc;border:1px solid #dbe3ee;border-radius:24px;overflow:hidden}
+.meeting-photo{position:relative;aspect-ratio:4/3;background:#273449}
+.meeting-photo iframe{width:100%;height:100%;border:0;display:block;pointer-events:none}
+.meeting-photo a{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:28px 8px;text-decoration:none;color:white}
+.meeting-photo span{background:#dbeafe;color:#165dcc;border-radius:999px;padding:8px 16px;font-size:15px;font-weight:700}
+.meeting-photo a:focus-visible{outline:3px solid #165dcc;outline-offset:-4px}
+.meeting-copy{padding:16px}
+.meeting-copy h3{margin:0 0 8px;font-size:21px}
+.meeting-copy p{display:inline-block;background:#edf1f5;color:#475569;margin:0;padding:8px 16px;border-radius:999px;font-size:15px;font-weight:700;line-height:1.45}
+.meeting-photo a{box-sizing:border-box}.meeting-card{display:flex;flex-direction:column}.meeting-photo{margin-top:auto}
+.meeting-note{font-size:14px;margin-bottom:0}
+@media(max-width:760px){.meeting-grid{grid-template-columns:1fr}}
+</style>
 </head>
 
 <body>
@@ -1375,6 +1393,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       </div>
     </section>
+<section class="section-card" id="puntos-de-encuentro" aria-labelledby="puntos-titulo">
+<h2 class="section-title" id="puntos-titulo">Puntos de encuentro para el regreso</h2>
+<p class="meeting-intro">Ubica el cruce de referencia para encontrarte con tu conductor al salir del concierto.</p>
+<div class="meeting-grid">
+<article class="meeting-card">
+<div class="meeting-copy"><h3>Santander Arena</h3><p>Av. Tupper con Beauchef</p></div>
+<div class="meeting-photo">
+<iframe title="Street View de Av. Tupper con Beauchef" src="https://www.google.com/maps?layer=c&amp;cbll=-33.45860415%2C-70.6643068&amp;cbp=12%2C100%2C0%2C0%2C0&amp;output=svembed" tabindex="-1" loading="lazy"></iframe>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=-33.45860415%2C-70.6643068" target="_blank" rel="noopener noreferrer" aria-label="Abrir punto de encuentro de Santander Arena en Google Maps"><span>↗ Abrir en Google Maps</span></a>
+</div>
+</article>
+<article class="meeting-card">
+<div class="meeting-copy"><h3>Estadio Nacional</h3><p>Av. Campo de Deportes con Av. Suárez Mujica</p></div>
+<div class="meeting-photo">
+<iframe title="Street View de Av. Campo de Deportes con Av. Suárez Mujica" src="https://www.google.com/maps?layer=c&amp;cbll=-33.460214%2C-70.6098438&amp;cbp=12%2C90%2C0%2C0%2C0&amp;output=svembed" tabindex="-1" loading="lazy"></iframe>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=-33.460214%2C-70.6098438" target="_blank" rel="noopener noreferrer" aria-label="Abrir punto de encuentro de Estadio Nacional en Google Maps"><span>↗ Abrir en Google Maps</span></a>
+</div>
+</article>
+<article class="meeting-card">
+<div class="meeting-copy"><h3>Estadio Bicentenario de La Florida</h3><p>Av. Santa Amalia con Av. México</p></div>
+<div class="meeting-photo">
+<iframe title="Street View de Av. Santa Amalia con Av. México" src="https://www.google.com/maps?layer=c&amp;cbll=-33.5436396%2C-70.5747204&amp;cbp=12%2C90%2C0%2C0%2C0&amp;output=svembed" tabindex="-1" loading="lazy"></iframe>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=-33.5436396%2C-70.5747204" target="_blank" rel="noopener noreferrer" aria-label="Abrir punto de encuentro de Estadio Bicentenario de La Florida en Google Maps"><span>↗ Abrir en Google Maps</span></a>
+</div>
+</article>
+</div><p class="meeting-note">Los puntos son referenciales. Si hay cambios para tu evento, te confirmaremos la recogida por WhatsApp.</p></section>
     <section class="section-card" id="media-partner">
       <div class="eyebrow">MEDIA PARTNER</div>
       <h2 class="section-title">Rockandwrestling.com</h2>
